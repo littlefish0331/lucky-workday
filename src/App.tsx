@@ -4,7 +4,7 @@ import { FORTUNES, SPECIAL_YIN, fortuneById } from './data/fortunes';
 import type { Pain } from './data/pains';
 import { drawFortune, knocksNeeded } from './engine/draw';
 import { normalizeName, taipeiDateKey } from './engine/rng';
-import { kindOf } from './engine/types';
+import { kindOf, type Topic } from './engine/types';
 import { fetchStats, countHit, countKnock, type Stats } from './lib/api';
 import { applyKeep, applyReroll, applyResolve, buildResult } from './lib/play';
 import { clearBook, findResult, loadStore, randomStamp, saveResult, setName as persistName, type Result, type StampSpec } from './lib/storage';
@@ -21,15 +21,15 @@ type View =
   | { s: 'shake' }
   | { s: 'toss' }
   | { s: 'card'; r: Result; today: boolean }
-  | { s: 'wood'; kind: 'reroll' | 'resolve'; target: number }
+  | { s: 'wood'; kind: 'reroll' | 'resolve'; topic: Topic; target: number }
   | { s: 'book' };
 
 export function App() {
   const [store, setStore] = useState(loadStore);
   const [view, setView] = useState<View>({ s: 'home' });
   const [stats, setStats] = useState<Stats | null>(null);
-  const play = useRef<{ name: string; pain: Pain | null; stamp: StampSpec; result: Result | null }>({
-    name: '', pain: null, stamp: randomStamp(), result: null,
+  const play = useRef<{ name: string; honorific: string; pain: Pain | null; stamp: StampSpec; result: Result | null }>({
+    name: '', honorific: '', pain: null, stamp: randomStamp(), result: null,
   });
   const date = useMemo(() => taipeiDateKey(), []);
 
@@ -63,12 +63,14 @@ export function App() {
     const hit = name ? findResult(store, name, date) : null;
     if (hit) { play.current.result = hit; return go({ s: 'card', r: hit, today: true }); }
     play.current.stamp = randomStamp();
+    play.current.honorific = store.honorific ?? '';
     go({ s: 'name' });
   };
 
-  const afterName = (name: string) => {
-    setStore(persistName(name));
+  const afterName = (name: string, honorific: string) => {
+    setStore(persistName(name, honorific || undefined));
     play.current.name = name;
+    play.current.honorific = honorific;
     const hit = findResult(loadStore(), name, date);
     if (hit) { play.current.result = hit; return go({ s: 'card', r: hit, today: true }); }
     go({ s: 'pain' });
@@ -76,13 +78,13 @@ export function App() {
 
   /** 儀式結束：抽籤、記錄、計數、進入籤卡 */
   const reveal = (special?: 'yin') => {
-    const { name, pain, stamp } = play.current;
+    const { name, honorific, pain, stamp } = play.current;
     const topic = pain?.topic ?? 'office';
     const fortune = special
       ? SPECIAL_YIN
       : drawFortune(FORTUNES, { name, dateKey: date, attempt: 0, pain: pain?.label ?? null, topic });
     if (!fortune) return go({ s: 'home' });
-    const r = commit(buildResult({ name, date, pain: special ? '' : pain?.label ?? '', topic, stamp, fortune, special }));
+    const r = commit(buildResult({ name, honorific, date, pain: special ? '' : pain?.label ?? '', topic, stamp, fortune, special }));
     if (!special) countHit(fortune.id);
     go({ s: 'card', r, today: true });
   };
@@ -90,7 +92,7 @@ export function App() {
   const startWood = (kind: 'reroll' | 'resolve') => {
     const r = play.current.result;
     if (!r) return;
-    go({ s: 'wood', kind, target: knocksNeeded(kind === 'resolve' ? 'resolve' : r.level) });
+    go({ s: 'wood', kind, topic: r.topic, target: knocksNeeded(kind === 'resolve' ? 'resolve' : r.level) });
   };
 
   const afterWood = (kind: 'reroll' | 'resolve', taps: number) => {
@@ -124,25 +126,25 @@ export function App() {
         <div className="screen center">
           <div className="hero" style={{ backgroundImage: `url(${art.hero})` }}>
             <div className="brand">
-              <h1>準時下班宮</h1>
-              <p className="tagline">報上名來，神明替你看看<br />今天能不能準時下班</p>
+              <h1>打工庇佑廟</h1>
+              <p className="tagline">職場很莫名其廟，來拜一下</p>
             </div>
             <button className="btn cta" onClick={start}>{store.name && findResult(store, store.name, date) ? '看今天的籤' : '進廟求籤'}</button>
             {store.book.length > 0 && <button className="link" onClick={() => go({ s: 'book' })}>我的籤冊（{store.book.length}）</button>}
             <div className="small stats" aria-live="polite">
-              {stats && stats.today > 0 ? `今天已有 ${stats.today.toLocaleString()} 位社畜求籤` : ' '}
+              {stats && stats.today > 0 ? `今天已有 ${stats.today.toLocaleString()} 位打工人求籤` : ' '}
             </div>
             <footer>籤詩純屬娛樂，人生由你作主。</footer>
           </div>
         </div>
       )}
 
-      {v.s === 'name' && <NameStep initial={store.name} onSubmit={afterName} />}
-      {v.s === 'pain' && <PainStep onPick={(p) => { play.current.pain = p; go({ s: 'stamp' }); }} />}
+      {v.s === 'name' && <NameStep initial={store.name} initialHonorific={store.honorific ?? ''} onSubmit={afterName} />}
+      {v.s === 'pain' && <PainStep honorific={play.current.honorific} onPick={(p) => { play.current.pain = p; go({ s: 'stamp' }); }} />}
       {v.s === 'stamp' && <StampStep name={play.current.name} pain={play.current.pain?.label ?? ''} spec={play.current.stamp} onDone={() => go({ s: 'shake' })} />}
       {v.s === 'shake' && <ShakeStep onDone={() => go({ s: 'toss' })} />}
       {v.s === 'toss' && <TossStep onDone={(k) => reveal(k === 'yin' ? 'yin' : undefined)} />}
-      {v.s === 'wood' && <WoodFishStep key={v.kind} kind={v.kind} target={v.target} onDone={(n) => afterWood(v.kind, n)} />}
+      {v.s === 'wood' && <WoodFishStep key={v.kind} kind={v.kind} target={v.target} topic={v.topic} onDone={(n) => afterWood(v.kind, n)} />}
       {v.s === 'card' && (
         <CardView
           r={v.r}

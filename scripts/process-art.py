@@ -113,6 +113,39 @@ def cells(im, cols, rows):
     return [im.crop((c * cw, r * ch, (c + 1) * cw, (r + 1) * ch)) for r in range(rows) for c in range(cols)]
 
 
+def process_characters():
+    """角色素材（真透明底 PNG）：3 張 4 表情 sheet 切格，加 8 張動作圖。
+    用法：只跑這一段（不碰其他輸出）→  python -X utf8 scripts/process-art.py --characters"""
+    # sheet 單格：做法同神像。不裁邊，4 格大小一致才能互相疊換表情。
+    for src, out, tag in [
+        ("granny-sheet.png", "granny", "發薪婆婆"),
+        ("wangcai-sheet.png", "wangcai", "旺財"),
+        ("pangju-sheet.png", "pangju", "胖橘"),
+    ]:
+        print(f"== {tag} 4 個表情 ==")
+        im = load(src)
+        if im:
+            for i, cell in enumerate(cells(im, 4, 1)):
+                c, n = clean(cell)
+                save(fit(c, max_side=400), f"{out}-{i}.webp", 90)
+
+    # 動作圖：1024 → 768（畫面實際顯示 ≤ 270 CSS px，3x 螢幕也夠）。保留正方形畫布，不裁邊，前端版面好處理。
+    # 殘點多半是 alpha 1~23 的淡點，clean 的門檻（24）會清掉；min_area 清掉剩下的孤立小塊。
+    print("== 動作圖 ==")
+    for name in [
+        "wangcai-typing", "wangcai-mrt", "wangcai-payday", "wangcai-overtime",
+        "pangju-yarn", "pangju-mrt", "pangju-glasses", "pangju-keyboard",
+    ]:
+        im = load(f"{name}.png")
+        if im:
+            c, n = clean(im, thr=24, min_area=150)
+            save(fit(c, max_side=768), f"{name}.webp", 88)
+
+
+if "--characters" in sys.argv:
+    process_characters()
+    sys.exit(0)
+
 print("== 手印（白底墨印 → 透明、統一墨色）==")
 for kind, cols, rows in [("finger", 2, 2), ("palm", 2, 1), ("cat", 3, 1), ("dog", 3, 1)]:
     im = load(f"stamp-{kind}.png")
@@ -161,6 +194,8 @@ for src, out, w in [("card-good.png", "card-good.webp", 1080), ("card-bad.png", 
     if im:
         print(f"  原圖尺寸 {im.size}")
         save(fit(im.convert("RGB"), width=w), out, 86)
+
+process_characters()
 
 total = sum(os.path.getsize(f"{OUT}/{f}") for f in os.listdir(OUT) if f.endswith(".webp"))
 print(f"\n共 {len([f for f in os.listdir(OUT) if f.endswith('.webp')])} 個檔案，{total//1024} KB")

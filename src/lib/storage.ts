@@ -14,6 +14,8 @@ export type Outcome = 'direct' | 'rerolled' | 'kept' | 'resolved';
 
 export interface Result {
   name: string;
+  /** 報名時選的稱呼 id（信士、信女…）。舊紀錄沒有這欄，顯示時當作「信眾」 */
+  honorific?: string;
   /** 台北日期 YYYY-MM-DD */
   date: string;
   pain: string;
@@ -37,6 +39,8 @@ export interface Result {
 
 export interface Store {
   name: string;
+  /** 上次選的稱呼，下次進來自動帶入 */
+  honorific?: string;
   book: Result[];
 }
 
@@ -71,6 +75,7 @@ export function loadStore(): Store {
       const p = JSON.parse(raw) as Partial<Store>;
       memory = {
         name: typeof p.name === 'string' ? p.name : '',
+        honorific: typeof p.honorific === 'string' ? p.honorific : undefined,
         book: Array.isArray(p.book) ? p.book.filter(validResult) : [],
       };
       return memory;
@@ -91,8 +96,8 @@ function persist(s: Store) {
   }
 }
 
-export function setName(name: string): Store {
-  const s = { ...loadStore(), name };
+export function setName(name: string, honorific?: string): Store {
+  const s = { ...loadStore(), name, honorific };
   persist(s);
   return s;
 }

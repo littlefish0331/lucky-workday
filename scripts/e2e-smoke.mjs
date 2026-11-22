@@ -22,14 +22,14 @@ const NAME = process.env.NAME ?? '王小明';
 
 await page.goto(URL, { waitUntil: 'networkidle' });
 await shot('01-home');
-(await page.locator('h1').innerText()) === '準時下班宮' ? ok('首頁標題') : bad('首頁標題');
+(await page.locator('h1').innerText()) === '打工庇佑廟' ? ok('首頁標題') : bad('首頁標題');
 
 // 版面：不能橫向捲動，字級不能小於 14
 const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
 overflow <= 0 ? ok('首頁無橫向捲動') : bad(`首頁橫向溢出 ${overflow}px`);
 
 await page.getByRole('button', { name: /進廟求籤|看今天的籤/ }).click();
-await page.getByLabel('你的名字').fill(NAME);
+await page.getByLabel('你的名字或暱稱').fill(NAME);
 await shot('02-name');
 await page.getByRole('button', { name: '就是我' }).click();
 
@@ -99,7 +99,7 @@ const meta = await page.evaluate(async () => {
 meta.w === 1080 && meta.h === 1920 ? ok(`籤卡 ${meta.w}x${meta.h}：${meta.alt}`) : bad(`籤卡尺寸 ${meta.w}x${meta.h}`);
 
 // 凶籤路線：重抽 / 認命
-const reroll = page.getByRole('button', { name: /敲木魚積陰德/ });
+const reroll = page.getByRole('button', { name: /敲木魚積功德/ });
 if (await reroll.count()) {
   ok('抽到凶側 → 出現重抽按鈕');
   await reroll.click();

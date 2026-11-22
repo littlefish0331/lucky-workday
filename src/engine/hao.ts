@@ -13,18 +13,17 @@ export const HAO: Record<Level, string[]> = {
   下下籤: ['永久待命尊者', '加班輪迴尊者', '週一再生尊者', '結案重來尊者', '已讀不回尊者', '無限改稿尊者', '年度大輪迴尊者', '假日被召喚尊者'],
 };
 
-/** 名字的最後一個中文字；非中文取第一個字母大寫；都沒有就取第一個字。 */
-export function nameMark(name: string): string {
-  const n = normalizeName(name);
-  const han = [...n].filter((c) => /\p{Script=Han}/u.test(c));
-  if (han.length) return han[han.length - 1];
-  const latin = [...n].find((c) => /\p{L}/u.test(c));
-  return latin ? latin.toUpperCase() : ([...n][0] ?? '無');
-}
-
-/** 例：明・準時下班居士。同名同日同等級 → 同法號。 */
+/** 例：準時下班居士。同名同日同等級 → 同法號。 */
 export function makeHao(name: string, level: Level, dateKey: string): string {
   const rand = createRng(`hao|${normalizeName(name)}|${dateKey}|${level}`);
   const list = HAO[level];
-  return `${nameMark(name)}・${list[Math.floor(rand() * list.length)]}`;
+  return list[Math.floor(rand() * list.length)];
+}
+
+/**
+ * 顯示用法號。V1 的舊紀錄存成「明・準時下班居士」（前面帶名字的一個字），
+ * 新版只留稱號，所以讀舊資料時把「X・」拿掉，籤冊與籤卡看起來一致。
+ */
+export function plainHao(hao: string): string {
+  return hao.replace(/^[^・]{1,2}・/, '');
 }

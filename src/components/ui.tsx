@@ -1,5 +1,6 @@
 // 互動素材：圖片版。圖片載入失敗時整個元件仍然可用（alt 文字加 CSS 底色）。
 import { art } from '../data/art';
+import type { Deity as DeityInfo } from '../data/deities';
 import type { StampSpec } from '../lib/storage';
 
 export function Cylinder({ tilt = 0, progress = 0, popped = false }: { tilt?: number; progress?: number; popped?: boolean }) {
@@ -25,8 +26,20 @@ export function Mallet({ hit }: { hit: boolean }) {
   return <img className={`mallet${hit ? ' hit' : ''}`} src={art.mallet} alt="" aria-hidden="true" draggable={false} />;
 }
 
-export function Deity({ stage, done }: { stage: 0 | 1 | 2 | 3; done?: boolean }) {
-  return <img className={`deity-img s${stage}${done ? ' done' : ''}`} src={art.deity(done ? 3 : stage)} alt="準時下班神" draggable={false} />;
+export function Deity({ deity, stage, done }: { deity: DeityInfo; stage: 0 | 1 | 2 | 3; done?: boolean }) {
+  // 角色圖載入失敗就退回績效伯伯，木魚畫面不會空掉
+  return (
+    <img
+      className={`deity-img s${stage}${done ? ' done' : ''}`}
+      src={deity.frame(done ? 3 : stage)}
+      alt={deity.name}
+      draggable={false}
+      onError={(e) => {
+        const fb = art.deity(done ? 3 : stage);
+        if (e.currentTarget.src !== new URL(fb, location.href).href) e.currentTarget.src = fb;
+      }}
+    />
+  );
 }
 
 export function StampImg({ spec, className }: { spec: StampSpec; className?: string }) {

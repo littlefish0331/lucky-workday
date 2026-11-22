@@ -7,11 +7,20 @@
 V1 已搬到 **Vercel**：https://lucky-workday.vercel.app/ ，repo 改為 **`littlefish0331/lucky-workday`**（公開）。舊 repo `ontime-lucky-day` 與 GitHub Pages 已由使用者刪除。
 使用者的 9 頁實測回饋（`reference/feedback-01.pptx`）已逐頁讀完並整理在下方，**程式還沒動**。籤詩與諧音梗素材（`reference/ai-response-02.md`）、角色美術（`art-src/`）都已到位，等著接進去。
 
-## 先處理的三件事（阻塞中）
+## 2026-11-22 晚間 session 做了什麼（程式改動**尚未 commit、尚未 push**）
+
+- **Edge Function 已部署（v6）並驗證**：新網域 Origin 回 200（`stats` 有數字）、舊網域 403；線上檔案與 repo 逐字相同。
+- **簡報第 1、2、3、7、8 頁已改**（程式、測試、截圖都看過）：改名「打工庇佑廟」＋標語；整體變亮（底色改走 `--bg*`，`--ink` 只剩深色文字用途）；報名頁改「信眾請留名」＋稱呼 chips（信士／信女／小女子／小弟／路過看看／誠心發問，選填，存進 `Result.honorific` 與 `Store.honorific`）；痛點頁問句「信士，今天有什麼困擾？」、按鈕「換一批」；法號不再取名字一字（`makeHao` 只回稱號，`plainHao()` 讀舊紀錄時去掉「X・」）；籤卡拿掉邀請語與網址，移到卡外 `.invite`；籤卡站名／印章改新名；折行改為「先在標點換行、否則等長」（`card.ts` 的 `wrap`）；分享區拿掉「換一則」、文案進頁面隨機一種、「去 Threads 發文」與「複製文案」同一行（複製時才附網址）；`+1 陰德`→`+1 功德`；貓／狗掌簽收字樣改「胖橘／旺財代為簽收」。
+- **四位神明依主題切換**（`src/data/deities.ts`，辦公室／業務→績效伯伯、錢／服務→發薪婆婆、工程師→旺財、通勤→胖橘），木魚畫面的圖與台詞都換；新角色圖已處理成 20 個 webp（`scripts/process-art.py --characters`），看過深淺底拼圖。**動作圖（wangcai-typing 等 8 張）已處理但程式還沒用到。**
+- **`docs/ART-PROMPTS-V2.md`**：給 Codex 的新 prompt（廟宇長籤筒、筊杯去黃邊、og 圖）。使用者還沒拿去生圖。
+- 驗證：vitest 52、tsc、check-fortunes 0 錯 0 警告；`e2e-smoke` 線上與本機各 15/15；`e2e-bad-paths` 19/19（用當天名字 `測試6 測試4`）。
+- **未解的小事**：①`e2e-bad-paths` 有一次在路線 B 找不到「重抽」鈕就逾時，隨後兩次都過；我沒能重現，**推測是 3% 的陰筊隱藏款（不能重抽）**，沒有證實，腳本已加上失敗時印出按鈕清單。②`e2e-card-layout` 最小間距 30px（STATUS 舊記錄 70px）；我拿舊版 `card.ts` 對照跑過，同樣 30px，所以**不是這次改動造成**，原因未查。③使用者在簡報提的「交班本寫了 2 頁，連冰箱都有交代」那張，我**沒有專門檢查**新折行的樣子。
+
+## 先處理的三件事
 
 | # | 事項 | 狀態 | 怎麼辦 |
 |---|---|---|---|
-| 1 | **Edge Function 重新部署** | **被 Claude Code 的權限分類器擋下**（使用者口頭已授權，但工具層仍擋）。新網域 `lucky-workday.vercel.app` 目前被線上版拒絕（HTTP 403，`reason: origin`），所以**新站不顯示今日人數、計數沒進 Redis**；遊戲本身正常 | 請使用者在 `/permissions` 加 `mcp__plugin_supabase_supabase__deploy_edge_function` 後再部署。檔案：`supabase/functions/count/` 的 `index.ts`、`logic.ts`、`known-ids.json`，專案 `csykldmxxzlnwzbamswl`，`verify_jwt=false`。**線上的 known-ids 比 repo 舊**（例如線上有 `0452b5c8`、repo 沒有；repo 有 `6eaa87dc`、線上沒有，至少十幾筆不同），所以新籤的計數現在也被擋，更需要部署 |
+| 1 | ~~Edge Function 重新部署~~ | **已完成（2026-11-22 晚）**。注意：之後只要改籤詩（known-ids 變動）或加投票，就要再部署一次 | 部署用 `mcp__plugin_supabase_supabase__deploy_edge_function`，專案 `csykldmxxzlnwzbamswl`，檔案 `index.ts`、`logic.ts`、`known-ids.json`，`verify_jwt=false` |
 | 2 | **改 commit 信箱並 force push** | 本機已改寫（見下方「git 狀態」）；**push 尚未做**，因為我的 git push 會被擋 | 使用者自己跑：`cd ontime-lucky-day && git push --force-with-lease origin main`。推完 Vercel 會自動重新部署 |
 | 3 | **旺財擠捷運** | 使用者已重生，檔案在 `art-src/wangcai-mrt.png`，**我看過：臉是柴犬、沒有貓鬚、兩側只有直條，合格** | 跑 `process-art.py` 時一起處理 |
 

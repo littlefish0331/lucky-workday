@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { JIAOBEI_RATE, KNOCKS, LEVEL_RATE, SEASON_WINDOW } from '../src/engine/config';
 import { drawFortune, isLive, knocksNeeded, pickLevel, seasonActive, throwJiaobei } from '../src/engine/draw';
-import { HAO, makeHao, nameMark } from '../src/engine/hao';
+import { HAO, makeHao, plainHao } from '../src/engine/hao';
 import { createRng, normalizeName, taipeiDateKey } from '../src/engine/rng';
 import { BAD_LEVELS, GOOD_LEVELS, LEVELS, kindOf, type Fortune } from '../src/engine/types';
 
@@ -65,12 +65,6 @@ describe('亂數與名字', () => {
     expect(normalizeName(' Ａmy  Lee ')).toBe('AmyLee');
     expect(normalizeName('王　小 明')).toBe('王小明');
     expect([...normalizeName('一二三四五六七八九十甲乙丙丁')].length).toBe(12);
-  });
-  it('名字記號：取最後一個中文字，英文取首字母大寫', () => {
-    expect(nameMark('王小明')).toBe('明');
-    expect(nameMark('amy')).toBe('A');
-    expect(nameMark('小A明')).toBe('明');
-    expect(nameMark('   ')).toBe('無');
   });
   it('台北日期格式 YYYY-MM-DD，並以台北時區為準', () => {
     expect(taipeiDateKey(new Date('2026-11-20T10:00:00Z'))).toBe('2026-11-20');
@@ -210,11 +204,16 @@ describe('木魚', () => {
 });
 
 describe('法號', () => {
-  it('同名同日同等級 → 同法號；格式為「字・稱號」', () => {
+  it('同名同日同等級 → 同法號；只有稱號，不帶名字的字', () => {
     const a = makeHao('王小明', '大吉', '2026-11-20');
     expect(a).toBe(makeHao('王小明', '大吉', '2026-11-20'));
-    expect(a.startsWith('明・')).toBe(true);
-    expect(HAO['大吉'].some((h) => a.endsWith(h))).toBe(true);
+    expect(HAO['大吉']).toContain(a);
+    expect(a).not.toContain('・');
+  });
+  it('舊紀錄的「明・準時下班居士」顯示時拿掉前面的字；新格式不動', () => {
+    expect(plainHao('明・準時下班居士')).toBe('準時下班居士');
+    expect(plainHao('T・準時下班居士')).toBe('準時下班居士');
+    expect(plainHao('準時下班居士')).toBe('準時下班居士');
   });
   it('下下籤的法號來自下下籤清單', () => {
     expect(HAO['下下籤'].some((h) => makeHao('阿華', '下下籤', '2026-11-20').endsWith(h))).toBe(true);

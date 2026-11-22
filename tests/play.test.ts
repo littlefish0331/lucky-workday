@@ -18,7 +18,7 @@ describe('一局的狀態轉換', () => {
     expect(canReroll(r)).toBe(false);
     expect(needsDecision(r)).toBe(false);
     expect(r.outcome).toBe('direct');
-    expect(r.hao.startsWith('明・')).toBe(true);
+    expect(HAO['大吉']).toContain(r.hao);
   });
 
   it('抽到凶：可以重抽；重抽成吉 → 改判，不用再決定', () => {

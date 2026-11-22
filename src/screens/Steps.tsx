@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent, type PointerEvent as RPointerEvent } from 'react';
 import { Block, Cylinder, StampImg } from '../components/ui';
+import { HONORIFICS, honorificById } from '../data/honorifics';
 import { HINTS } from '../data/texts';
-import { PAINS, TOPIC_LABEL, pickPainBatch, type Pain } from '../data/pains';
+import { TOPIC_LABEL, pickPainBatch, type Pain } from '../data/pains';
 import { NAME_MAX } from '../engine/config';
 import { throwJiaobei } from '../engine/draw';
 import { normalizeName } from '../engine/rng';
@@ -21,33 +22,46 @@ export function Steps({ at }: { at: number }) {
   );
 }
 
-/* ① 報上名來 */
-export function NameStep({ initial, onSubmit }: { initial: string; onSubmit: (name: string) => void }) {
+/* ① 信眾留名（稱呼為選填） */
+export function NameStep({ initial, initialHonorific, onSubmit }: { initial: string; initialHonorific: string; onSubmit: (name: string, honorific: string) => void }) {
   const [v, setV] = useState(initial);
+  const [h, setH] = useState(initialHonorific);
   const ok = normalizeName(v).length > 0;
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (ok) onSubmit(v.trim().replace(/\s+/g, ' ').slice(0, NAME_MAX));
+    if (ok) onSubmit(v.trim().replace(/\s+/g, ' ').slice(0, NAME_MAX), h);
   };
   return (
     <form className="screen stack center" onSubmit={submit}>
       <Steps at={1} />
-      <h2>報上名來</h2>
-      <p className="sub">神明要登記信眾。暱稱也可以，名字只存在你的手機裡。</p>
+      <h2>信眾請留名</h2>
       <div className="grow" />
       <input
         className="field"
         value={v}
         onChange={(e) => setV(e.target.value)}
         maxLength={NAME_MAX}
-        placeholder="你的名字"
+        placeholder="你的名字或暱稱"
         autoComplete="off"
         autoCapitalize="off"
         enterKeyHint="go"
-        aria-label="你的名字"
+        aria-label="你的名字或暱稱"
         autoFocus
       />
-      <p className="small">同一個名字，同一天會抽到同一支籤。</p>
+      <div className="chips" role="radiogroup" aria-label="稱呼（可不選）">
+        {HONORIFICS.map((o) => (
+          <button
+            key={o.id}
+            type="button"
+            role="radio"
+            aria-checked={h === o.id}
+            className={`chip${h === o.id ? ' on' : ''}`}
+            onClick={() => setH(h === o.id ? '' : o.id)}
+          >
+            {o.chip}
+          </button>
+        ))}
+      </div>
       <div className="grow" />
       <button className="btn" type="submit" disabled={!ok}>
         就是我
@@ -56,15 +70,14 @@ export function NameStep({ initial, onSubmit }: { initial: string; onSubmit: (na
   );
 }
 
-/* ② 最痛的事 */
-export function PainStep({ onPick }: { onPick: (p: Pain) => void }) {
+/* ② 今天有什麼困擾 */
+export function PainStep({ honorific, onPick }: { honorific: string; onPick: (p: Pain) => void }) {
   const seen = useRef(new Set<string>());
   const [batch, setBatch] = useState<Pain[]>(() => pickPainBatch(seen.current));
   return (
     <div className="screen stack">
       <Steps at={2} />
-      <h2>最近，哪件事最痛？</h2>
-      <p className="sub">選一個。神明會往這個方向多看一眼。</p>
+      <h2>{honorificById(honorific).ask}，今天有什麼困擾？</h2>
       <div className="pains" role="list">
         {batch.map((p) => (
           <button key={p.id} className="pain" role="listitem" onClick={() => onPick(p)}>
@@ -75,13 +88,13 @@ export function PainStep({ onPick }: { onPick: (p: Pain) => void }) {
         ))}
       </div>
       <button className="btn ghost" onClick={() => setBatch(pickPainBatch(seen.current))}>
-        都不是，換一批（共 {PAINS.length} 種）
+        換一批
       </button>
     </div>
   );
 }
 
-/* ③ 按手印立契約 */
+/* ③ 蓋手印 */
 export function StampStep({ name, pain, spec, onDone }: { name: string; pain: string; spec: StampSpec; onDone: () => void }) {
   const [p, setP] = useState(0);
   const [hold, setHold] = useState(false);
@@ -133,17 +146,17 @@ export function StampStep({ name, pain, spec, onDone }: { name: string; pain: st
   return (
     <div className="screen stack center">
       <Steps at={3} />
-      <h2>立契約</h2>
+      <h2>蓋個手印</h2>
       <div className="contract">
-        <h3>職場求籤契約</h3>
+        <h3>求籤登記單</h3>
         <div>
-          立約人 <b>{name}</b>，因「<b>{pain}</b>」之事，自願向本宮求籤一支。
+          信眾 <b>{name}</b>，因「<b>{pain}</b>」之事，來本廟求籤一支。
         </div>
         <div>抽到什麼都不退貨，明天的班照樣要上。</div>
         {signed && <StampImg className="signed on" spec={spec} />}
       </div>
       <div className="grow" />
-      <p className="sub">{signed ? '契約成立。' : HINTS.stamp}</p>
+      <p className="sub">{signed ? '登記完成。' : HINTS.stamp}</p>
       <button
         className={`inkpad${hold ? ' hold' : ''}`}
         onPointerDown={(e: RPointerEvent<HTMLButtonElement>) => {

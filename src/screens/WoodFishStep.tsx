@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { Deity, Mallet, WoodFish } from '../components/ui';
-import { CRIT_QUIPS, DEITY_STAGES, HINTS, KNOCK_QUIPS } from '../data/texts';
+import { deityOf } from '../data/deities';
+import { CRIT_QUIPS, HINTS, KNOCK_QUIPS } from '../data/texts';
+import type { Topic } from '../engine/types';
 import { buzz } from '../lib/haptics';
 import { useLater } from '../lib/hooks';
 
 const pick = <T,>(a: T[]): T => a[Math.floor(Math.random() * a.length)];
 
 /**
- * 敲木魚積陰德。target 是要敲的次數，玩家看不到（只看神像表情變化）。
+ * 敲木魚積功德。target 是要敲的次數，玩家看不到（只看神像表情變化）。
  * 暴擊一次算 5 下；onDone 回傳實際敲了幾下。
  */
-export function WoodFishStep({ kind, target, onDone }: { kind: 'reroll' | 'resolve'; target: number; onDone: (taps: number) => void }) {
+export function WoodFishStep({ kind, target, topic, onDone }: { kind: 'reroll' | 'resolve'; target: number; topic: Topic; onDone: (taps: number) => void }) {
+  const deity = deityOf(topic);
   const [, setTick] = useState(0);
   const [hit, setHit] = useState(false);
   const [quip, setQuip] = useState('');
@@ -48,21 +51,20 @@ export function WoodFishStep({ kind, target, onDone }: { kind: 'reroll' | 'resol
 
   const ratio = progress.current / target;
   const stage = ratio >= 1 ? 3 : ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : ratio >= 0.3 ? 1 : 0;
-  const d = DEITY_STAGES[stage];
 
   return (
     <div className="screen stack center">
-      <h2>{kind === 'reroll' ? '敲木魚積陰德' : '敲木魚化解'}</h2>
+      <h2>{kind === 'reroll' ? '敲木魚積功德' : '敲木魚化解'}</h2>
       <p className="sub">
         {done.current ? '功德圓滿。' : kind === 'reroll' ? '敲到神明願意再給你一次機會。' : '再敲一輪，把這支籤化掉。'}
         <br />
         {HINTS.woodfish}
       </p>
       <div className={`deity s${stage}`}>
-        <Deity stage={stage as 0 | 1 | 2 | 3} done={done.current} />
+        <Deity deity={deity} stage={stage as 0 | 1 | 2 | 3} done={done.current} />
       </div>
       <div className="quip" aria-live="polite">
-        {done.current ? '神明：好啦好啦，給你一次。' : quip || d.say}
+        {done.current ? `${deity.name}：${deity.done}` : quip || `${deity.name}：${deity.says[stage]}`}
       </div>
       <button className="woodwrap" onPointerDown={(e) => { e.preventDefault(); knock(); }} aria-label="敲木魚" onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); knock(); } }}>
         <WoodFish hit={hit} />

@@ -9,6 +9,7 @@ export const snapOf = (f: Fortune): Result['snap'] => ({ no: f.no, eye: f.eye, b
 
 export function buildResult(p: {
   name: string;
+  honorific?: string;
   date: string;
   pain: string;
   topic: Topic;
@@ -19,6 +20,7 @@ export function buildResult(p: {
 }): Result {
   return {
     name: p.name,
+    honorific: p.honorific || undefined,
     date: p.date,
     pain: p.pain,
     topic: p.topic,

@@ -19,7 +19,7 @@ const browser = await chromium.launch({ executablePath: EDGE, headless: true });
 async function ritual(page, name) {
   await page.goto(URL, { waitUntil: 'networkidle' });
   await page.getByRole('button', { name: /進廟求籤|看今天的籤/ }).click();
-  await page.getByLabel('你的名字').fill(name);
+  await page.getByLabel('你的名字或暱稱').fill(name);
   await page.getByRole('button', { name: '就是我' }).click();
   await page.locator('.pain').first().click();
   const pad = page.locator('.inkpad');
@@ -67,7 +67,7 @@ const newPage = async () => (await browser.newContext({ viewport: { width: 390, 
   const first = await level(page);
   must(['小凶', '凶', '大凶', '下下籤'].includes(first), `A. 第一抽是凶側：${first}`);
   await page.screenshot({ path: 'shots/bad-A1-first.png' });
-  await page.getByRole('button', { name: /敲木魚積陰德，重抽一次/ }).click();
+  await page.getByRole('button', { name: /敲木魚積功德，重抽一次/ }).click();
   await page.locator('.woodwrap').waitFor();
   await page.getByRole('button', { name: '我手痠了，幫我敲' }).click();
   await page.locator('.cardimg').waitFor({ timeout: 30000 });
@@ -94,7 +94,9 @@ for (const route of ['B', 'C']) {
   page.on('pageerror', (e) => errors.push(e.message));
   await ritual(page, BAD);
   const first = await level(page);
-  await page.getByRole('button', { name: /敲木魚積陰德，重抽一次/ }).click();
+  const rr = page.getByRole('button', { name: /敲木魚積功德，重抽一次/ });
+  if (!(await rr.count())) { await page.screenshot({ path: `shots/bad-${route}-NOREROLL.png` }); console.log('停在：', first, JSON.stringify(await page.evaluate(() => [...document.querySelectorAll('button,a.btn')].map((b) => b.textContent.trim().slice(0, 14))))); }
+  await rr.click({ timeout: 5000 });
   await page.locator('.woodwrap').waitFor();
   await page.getByRole('button', { name: '我手痠了，幫我敲' }).click();
   await page.locator('.cardimg').waitFor({ timeout: 30000 });

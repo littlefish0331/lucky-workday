@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { plainHao } from '../engine/hao';
 import { kindOf } from '../engine/types';
 import type { Result } from '../lib/storage';
 
@@ -18,7 +19,7 @@ export function BookView({ book, onOpen, onClear, onHome }: { book: Result[]; on
                 <span className={`lv ${kindOf(r.level) === 'good' ? 'g' : 'b'}`}>{r.level}</span>
                 <span className="eye">{r.snap.eye}</span>
                 <span className="meta">
-                  {r.date}・{r.name}・{r.hao}
+                  {r.date}・{r.name}・{plainHao(r.hao)}
                   {r.outcome === 'rerolled' && '・改判'}
                   {r.outcome === 'resolved' && '・已化解'}
                 </span>

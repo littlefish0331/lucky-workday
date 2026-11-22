@@ -4,6 +4,8 @@ import { art, loadImage } from '../data/art';
 import { stampDataUrl } from './stamp';
 import type { Result } from './storage';
 import { STAMP_CAPTION } from './stamp';
+import { honorificById } from '../data/honorifics';
+import { plainHao } from '../engine/hao';
 import { kindOf } from '../engine/types';
 
 export const CARD_W = 1080;
@@ -17,8 +19,8 @@ const PALETTE = {
   bad: { paper: '#E3D5BC', paper2: '#D2C09E', frame: '#2B211B', gold: '#8A7550', ink: '#1B1410', sub: '#5A4636', accent: '#7A2A22' },
 };
 
-/** 把文字依寬度折行。中文逐字量，標點不放行首。 */
-function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): string[] {
+/** 貪婪折行：中文逐字量，標點不放行首。 */
+function greedyWrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): string[] {
   const lines: string[] = [];
   let cur = '';
   for (const ch of [...text]) {
@@ -35,6 +37,63 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): string
   }
   if (cur) lines.push(cur);
   return lines;
+}
+
+/** 在不增加行數的前提下，盡量讓每一行一樣長（避免最後一行只剩一兩個字）。 */
+function balancedWrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): string[] {
+  const base = greedyWrap(ctx, text, maxW);
+  if (base.length <= 1) return base;
+  let lo = maxW / base.length;
+  let hi = maxW;
+  let best = base;
+  for (let i = 0; i < 12; i++) {
+    const mid = (lo + hi) / 2;
+    const t = greedyWrap(ctx, text, mid);
+    if (t.length <= base.length) { best = t; hi = mid; } else lo = mid;
+  }
+  return best;
+}
+
+const CLAUSE_END = /[，。、！？：；]/;
+
+/**
+ * 折行：優先在標點（逗號、句號…）換行，讓一句話不要被攔腰切斷；
+ * 句子太長放不下才退回「逐字、各行等長」的折法。
+ */
+function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): string[] {
+  const plain = balancedWrap(ctx, text, maxW);
+  if (plain.length <= 1) return plain;
+  // 切成子句（標點留在前一句尾巴）
+  const clauses: string[] = [];
+  let cur = '';
+  for (const ch of [...text]) {
+    cur += ch;
+    if (CLAUSE_END.test(ch)) { clauses.push(cur); cur = ''; }
+  }
+  if (cur) clauses.push(cur);
+  if (clauses.length < 2 || clauses.length > 12) return plain;
+  const w = clauses.map((c) => ctx.measureText(c).width);
+  if (w.some((x) => x > maxW)) return plain;
+  // 動態規劃：行數與「最長一行」都最小
+  const n = clauses.length;
+  const lineW = (i: number, j: number) => ctx.measureText(clauses.slice(i, j).join('')).width;
+  type Best = { lines: number; max: number; cut: number };
+  const dp: Best[] = Array.from({ length: n + 1 }, () => ({ lines: Infinity, max: Infinity, cut: 0 }));
+  dp[0] = { lines: 0, max: 0, cut: 0 };
+  for (let j = 1; j <= n; j++) {
+    for (let i = 0; i < j; i++) {
+      const lw = lineW(i, j);
+      if (lw > maxW || dp[i].lines === Infinity) continue;
+      const cand = { lines: dp[i].lines + 1, max: Math.max(dp[i].max, lw), cut: i };
+      if (cand.lines < dp[j].lines || (cand.lines === dp[j].lines && cand.max < dp[j].max)) dp[j] = cand;
+    }
+  }
+  if (dp[n].lines === Infinity || dp[n].lines > plain.length) return plain;
+  const out: string[] = [];
+  for (let j = n; j > 0; j = dp[j].cut) out.unshift(clauses.slice(dp[j].cut, j).join(''));
+  // 子句版如果某一行比等長版寬太多，視覺會失衡，就用等長版
+  const widest = (ls: string[]) => Math.max(...ls.map((l) => ctx.measureText(l).width));
+  return widest(out) <= widest(plain) * 1.35 ? out : plain;
 }
 
 function fitFont(ctx: CanvasRenderingContext2D, text: string, family: string, weight: string, max: number, min: number, maxW: number, maxLines: number) {
@@ -120,14 +179,14 @@ export interface CardOptions {
   stampImage?: CanvasImageSource | null;
 }
 
-const NOTE_TEXT = '原抽敲木魚下改判認命收下明天會更好大概化解已知悉神明閱準時下班完成';
+const NOTE_TEXT = '原抽敲木魚下改判認命收下明天會更好大概化解已知悉神明閱完成';
 
 export async function drawCard(r: Result, opt: CardOptions = {}): Promise<HTMLCanvasElement> {
   try {
     // 字型是分片載入的：要把這張卡會用到的每個字都交給 fonts.load，否則 Canvas 會畫出系統字型
     const all = [
-      '準時下班宮第籤信眾今日煩惱你也來求一支看看今天能不能準時下班',
-      r.level, r.snap.eye, ...r.snap.body, r.snap.tip, r.name, r.hao, r.pain, r.resolveTip ?? '', NOTE_TEXT, '0123456789',
+      '打工庇佑廟第籤信眾今日煩惱神明已閱胖橘旺財代為簽收信士女小子弟路過誠心發問',
+      r.level, r.snap.eye, ...r.snap.body, r.snap.tip, r.name, plainHao(r.hao), r.pain, r.resolveTip ?? '', NOTE_TEXT, '0123456789',
     ].join('');
     await Promise.all([
       document.fonts.load(`700 80px ${SERIF}`, all),
@@ -154,7 +213,7 @@ export async function drawCard(r: Result, opt: CardOptions = {}): Promise<HTMLCa
   // 頂部：站名與籤號
   ctx.fillStyle = p.sub;
   ctx.font = `400 38px ${SERIF}`;
-  ctx.fillText('準 時 下 班 宮', CARD_W / 2, 238);
+  ctx.fillText('打 工 庇 佑 廟', CARD_W / 2, 238);
   ctx.font = `400 34px ${SERIF}`;
   ctx.fillText(`第 ${String(r.snap.no).padStart(3, '0')} 籤`, CARD_W / 2, 286);
 
@@ -234,14 +293,15 @@ export async function drawCard(r: Result, opt: CardOptions = {}): Promise<HTMLCa
   ctx.textAlign = 'left';
   ctx.fillStyle = p.sub;
   ctx.font = `400 34px ${SERIF}`;
-  ctx.fillText('信眾', 150, baseY + 10);
+  ctx.fillText(honorificById(r.honorific).card, 150, baseY + 10);
   ctx.fillStyle = p.ink;
   ctx.font = `700 60px ${SERIF}`;
   ctx.fillText(r.name.slice(0, 8), 150, baseY + 78);
   ctx.fillStyle = p.accent;
-  const haoFit = fitFont(ctx, r.hao, SERIF, '700', 50, 34, 520, 1);
+  const hao = plainHao(r.hao);
+  const haoFit = fitFont(ctx, hao, SERIF, '700', 50, 34, 520, 1);
   ctx.font = `700 ${haoFit.size}px ${SERIF}`;
-  ctx.fillText(r.hao, 150, baseY + 142);
+  ctx.fillText(hao, 150, baseY + 142);
   ctx.fillStyle = p.sub;
   ctx.font = `400 34px ${SERIF}`;
   ctx.fillText(`今日煩惱：${r.pain || '（神明已讀不回）'}`.slice(0, 18), 150, baseY + 198);
@@ -271,16 +331,7 @@ export async function drawCard(r: Result, opt: CardOptions = {}): Promise<HTMLCa
   }
   // 印章
   // 印章蓋進底圖上方的圓圈（圓心約 540,116、直徑約 114）
-  seal(ctx, 540, 117, bad ? '神明已閱' : '準時下班', p.accent, 0.6);
-
-  // 網址與邀請
-  ctx.textAlign = 'center';
-  ctx.fillStyle = p.sub;
-  ctx.font = `400 34px ${SERIF}`;
-  ctx.fillText('你也來求一支，看看今天能不能準時下班', CARD_W / 2, 1782);
-  ctx.fillStyle = p.accent;
-  ctx.font = `700 32px ${SERIF}`;
-  ctx.fillText(SITE_URL.replace('https://', '').replace(/\/$/, ''), CARD_W / 2, 1832);
+  seal(ctx, 540, 117, bad ? '神明已閱' : '打工庇佑', p.accent, 0.6);
 
   layoutOf.set(cv, { contentEnd: y, noteY, infoTop: baseY - 50 });
   return cv;

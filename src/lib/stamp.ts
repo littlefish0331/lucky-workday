@@ -126,6 +126,6 @@ export function stampDataUrl(spec: StampSpec, size = 240): string {
 export const STAMP_CAPTION: Record<StampSpec['kind'], string> = {
   finger: '',
   palm: '',
-  cat: '貓咪代為簽收',
-  dog: '狗狗代為簽收',
+  cat: '胖橘代為簽收',
+  dog: '旺財代為簽收',
 };

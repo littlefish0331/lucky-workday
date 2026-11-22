@@ -1,10 +1,10 @@
 {
-  "name": "準時下班宮",
-  "short_name": "準時下班宮",
-  "description": "報上名來，神明替你看看今天能不能準時下班",
+  "name": "打工庇佑廟 Lucky Workday",
+  "short_name": "打工庇佑廟",
+  "description": "職場很莫名其廟，來拜一下",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#1b1410",
+  "background_color": "#3a2118",
   "theme_color": "#c0392b",
   "lang": "zh-Hant",
   "icons": [

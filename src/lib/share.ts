@@ -1,18 +1,19 @@
 import { canvasToBlob, SITE_URL } from './card';
 import type { Result } from './storage';
-import { kindOf } from '../engine/types';
+import { plainHao } from '../engine/hao';
 
-/** 兩三種可選文案，結尾邀請留言互動。 */
+/** 兩三種文案，進頁面時隨機挑一種。使用者發文前會自己再編輯，所以不提供「換一則」。 */
 export function shareTexts(r: Result): string[] {
-  const bad = kindOf(r.level) === 'bad';
+  const hao = plainHao(r.hao);
   const pain = r.pain ? `（今日煩惱：${r.pain}）` : '';
-  const a = bad
-    ? `我在準時下班宮抽到「${r.level}」，法號【${r.hao}】${pain}\n神明說：${r.snap.eye}\n你的法號是什麼？留言給我看`
-    : `我在準時下班宮抽到「${r.level}」，法號【${r.hao}】${pain}\n神明說：${r.snap.eye}\n你的法號是什麼？留言給我看`;
-  const b = `神明賜我法號「${r.hao}」。\n${r.snap.eye}\n你也去求一支，留言比比看誰比較慘（或比較準時下班）`;
+  const a = `我在打工庇佑廟抽到「${r.level}」，法號【${hao}】${pain}\n神明說：${r.snap.eye}\n你的法號是什麼？留言給我看`;
+  const b = `神明賜我法號「${hao}」。\n${r.snap.eye}\n你也去求一支，留言比比看誰比較慘（或比較準時下班）`;
   const c = `今天的籤：${r.level}。${r.snap.eye}\n同事們，來報上法號`;
   return [a, b, c];
 }
+
+/** 複製時在文案後面接網址（Threads 發文連結本身另外帶 url，所以那邊不重複） */
+export const withUrl = (text: string) => `${text}\n${SITE_URL}`;
 
 export function threadsIntentUrl(text: string): string {
   return `https://www.threads.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(SITE_URL)}`;
@@ -30,7 +31,7 @@ export async function saveCard(cv: HTMLCanvasElement, filename: string): Promise
   const nav = navigator as Navigator & { canShare?: (d: ShareData) => boolean };
   if (typeof nav.share === 'function' && nav.canShare?.({ files: [file] })) {
     try {
-      await nav.share({ files: [file], title: '準時下班宮' });
+      await nav.share({ files: [file], title: '打工庇佑廟' });
       return 'share';
     } catch (e) {
       if ((e as DOMException)?.name === 'AbortError') return 'cancel';
