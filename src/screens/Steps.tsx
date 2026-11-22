@@ -8,7 +8,10 @@ import { throwJiaobei } from '../engine/draw';
 import { normalizeName } from '../engine/rng';
 import type { Jiaobei } from '../engine/types';
 import { buzz } from '../lib/haptics';
-import { useLater } from '../lib/hooks';
+import { reduceMotion, useLater } from '../lib/hooks';
+import { planThrow, type BlockPlan } from '../lib/jiaobei-physics';
+import type { JiaobeiScene } from '../lib/jiaobei-scene';
+import { listenShake, motionSupport, requestMotionPermission } from '../lib/motion';
 import type { StampSpec } from '../lib/storage';
 
 const TOTAL_STEPS = 5;
@@ -187,16 +190,23 @@ export function StampStep({ name, pain, spec, onDone }: { name: string; pain: st
   );
 }
 
-/* ④ 搖籤筒 */
+/* ④ 搖籤筒：搖手機、或手指左右拖曳，兩種都可以，同時有效 */
+/** 手機搖一下加多少進度（0～1）。來回各算一下，用力搖約 8 下/秒，大約搖 2.5 秒籤就跳出來 */
+const SHAKE_STEP = 0.05;
 export function ShakeStep({ onDone }: { onDone: () => void }) {
   const [prog, setProg] = useState(0);
   const [tilt, setTilt] = useState(0);
   const [popped, setPopped] = useState(false);
+  // 搖手機的狀態：off = 不支援或沒授權（只剩拖曳）；ask = iOS 要點一下授權；on = 正在聽
+  const [motion, setMotion] = useState<'off' | 'ask' | 'on'>(() => (motionSupport() === 'ask' ? 'ask' : motionSupport() === 'ready' ? 'on' : 'off'));
+  const [motionLive, setMotionLive] = useState(false);
+  const [denied, setDenied] = useState(false);
   const last = useRef<number | null>(null);
   const startX = useRef(0);
   const moved = useRef(0);
   const progRef = useRef(0);
   const doneRef = useRef(false);
+  const flip = useRef(1);
   const later = useLater();
 
   const add = (d: number) => {
@@ -214,11 +224,45 @@ export function ShakeStep({ onDone }: { onDone: () => void }) {
     }
   };
 
+  // 搖手機：每搖一下，進度加一點、籤筒往左右甩一下
+  const addRef = useRef(add);
+  addRef.current = add;
+  useEffect(() => {
+    if (motion !== 'on') return;
+    return listenShake({
+      onStroke: () => {
+        flip.current = -flip.current;
+        setTilt(12 * flip.current);
+        later(() => setTilt(0), 160); // 沒再搖就回正；繼續搖的話下一下會再蓋過去
+        addRef.current(SHAKE_STEP);
+      },
+      onLive: () => setMotionLive(true),
+      onNoData: () => setMotion((m) => (m === 'on' ? 'off' : m)), // 桌機或沒有感測器：安靜退回只剩拖曳
+    });
+  }, [motion]);
+
+  const allow = async () => {
+    const r = await requestMotionPermission();
+    if (r === 'granted') setMotion('on');
+    else {
+      setMotion('off');
+      setDenied(true);
+    }
+  };
+
+  const hint = popped ? '一支籤跳出來了！' : motionLive ? '搖手機，或左右拖曳籤筒' : HINTS.shake;
+
   return (
     <div className="screen stack center">
       <Steps at={4} />
       <h2>搖籤筒</h2>
-      <p className="sub">{popped ? '一支籤跳出來了！' : HINTS.shake}</p>
+      <p className="sub">{hint}</p>
+      {motion === 'ask' && !popped && (
+        <button className="btn ghost shake-allow" onClick={allow}>
+          用搖手機的方式搖
+        </button>
+      )}
+      {denied && !popped && <p className="note">沒開感應也沒關係，用手指拖曳就行。</p>}
       <div className="grow" />
       <div
         className="stage"
@@ -266,7 +310,9 @@ export function ShakeStep({ onDone }: { onDone: () => void }) {
   );
 }
 
-/* ⑤ 擲筊 */
+/* ⑤ 擲筊
+ * 3D 版（three.js，進到這一頁才動態載入）：結果由 throwJiaobei 先決定，動畫只負責「演出」那個結果，
+ * 筊杯每次落在地面不同位置。載入失敗、沒有 WebGL、或使用者要求減少動畫時，退回原本的 2D 版。 */
 const FACES: Record<Jiaobei, ['flat' | 'round', 'flat' | 'round']> = { sheng: ['flat', 'round'], xiao: ['flat', 'flat'], yin: ['round', 'round'] };
 const WORDS: Record<Jiaobei, string> = { sheng: '聖筊！', xiao: '笑筊……神明笑了', yin: '陰筊……' };
 
@@ -275,39 +321,97 @@ export function TossStep({ onDone }: { onDone: (kind: 'sheng' | 'yin') => void }
   const [flying, setFlying] = useState(false);
   const [verdict, setVerdict] = useState<Jiaobei | null>(null);
   const [throwNo, setThrowNo] = useState(1);
+  // 3D：loading = 還在載入；ready = 可以用；off = 不用（失敗、減少動畫、沒有 WebGL）
+  const [gl, setGl] = useState<'loading' | 'ready' | 'off'>(() => (reduceMotion() ? 'off' : 'loading'));
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const sceneRef = useRef<JiaobeiScene | null>(null);
   const later = useLater();
+
+  useEffect(() => {
+    if (gl !== 'loading') return;
+    let alive = true;
+    let made: JiaobeiScene | null = null;
+    // 載入太久（慢網路）就放棄 3D、改用 2D，不讓玩家一直等。之後才載好的場景會被丟掉
+    const giveUp = window.setTimeout(() => {
+      if (!sceneRef.current) {
+        alive = false;
+        setGl('off');
+      }
+    }, 6000);
+    (async () => {
+      try {
+        const cv = canvasRef.current;
+        if (!cv) throw new Error('no canvas');
+        const { createScene } = await import('../lib/jiaobei-scene');
+        made = await createScene(cv);
+        if (!alive) return made.dispose();
+        window.clearTimeout(giveUp);
+        sceneRef.current = made;
+        setGl('ready');
+      } catch {
+        window.clearTimeout(giveUp);
+        if (alive) setGl('off');
+      }
+    })();
+    return () => {
+      alive = false;
+      window.clearTimeout(giveUp);
+      made?.dispose();
+      sceneRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => sceneRef.current?.resize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  /** 揭曉：顯示判定、震動，聖筊／陰筊之後進到下一步，笑筊要再擲一次 */
+  const reveal = (v: Jiaobei) => {
+    setFlying(false);
+    setVerdict(v);
+    buzz(v === 'sheng' ? [30, 40, 60] : 40);
+    if (v === 'sheng') later(() => onDone('sheng'), 1100);
+    else if (v === 'yin') later(() => onDone('yin'), 1500);
+    else setThrowNo(2);
+  };
 
   const toss = () => {
     if (flying) return;
     setVerdict(null);
     setFlying(true);
     buzz(20);
-    later(() => {
-      const v = throwJiaobei(throwNo);
-      setFaces(FACES[v]);
-      setFlying(false);
-      setVerdict(v);
-      buzz(v === 'sheng' ? [30, 40, 60] : 40);
-      if (v === 'sheng') later(() => onDone('sheng'), 1100);
-      else if (v === 'yin') later(() => onDone('yin'), 1500);
-      else setThrowNo(2);
-    }, 900);
+    const v = throwJiaobei(throwNo); // 結果先決定
+    setFaces(FACES[v]);
+    if (gl === 'ready' && sceneRef.current) {
+      const plans: readonly [BlockPlan, BlockPlan] = planThrow(v, Math.floor(Math.random() * 2 ** 31));
+      sceneRef.current.play(plans, () => later(() => reveal(v), 250));
+    } else {
+      later(() => reveal(v), 900);
+    }
   };
 
-  const label = flying ? '擲出去了……' : verdict === 'xiao' ? '再擲一次' : '擲筊';
+  const label = gl === 'loading' ? '筊杯準備中……' : flying ? '擲出去了……' : verdict === 'xiao' ? '再擲一次' : '擲筊';
+  const use3d = gl !== 'off';
   return (
     <div className="screen stack center">
       <Steps at={5} />
       <h2>擲筊</h2>
       <p className="sub">{verdict === 'xiao' ? '神明覺得好笑，再擲一次。' : HINTS.toss}</p>
       <div className="grow" />
-      <div className="blocks" aria-live="polite">
-        <Block face={faces[0]} flying={flying} />
-        <Block face={faces[1]} flying={flying} mirror />
-      </div>
-      <div className={`verdict ${verdict ?? ''}`}>{verdict ? WORDS[verdict] : ' '}</div>
+      {/* canvas 永遠掛著（載入完成前就要量到尺寸）；3D 不可用時用 CSS 隱藏，改顯示 2D 版 */}
+      <canvas ref={canvasRef} className={`toss-canvas${use3d ? '' : ' off'}`} aria-hidden="true" data-gl={gl} />
+      {!use3d && (
+        <div className="blocks" aria-live="polite">
+          <Block face={faces[0]} flying={flying} />
+          <Block face={faces[1]} flying={flying} mirror />
+        </div>
+      )}
+      <div className={`verdict ${verdict ?? ''}`} aria-live="polite">{verdict ? WORDS[verdict] : ' '}</div>
       <div className="grow" />
-      <button className="btn" onClick={toss} disabled={flying || verdict === 'sheng' || verdict === 'yin'}>
+      <button className="btn" onClick={toss} disabled={gl === 'loading' || flying || verdict === 'sheng' || verdict === 'yin'}>
         {label}
       </button>
     </div>

@@ -73,17 +73,20 @@ await page.mouse.up();
 await page.getByRole('button', { name: '擲筊' }).waitFor({ timeout: 5000 });
 ok('搖籤 → 進入擲筊');
 
-// 擲筊：笑筊要再擲；最多 2 擲
+// 擲筊：笑筊要再擲；最多 2 擲。動畫長度會變（2D 約 1 秒、3D 約 1.6 秒），所以不寫死等待時間，
+// 而是每擲一次就等到「籤卡出現」或「再擲一次」可以按。
 let tosses = 0;
 for (let i = 0; i < 3; i++) {
-  const b = page.getByRole('button', { name: /擲筊|再擲一次/ });
-  if (!(await b.isVisible().catch(() => false))) break;
-  if (await b.isDisabled()) break;
+  const b = page.getByRole('button', { name: /^擲筊$|再擲一次/ });
+  await b.waitFor({ timeout: 8000 });
   await b.click();
   tosses++;
-  await page.waitForTimeout(1250);
-  if (i === 0) await shot('07-toss');
-  if (await page.locator('.cardimg, .cardskel').count()) break;
+  if (i === 0) { await page.waitForTimeout(500); await shot('07-toss'); }
+  const next = await Promise.race([
+    page.locator('.cardimg, .cardskel').first().waitFor({ timeout: 9000 }).then(() => 'card'),
+    page.getByRole('button', { name: '再擲一次' }).waitFor({ timeout: 9000 }).then(() => 'again'),
+  ]).catch(() => 'none');
+  if (next !== 'again') break;
 }
 await page.locator('.cardimg').waitFor({ timeout: 15000 });
 tosses <= 2 ? ok(`擲筊 ${tosses} 次就揭曉`) : bad(`擲筊 ${tosses} 次`);

@@ -14,6 +14,39 @@ cd ontime-lucky-day && git push origin main
 
 我的 git push 被分類器擋，不要繞路，由使用者自己執行。推上去之前，線上看到的還是舊名「準時下班宮」；推完 Vercel 自動部署。**接手第一件事：問使用者推了沒。**
 
+## 第三個 session（2026-11-22 深夜）：投票機制完成
+
+- **投票已做完、已 commit（`27e6ea5`）、Edge Function 已部署 v7**。前端 `src/components/VoteBox.tsx`＋`src/lib/vote.ts`（本機記票，每支籤一次不能改）；伺服器 `vote` action（`parseVote`／`voteCommand`／`voteRateCommand`，同 IP 同一支籤一天一票，寫 `otld:vu`／`otld:vd`）。凶籤還沒決定（重抽／認命）與陰筊隱藏款不顯示投票。
+- **驗證**：vitest 63 通過；`scripts/e2e-vote.mjs` 18 項（攔截 Supabase 請求，不污染正式票數）；線上 Function 用壞輸入探測（不存在的籤、票別錯、缺 fid、亂 fid、別人的 Origin→403、沒 apikey→401）都被正確擋掉，`stats` 正常。
+- **還沒驗證**：真正的一張票寫進 Redis、同 IP 一天一票的限流。要等前端 push 上線後，使用者在線上投一次，再用 Upstash 讀 `otld:vu`／`otld:vd` 確認。我刻意沒有對正式資料庫送合法的票。
+- **只看過發薪婆婆那組的「有感」截圖**；績效伯伯、旺財、胖橘與「沒感」的版面沒逐一看。
+
+## 第三個 session 後半：搖手機搖籤、擲筊 Three.js（已做、已測、**未經真機**）
+
+**搖手機搖籤**（`src/lib/shake.ts` 偵測、`src/lib/motion.ts` 接線、`Steps.tsx` 的 `ShakeStep`）
+- 手機搖與手指拖曳**同時有效**。iOS 才出現「用搖手機的方式搖」鈕（點了才呼叫 `requestPermission`，不點不偷聽）；拒絕授權只多一句「沒開感應也沒關係，用手指拖曳就行。」；桌機／沒有感測器／1.5 秒沒資料，授權鈕不出現、安靜退回只剩拖曳。
+- 偵測器：低通濾波估重力、高通取去重力加速度，門檻 11 m/s²，兩下至少隔 130ms，超過 260ms 仍在門檻上強制重新武裝（轉圈搖不會卡成 1 下）。參數集中在 `SHAKE_DEFAULTS`，每下進度 `SHAKE_STEP = 0.05`（用力搖約 2.5 秒出籤）。
+- 驗證：vitest 13 項（合成資料：放桌上、雜訊、慢傾斜、走路、輕搖、用力搖、轉圈搖、亂搖）；`scripts/e2e-shake.mjs` 25 項（桌機、Android、iOS 允許／拒絕、無 DeviceMotion、走路不誤觸），看過授權鈕與拒絕提示截圖。
+- **沒有真機。** 門檻是依典型數值估的、不是實測。真機要回報：好不好搖出籤？走路會不會誤觸？iOS 授權視窗正常嗎？太難／太易就調 `threshold` 與 `SHAKE_STEP`。
+
+**擲筊 Three.js**（`src/lib/jiaobei-scene.ts` 場景、`jiaobei-physics.ts` 軌跡、`src/data/jiaobei-shape.ts` 輪廓）
+- 結果仍由 `throwJiaobei` **先決定**，動畫只「演出」該結果（不是物理模擬，所以畫面與判定永遠一致）。每次落點隨機散落、兩杯不疊（vitest 掃 5000 個 seed）；拋起時筊杯比落地時大約 39%（近大遠小）。
+- 筊杯輪廓由 `scripts/trace-jiaobei.py` 從貼圖透明度描出（換了筊杯圖要重跑），貼圖與輪廓同一組 UV 對齊。圓面用「同輪廓、只畫 BackSide」的薄片（曾用旋轉 180° 的做法，邊緣會冒出鏡射的耳朵，已改掉，看過三種結果截圖）。
+- **three 只在擲筊頁才動態載入**；首頁 `index.html` 不預載（已驗證 0 次）。失敗一律退回原本 2D：three 載入失敗、沒有 WebGL、`prefers-reduced-motion`（連 three 都不下載）、載入超過 6 秒放棄。載入中按鈕顯示「筊杯準備中……」且不可按。
+- **包體積**：主程式 460,766 → 467,567 bytes（+6.8KB，gzip 147,217 → 149,498，+2.3KB；含搖手機與擲筊接線）；`jiaobei-scene` 獨立 chunk **567,734 bytes（gzip 141,469）**，只有進到擲筊頁才下載。three 固定 `0.187.0`（`@types/three` 同版）。
+- 驗證：vitest 14 項（軌跡連續、落點、輪廓不打結）；`scripts/e2e-toss3d.mjs`（含三種退回 2D）；聖／笑／陰三種結果的落地截圖（`scripts/shot-toss-faces.mjs`）；鏡頭位置不是目測，是用軌跡掃描確認全程不出畫面。
+- **只用軟體 WebGL（SwiftShader）驗過，沒有真機。** 真機要回報：低階手機掉不掉幀？載入要等多久（目前慢網路會先看到「筊杯準備中……」）？畫面比例對不對？
+- 想過但沒做：在搖籤那一頁就預先下載 three，可以讓「筊杯準備中」幾乎看不到，代價是搖籤頁就會多下載約 140KB gzip。要不要做由使用者決定。
+- 已知小事：three 0.187 已移除 `PCFSoftShadowMap`，場景改用 `PCFShadowMap`（影子邊緣較硬）。
+
+**驗證腳本的改動**：`e2e-smoke`、`e2e-vote` 的擲筊迴圈改成等狀態（籤卡出現或「再擲一次」可按），不再寫死 1250ms（3D 動畫較長，寫死會誤判）。新增 `scripts/with-preview.mjs`（替 e2e 自己啟動並關閉預覽伺服器，不留背景程序）。
+
+## 環境陷阱（這個 session 踩到）
+
+- **vitest 在 cwd 磁碟機代號是小寫 `c:` 時全部失敗**（`Cannot read properties of undefined (reading 'config')`，連沒改過的檔案也是；Playwright 與 tsc 不受影響）。從大寫 `C:\...` 路徑執行就正常。工作目錄切換後可能變小寫，先 `cd "C:/Users/..."` 再跑。**不要誤判成自己改壞了程式。**
+- **背景預覽伺服器被分類器擋下「終止程序」**：`Stop-Process` 這類指令不要繞路。改用「前景執行＋逾時」，或請使用者自己關（`Stop-Process -Id (Get-NetTCPConnection -LocalPort 4173 -State Listen).OwningProcess -Force`）。
+- `.preview.log`、`shots/` 是暫存，不要 commit（`git add` 指定檔案，不用 `-A`）。
+
 ## 這個 session（2026-11-22 晚）做完並驗證的事
 
 - **Edge Function 已部署（v6）**：新網域 200、舊網域 403，線上檔案與 repo 逐字相同。
@@ -89,8 +122,8 @@ cd ontime-lucky-day && git push origin main
 | 2 報名 | **已做** | 「信眾請留名」＋稱呼 chips；兩句說明已刪 |
 | 3 痛點 | **部分** | 問句、「換一批」已改。**「選了某類卻抽到別類很怪」＋職業標籤還沒動，要先和使用者討論設計**（現有 6 個主題其實就是職業：先選職業再問困擾、籤上預先標好） |
 | 4 手印 | **只換字** | 「蓋個手印」「求籤登記單」。**互動沒重做**：先按印泥→選位置→手印出現在按下處→按下震動→沒蓋完提示「按久一點」→指紋動畫（線條一段一段出現）。震動：Android 可 `navigator.vibrate`，iOS Safari 網頁據我所知不支援（未驗證），要有畫面備援並如實告訴使用者 |
-| 5 搖籤 | **籤筒圖已換；搖手機未做** | 搖手機已獲允許（見上表） |
-| 6 擲筊 | **筊杯圖已換；動畫未做** | 要散落隨機位置、拋起大小變化；Three.js 已獲允許 |
+| 5 搖籤 | **已做（待實機）** | 搖手機＋拖曳並存，iOS 授權鈕；只用合成事件驗過 |
+| 6 擲筊 | **已做（待實機）** | Three.js 3D：散落隨機落點、拋起近大遠小；失敗退回 2D；只用軟體 WebGL 驗過 |
 | 7 籤卡 | **已做** | 法號、邀請語移出、折行。**「交班本寫了 2 頁…」那張沒專門檢查** |
 | 8 分享 | **已做** | |
 | 9 截圖 | 保持 | |
@@ -113,9 +146,9 @@ cd ontime-lucky-day && git push origin main
 ## 下一步施工順序
 
 1. **問使用者 force push 做了沒**；推完後用 `URL=https://lucky-workday.vercel.app/ node scripts/e2e-smoke.mjs` 驗線上，並看線上首頁截圖是不是新名稱。
-2. **投票機制**（設計見上方，前端＋Edge Function `vote` action＋測試），再部署 Edge Function 一次（部署權限使用者已設好）。
-3. **搖手機搖籤**（DeviceMotion＋拖曳備援；iOS 授權鈕）。真機沒辦法在這邊測，要如實告訴使用者「只在桌機模擬過」，請他實機回報。
-4. **擲筊 Three.js**（動態載入、散落隨機位置、拋起大小變化）。先量現有包大小。
+2. ~~**投票機制**~~ **已完成**（見上方「第三個 session」）。待辦只剩：push 後請使用者線上投一次，再用 Upstash 讀 `otld:vu`／`otld:vd` 確認真的有寫入。
+3. ~~**搖手機搖籤**~~ **已完成**，但只在桌機用合成事件驗過，**等使用者實機回報**（見上方）。
+4. ~~**擲筊 Three.js**~~ **已完成**，只用軟體 WebGL 驗過，**等使用者實機回報**（見上方）。
 5. **手印互動重做**（見上表第 4 頁）。
 6. **職業標籤**與「選了某類卻抽到別類」的設計討論，再動手。
 7. **諧音籤**（`write-fortunes`，派寫手＋審稿；先問使用者是新增張數還是改寫現有籤的一句；只取 `ai-response-02.md` 的梗）。改籤詩後務必重新部署 Edge Function。

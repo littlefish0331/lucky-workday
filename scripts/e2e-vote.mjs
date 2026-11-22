@@ -50,11 +50,14 @@ async function reachCard(page, name) {
   await page.mouse.up();
   await page.getByRole('button', { name: '擲筊' }).waitFor({ timeout: 5000 });
   for (let i = 0; i < 3; i++) {
-    const b = page.getByRole('button', { name: /擲筊|再擲一次/ });
-    if (!(await b.isVisible().catch(() => false)) || (await b.isDisabled())) break;
+    const b = page.getByRole('button', { name: /^擲筊$|再擲一次/ });
+    await b.waitFor({ timeout: 8000 });
     await b.click();
-    await page.waitForTimeout(1250);
-    if (await page.locator('.cardimg, .cardskel').count()) break;
+    const next = await Promise.race([
+      page.locator('.cardimg, .cardskel').first().waitFor({ timeout: 9000 }).then(() => 'card'),
+      page.getByRole('button', { name: '再擲一次' }).waitFor({ timeout: 9000 }).then(() => 'again'),
+    ]).catch(() => 'none');
+    if (next !== 'again') break;
   }
   await page.locator('.cardimg').waitFor({ timeout: 15000 });
   // 凶籤：先擋在「重抽／認命」之前，投票鈕不該出現
