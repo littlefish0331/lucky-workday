@@ -112,12 +112,31 @@ describe('抽籤', () => {
     expect(good / N).toBeGreaterThan(0.52);
     expect(good / N).toBeLessThan(0.58);
   });
-  it('選了痛點，該痛點的籤被抽中機率約 4/13（權重 4 對 9 張 1）', () => {
+  it('選了痛點與主題：同痛點的籤被抽中約 12/13（假池每個等級 1 張同痛點、9 張別主題，別主題權重 0 不會抽到）', () => {
+    // 假池：第 0 張是 service／目標痛點，其餘 9 張是 office。選 service＋目標痛點 → 只剩那一張可抽，必中
+    let hit = 0;
+    const N = 3000;
+    for (let i = 0; i < N; i++) if (drawFortune(pool, { ...base, name: `p${i}`, pain: '目標痛點', topic: 'service' })!.pain === '目標痛點') hit++;
+    expect(hit).toBe(N);
+  });
+  it('選了主題就不會抽到別的主題（別主題權重 0）', () => {
+    for (let i = 0; i < 3000; i++) expect(drawFortune(pool, { ...base, name: `t${i}`, pain: '其他痛點', topic: 'office' })!.topic).toBe('office');
+  });
+  it('同主題內：選了痛點，同痛點的籤被抽中機率約 12/21（權重 12 對 9 張 1）', () => {
+    // 做一個全是 office 的池：每個等級 1 張目標痛點 + 9 張其他痛點
+    const officeOnly = pool.map((f) => ({ ...f, topic: 'office' as const }));
     let hit = 0;
     const N = 8000;
-    for (let i = 0; i < N; i++) if (drawFortune(pool, { ...base, name: `p${i}`, pain: '目標痛點' })!.pain === '目標痛點') hit++;
-    expect(hit / N).toBeGreaterThan(0.27);
-    expect(hit / N).toBeLessThan(0.35);
+    for (let i = 0; i < N; i++) if (drawFortune(officeOnly, { ...base, name: `m${i}`, pain: '目標痛點', topic: 'office' })!.pain === '目標痛點') hit++;
+    expect(hit / N).toBeGreaterThan(0.53); // 12/21 ≈ 0.571
+    expect(hit / N).toBeLessThan(0.61);
+  });
+  it('所選主題在這個等級一張都沒有時，退回全池同權重，不會失敗', () => {
+    const onlyOffice = pool.filter((f) => f.topic === 'office');
+    for (let i = 0; i < 300; i++) expect(drawFortune(onlyOffice, { ...base, name: `n${i}`, pain: '目標痛點', topic: 'service' })).not.toBeNull();
+  });
+  it('沒選主題時（舊紀錄、隱藏款），全部同權重，不會因為權重 0 而抽不到', () => {
+    for (let i = 0; i < 300; i++) expect(drawFortune(pool, { ...base, name: `o${i}`, pain: null, topic: null })).not.toBeNull();
   });
   it('沒選痛點時，該籤只有 1/10', () => {
     let hit = 0;

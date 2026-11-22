@@ -29,8 +29,13 @@ export const KNOCKS: Record<Level | 'resolve', [number, number]> = {
   resolve: [24, 36],
 };
 
-/** 挑籤權重：痛點相同 ×4、主題相同 ×2、其他 ×1 */
-export const WEIGHT = { pain: 4, topic: 2, other: 1 } as const;
+/**
+ * 挑籤權重（2026-11-23 改）：痛點相同 ×12、同主題其他痛點 ×1、別的主題 ×0（不會抽到）。
+ * 玩家選了行業就只抽那個行業的籤。舊值是 4/2/1：用真實籤池算，選了痛點後 70% 抽到別的主題、只有 3.7% 抽到同痛點。
+ * 新值實測：同痛點約 37%、同主題別痛點約 63%、別主題 0%。每個「主題×等級」常駐籤最少 5 張，所以不會抽不到。
+ * 沒選痛點／主題時（舊紀錄、陰筊隱藏款）所有籤權重相同。
+ */
+export const WEIGHT = { pain: 12, topic: 1, other: 0 } as const;
 
 /** 時令籤的出現窗口（台北時間，含頭尾）。回傳 true 表示現在可以出現。 */
 export const SEASON_WINDOW: Record<Season, (month: number, day: number) => boolean> = {

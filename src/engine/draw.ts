@@ -57,9 +57,13 @@ export function drawFortune(pool: readonly Fortune[], input: DrawInput): Fortune
     if (withoutExcluded.length) cands = withoutExcluded;
     if (!cands.length) continue;
 
-    const weights = cands.map((f) =>
-      input.pain && f.pain === input.pain ? WEIGHT.pain : input.topic && f.topic === input.topic ? WEIGHT.topic : WEIGHT.other,
-    );
+    // 玩家選了主題：同痛點 ×pain、同主題別痛點 ×topic、別主題 ×other（目前 0，不會抽到）。
+    // 沒選主題（舊紀錄、隱藏款）：全部同權重，避免權重全是 0。
+    let weights = input.topic
+      ? cands.map((f) => (input.pain && f.pain === input.pain ? WEIGHT.pain : f.topic === input.topic ? WEIGHT.topic : WEIGHT.other))
+      : cands.map(() => 1);
+    // 這個等級在所選主題裡一張都沒有（理論上不會發生，常駐籤每格至少 5 張）：退回同權重，寧可抽到別類也不要失敗
+    if (weights.every((w) => w <= 0)) weights = cands.map(() => 1);
     let r = rand() * weights.reduce((a, b) => a + b, 0);
     for (let i = 0; i < cands.length; i++) {
       r -= weights[i];
