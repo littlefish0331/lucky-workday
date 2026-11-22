@@ -4,12 +4,13 @@
 // 路由（都是 POST，body 為 JSON）：
 //   { action: 'hit',   fid }   記一次求籤
 //   { action: 'knock', n }     記一輪木魚
-//   { action: 'stats' }        取今日與累計數字（30 秒快取）
+//   { action: 'vote', fid, v } 對一支籤投「有感(up)／沒感(down)」；同 IP 同一支籤一天一票
+//   { action: 'stats' }        取今日與累計數字（30 秒快取）。票數不對外提供
 // 任何失敗都回 200 + { ok:false }，前端會直接忽略，不影響遊戲。
 import known from './known-ids.json' with { type: 'json' };
 import {
-  ALLOWED_ORIGINS, clientIp, hitCommands, knockCommand, originAllowed, parseHit, parseKnock, parseStats,
-  rateCommand, statsCommand, taipeiDate, type Cmd, type KnownIds, type Stats,
+  ALLOWED_ORIGINS, clientIp, hitCommands, knockCommand, originAllowed, parseHit, parseKnock, parseStats, parseVote,
+  rateCommand, statsCommand, taipeiDate, voteCommand, voteRateCommand, type Cmd, type KnownIds, type Stats,
 } from './logic.ts';
 
 const REDIS_URL = Deno.env.get('UPSTASH_REDIS_REST_URL') ?? '';
@@ -75,6 +76,15 @@ Deno.serve(async (req) => {
       if (!p.ok) return json({ ok: false, reason: p.reason });
       if (await limited('knock')) return json({ ok: false, reason: 'rate' });
       await redis([knockCommand(p.value)]);
+      return json({ ok: true });
+    }
+
+    if (action === 'vote') {
+      const p = parseVote(body, known as KnownIds);
+      if (!p.ok) return json({ ok: false, reason: p.reason });
+      // 同 IP 對同一支籤一天一票：SET NX 沒設成功（回 null）就不計
+      if ((await redis([voteRateCommand(p.value.fid, ip)]))[0]?.result == null) return json({ ok: false, reason: 'rate' });
+      await redis([voteCommand(p.value.fid, p.value.v)]);
       return json({ ok: true });
     }
 

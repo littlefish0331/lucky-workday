@@ -31,6 +31,8 @@ async function post(body: unknown, timeoutMs = 4000): Promise<Record<string, unk
 
 export const countHit = (fid: string) => void post({ action: 'hit', fid });
 export const countKnock = (n: number) => void post({ action: 'knock', n });
+/** 有感／沒感。送出失敗也沒關係：玩家這邊照樣看到神明的回應。 */
+export const sendVote = (fid: string, v: 'up' | 'down') => void post({ action: 'vote', fid, v });
 
 export async function fetchStats(): Promise<Stats | null> {
   const r = await post({ action: 'stats' });

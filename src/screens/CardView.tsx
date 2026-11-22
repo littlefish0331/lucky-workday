@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import { VoteBox } from '../components/VoteBox';
+import { deityOf } from '../data/deities';
+import { fortuneById } from '../data/fortunes';
 import { canReroll, isBad, needsDecision } from '../lib/play';
 import { drawCard, SITE_URL } from '../lib/card';
 import { copyText, saveCard, shareTexts, threadsIntentUrl, withUrl } from '../lib/share';
@@ -50,6 +53,8 @@ export function CardView({
   const decide = isToday && needsDecision(r);
   const first = isToday && canReroll(r);
   const pending = decide || first;
+  // 投票：負責的神明依「這支籤」的主題決定。隱藏款與已下架的籤伺服器不收，就不顯示
+  const votable = !pending && r.special !== 'yin' ? fortuneById(r.fortuneId) : undefined;
 
   const onSave = async () => {
     if (!cv.current) return;
@@ -74,6 +79,8 @@ export function CardView({
           <div className="cardskel">{failed ? '籤卡畫不出來，請重新整理' : '神明正在提筆……'}</div>
         )}
       </div>
+
+      {votable && <VoteBox key={votable.id} fid={votable.id} deity={deityOf(votable.topic)} />}
 
       <p className="invite">
         你也來求一支，看看今天能不能準時下班

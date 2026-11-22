@@ -15,6 +15,8 @@ export interface Deity {
   says: [string, string, string, string];
   /** 木魚敲完時 */
   done: string;
+  /** 籤卡下方「有感／沒感」投完之後的回應（不含名字） */
+  vote: { up: string; down: string };
   /** 主題 → 負責的神明，見 DEITY_OF_TOPIC */
 }
 
@@ -25,6 +27,7 @@ export const DEITIES: Record<DeityId, Deity> = {
     frame: (s) => `${B}art/deity-${s}.webp`,
     says: ['（面無表情）', '嗯？', '嗯嗯，有在看。', '哈哈哈哈！夠了夠了！'],
     done: '好啦好啦，給你一次。',
+    vote: { up: '這支籤，今年考績甲等', down: '已列入改善計畫，下季再看' },
   },
   granny: {
     id: 'granny',
@@ -32,6 +35,7 @@ export const DEITIES: Record<DeityId, Deity> = {
     frame: (s) => `${B}art/granny-${s}.webp`,
     says: ['（低頭數紅包）', '嗯？帳好像對不上。', '嗯嗯，有在入帳。', '哎喲！加發加發！'],
     done: '好啦好啦，這個月多給你一點。',
+    vote: { up: '加發一個紅包，功德 +1', down: '這支籤本月獎金減半' },
   },
   wangcai: {
     id: 'wangcai',
@@ -39,6 +43,7 @@ export const DEITIES: Record<DeityId, Deity> = {
     frame: (s) => `${B}art/wangcai-${s}.webp`,
     says: ['（歪頭）', '汪？', '汪！有在看！', '汪汪汪汪！尾巴停不下來！'],
     done: '汪！再給你一次！',
+    vote: { up: '汪！（尾巴搖到出現殘影）', down: '汪……（低頭回去 debug）' },
   },
   pangju: {
     id: 'pangju',
@@ -46,6 +51,7 @@ export const DEITIES: Record<DeityId, Deity> = {
     frame: (s) => `${B}art/pangju-${s}.webp`,
     says: ['（半睜一隻眼）', '喵？', '呼嚕……有在聽。', '喵嗚！好啦好啦！'],
     done: '喵。給你一次。',
+    vote: { up: '呼嚕嚕', down: '（翻身繼續睡，不負責）' },
   },
 };
 

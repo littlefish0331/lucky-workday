@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
-  K, KNOCK_MAX, clientIp, hitCommands, knockCommand, originAllowed, parseHit, parseKnock, parseStats,
-  rateCommand, statsCommand, taipeiDate, type KnownIds,
+  K, KNOCK_MAX, clientIp, hitCommands, knockCommand, originAllowed, parseHit, parseKnock, parseStats, parseVote,
+  rateCommand, statsCommand, taipeiDate, voteCommand, voteRateCommand, type KnownIds,
 } from '../supabase/functions/count/logic';
 
 const known: KnownIds = { abcdef12: '大吉', '0a1b2c3d': '下下籤' };
@@ -39,6 +39,31 @@ describe('木魚計數的輸入驗證', () => {
     expect(parseKnock({ n: KNOCK_MAX }).ok).toBe(true);
     for (const n of [0, -1, 41, 1.5, NaN, Infinity, '12', null, undefined]) expect(parseKnock({ n }).ok).toBe(false);
     expect(parseKnock(null).ok).toBe(false);
+  });
+});
+
+describe('投票的輸入驗證', () => {
+  it('只接受已知的籤 id 加上 up／down', () => {
+    expect(parseVote({ fid: 'abcdef12', v: 'up' }, known)).toEqual({ ok: true, value: { fid: 'abcdef12', v: 'up' } });
+    expect(parseVote({ fid: '0a1b2c3d', v: 'down' }, known)).toEqual({ ok: true, value: { fid: '0a1b2c3d', v: 'down' } });
+  });
+  it('不存在的籤、格式錯、票別錯、亂資料都拒絕', () => {
+    for (const bad of [
+      null, {}, { fid: 'abcdef12' }, { fid: 'abcdef12', v: 'UP' }, { fid: 'abcdef12', v: 1 }, { fid: 'abcdef12', v: null },
+      { fid: '11111111', v: 'up' }, { fid: 'ABCDEF12', v: 'up' }, { fid: '../../x', v: 'up' }, { v: 'up' },
+    ])
+      expect(parseVote(bad, known).ok).toBe(false);
+  });
+});
+
+describe('投票的 Redis 指令', () => {
+  it('有感寫 otld:vu、沒感寫 otld:vd，各 1 個指令；限流 1 個指令，一天一票', () => {
+    expect(voteCommand('abcdef12', 'up')).toEqual(['HINCRBY', 'otld:vu', 'abcdef12', 1]);
+    expect(voteCommand('abcdef12', 'down')).toEqual(['HINCRBY', 'otld:vd', 'abcdef12', 1]);
+    expect(voteRateCommand('abcdef12', '1.2.3.4')).toEqual(['SET', 'otld:rl:vote:abcdef12:1.2.3.4', '1', 'NX', 'EX', 86400]);
+  });
+  it('同一個 IP 對不同籤的限流 key 不同', () => {
+    expect(K.voteRate('aaaaaaaa', '1.2.3.4')).not.toBe(K.voteRate('bbbbbbbb', '1.2.3.4'));
   });
 });
 

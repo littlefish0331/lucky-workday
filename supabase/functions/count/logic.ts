@@ -40,15 +40,31 @@ export function parseKnock(body: unknown): Parsed<number> {
   return { ok: true, value: n };
 }
 
+export type VoteValue = 'up' | 'down';
+
+/** 投「有感／沒感」。fid 必須是已知的籤（和 hit 一樣由伺服器驗證）。 */
+export function parseVote(body: unknown, known: KnownIds): Parsed<{ fid: string; v: VoteValue }> {
+  const b = body as { fid?: unknown; v?: unknown } | null;
+  const hit = parseHit({ fid: b?.fid }, known);
+  if (!hit.ok) return hit;
+  if (b?.v !== 'up' && b?.v !== 'down') return { ok: false, reason: 'bad v' };
+  return { ok: true, value: { fid: hit.value.fid, v: b.v } };
+}
+
 // ---- Redis key 與指令。這個資料庫可能和其他專案共用，所以一律加 otld: 前綴 ----
 export const K = {
   total: 'otld:total',
   knocks: 'otld:knocks',
   fortunes: 'otld:f',
+  /** 有感／沒感：和 otld:f 同款的 hash，欄位是籤 id */
+  voteUp: 'otld:vu',
+  voteDown: 'otld:vd',
   day: (d: string) => `otld:d:${d}`,
   level: (d: string) => `otld:lv:${d}`,
   /** 限流：同一個 IP 在 N 秒內只收一次。SET NX EX 只要 1 個指令。 */
   rate: (action: string, ip: string) => `otld:rl:${action}:${ip}`,
+  /** 投票限流：同一個 IP 對同一支籤，一天一票 */
+  voteRate: (fid: string, ip: string) => `otld:rl:vote:${fid}:${ip}`,
 };
 
 export type Cmd = (string | number)[];
@@ -66,6 +82,17 @@ export function hitCommands(date: string, fid: string, level: Level): Cmd[] {
     ['HINCRBY', K.level(date), level, 1],
     ['HINCRBY', K.fortunes, fid, 1],
   ];
+}
+
+export const VOTE_RATE_SECONDS = 86_400;
+
+/** 同一個 IP 對同一支籤一天只收一票。設成功回 OK，已存在回 null。 */
+export function voteRateCommand(fid: string, ip: string): Cmd {
+  return ['SET', K.voteRate(fid, ip), '1', 'NX', 'EX', VOTE_RATE_SECONDS];
+}
+
+export function voteCommand(fid: string, v: VoteValue): Cmd {
+  return ['HINCRBY', v === 'up' ? K.voteUp : K.voteDown, fid, 1];
 }
 
 export function knockCommand(n: number): Cmd {
