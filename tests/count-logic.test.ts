@@ -8,12 +8,14 @@ const known: KnownIds = { abcdef12: '大吉', '0a1b2c3d': '下下籤' };
 
 describe('來源檢查', () => {
   it('放行自己的網站、本機與區網；擋掉別人的網站', () => {
-    expect(originAllowed('https://littlefish0331.github.io')).toBe(true);
+    expect(originAllowed('https://lucky-workday.vercel.app')).toBe(true);
+    expect(originAllowed('https://littlefish0331.github.io')).toBe(false);
+    expect(originAllowed('https://lucky-workday-git-main-youjuns-projects.vercel.app')).toBe(false);
     expect(originAllowed('http://localhost:5173')).toBe(true);
     expect(originAllowed('http://127.0.0.1:4173')).toBe(true);
     expect(originAllowed('http://192.168.1.23:5173')).toBe(true);
     expect(originAllowed('https://evil.example.com')).toBe(false);
-    expect(originAllowed('https://littlefish0331.github.io.evil.com')).toBe(false);
+    expect(originAllowed('https://lucky-workday.vercel.app.evil.com')).toBe(false);
     expect(originAllowed('http://localhost.evil.com')).toBe(false);
     expect(originAllowed(null)).toBe(true);
   });

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
-// base './' 讓 GitHub Pages 的子路徑（/ontime-lucky-day/）與本機都能運作
+// base './' 讓網站放在網域根目錄（Vercel）或任何子路徑下、以及本機，資源路徑都能運作
 export default defineConfig({
   base: './',
   plugins: [react()],

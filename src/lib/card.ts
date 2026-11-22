@@ -8,7 +8,7 @@ import { kindOf } from '../engine/types';
 
 export const CARD_W = 1080;
 export const CARD_H = 1920;
-export const SITE_URL = 'https://littlefish0331.github.io/ontime-lucky-day/';
+export const SITE_URL = 'https://lucky-workday.vercel.app/';
 const SERIF = "'Noto Serif TC', 'LXGW WenKai TC', 'PMingLiU', serif";
 const KAI = "'LXGW WenKai TC', 'Noto Serif TC', 'DFKai-SB', serif";
 

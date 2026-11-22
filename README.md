@@ -2,7 +2,7 @@
 
 報上名來，神明賜你職場法號，替你看看今天能不能準時下班。給台灣上班族與打工人的求籤小遊戲。
 
-- 網站：https://littlefish0331.github.io/ontime-lucky-day/
+- 網站：https://lucky-workday.vercel.app/（部署在 Vercel，push 到 `main` 自動上線）
 - 技術：React + TypeScript + Vite，純前端；計數走 Supabase Edge Function → Upstash Redis。
 
 ## 本機執行

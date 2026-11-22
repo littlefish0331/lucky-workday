@@ -7,7 +7,7 @@ export type Level = (typeof LEVELS)[number];
 /** 籤 id → 等級。由 scripts/build-fortunes.mjs 產生 known-ids.json */
 export type KnownIds = Record<string, Level>;
 
-export const ALLOWED_ORIGINS = ['https://littlefish0331.github.io'];
+export const ALLOWED_ORIGINS = ['https://lucky-workday.vercel.app'];
 
 /** 本機開發：localhost、127.0.0.1，以及手機測試用的區網位址 */
 const DEV_ORIGIN = /^http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})(:\d{2,5})?$/;
