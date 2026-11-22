@@ -87,7 +87,7 @@ h2 { font-size: 28px; color: var(--paper); }
 .ring .bg { stroke: rgba(255, 255, 255, 0.12); } .ring .fg { stroke: var(--gold); stroke-linecap: round; }
 
 /* 搖籤 */
-.stage { min-height: 320px; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+.stage { min-height: 300px; display: grid; place-items: center; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
 .meter { width: 70%; height: 10px; background: var(--bg3); border-radius: 6px; overflow: hidden; margin: 6px auto 0; }
 .meter i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold-d), var(--gold)); transition: width 0.08s; }
 
@@ -144,9 +144,9 @@ footer { text-align: center; color: var(--sub); font-size: 14px; padding-top: 18
 }
 
 /* 美術版的籤筒 / 筊杯 / 神像 / 首頁 */
-.cyl { position: relative; width: 210px; transform-origin: 50% 92%; transition: transform 0.06s linear; }
+.cyl { position: relative; width: 150px; transform-origin: 50% 92%; transition: transform 0.06s linear; }
 .cyl-img { width: 100%; display: block; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.5)); pointer-events: none; }
-.cyl-stick { position: absolute; left: 50%; top: -34%; width: 9%; margin-left: -4%; animation: pop 0.7s ease-out both; pointer-events: none; }
+.cyl-stick { position: absolute; left: 53%; top: -16%; width: 8%; margin-left: -4%; animation: pop 0.7s ease-out both; pointer-events: none; }
 .cyl-bar { position: absolute; left: 10%; bottom: -10px; height: 5px; border-radius: 3px; background: var(--gold); }
 @keyframes pop { from { transform: translateY(70%) } to { transform: translateY(0) } }
 @keyframes toss { 0% { transform: translateY(0) rotate(0) } 35% { transform: translateY(-130px) rotate(360deg) } 70% { transform: translateY(-20px) rotate(720deg) } 100% { transform: translateY(0) rotate(1080deg) } }

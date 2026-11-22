@@ -164,7 +164,7 @@ if im:
         save(fit(c, max_side=400), f"deity-{i}.webp", 90)
 
 for src, out, kw, tag in [
-    ("fortune-cylinder.png", "cylinder.webp", dict(height=620), "籤筒"),
+    ("fortune-cylinder-v2.png", "cylinder.webp", dict(height=800), "籤筒（廟宇長籤筒 v2）"),
     ("fortune-stick.png", "stick.webp", dict(height=520), "籤枝"),
     ("woodfish.png", "woodfish.webp", dict(width=640), "木魚"),
     ("mallet.png", "mallet.webp", dict(width=720), "木槌"),
@@ -177,7 +177,7 @@ for src, out, kw, tag in [
         save(fit(trim(c), **kw), out, 90)
 
 print("== 筊杯（平面、圓面）==")
-im = load("jiaobei-sheet.png")
+im = load("jiaobei-v2-sheet.png")
 if im:
     a, b = cells(im, 2, 1)
     a, _ = clean(a)
