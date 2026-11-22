@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 從骨架到上線｜準時下班宮</title>
+<link rel="stylesheet" href="assets/note.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><a href="index.html">← 目錄</a><button class="theme" type="button">深色／淺色</button></header>
+  <h1>02　從骨架到上線</h1>
+  <p class="meta">2026-11-20・M1 到 M5・已上線 https://littlefish0331.github.io/ontime-lucky-day/</p>
+
+  <div class="tldr"><b>結論：</b>V1 已部署並在線上跑通。這篇記錄「怎麼組起來」「怎麼驗證」「哪些踩了坑」。最值得留的教訓：<b>檢查器通過不等於好</b>，真實瀏覽器跑過才算數。</div>
+
+  <h2>1. 整體結構</h2>
+  <pre class="mermaid">
+flowchart TB
+  subgraph 內容
+    B[content/batches/*.json<br/>530 張籤原稿] --> C[check-fortunes.mjs<br/>格式+禁用句型+批次統計]
+    C --> D[build-fortunes.mjs]
+    D --> E[fortunes.generated.json]
+    D --> K[known-ids.json]
+  end
+  subgraph 前端
+    E --> G[engine 抽籤引擎]
+    G --> S[screens 各步驟畫面]
+    S --> CARD[card.ts Canvas 1080x1920]
+    S --> LS[(localStorage<br/>籤冊+名字)]
+  end
+  subgraph 後端
+    K --> EF[Supabase Edge Function count]
+    S -- 計數 --> EF --> R[(Upstash Redis<br/>otld: 前綴)]
+  end
+  </pre>
+  <p>設計原則：<b>引擎是純函式</b>（同樣的名字、日期、次數必得同樣結果），畫面只負責呈現。所以引擎能用單元測試把機率驗到小數點，畫面則靠真實瀏覽器驗。</p>
+
+  <h2>2. 一局遊戲的狀態（含凶籤出口）</h2>
+  <div class="stepper">
+    <div class="stage">
+      <section class="step"><div class="no">STATE 1</div><div class="big">🎴</div><h4>direct：第一次抽到</h4><p>吉側：直接存圖分享。凶側：可以「敲木魚重抽」或「認命」。陰筊的隱藏款不能重抽。</p></section>
+      <section class="step"><div class="no">STATE 2</div><div class="big">🪵</div><h4>敲木魚（8–32 下，玩家看不到目標）</h4><p>次數依等級而定，越凶越多。可「我手痠了，幫我敲」自動敲。</p></section>
+      <section class="step"><div class="no">STATE 3</div><div class="big">🔄</div><h4>rerolled：重抽結果</h4><p>吉 → 卡上註記「原抽 X・敲木魚 N 下・改判」，結束。仍凶 → 進入下一步。</p></section>
+      <section class="step"><div class="no">STATE 4</div><div class="big">🤷</div><h4>認命 或 化解</h4><p><b>認命</b>＝保留手上這支（kept）。<b>化解</b>＝再敲 24–36 下，蓋「已化解」並附一句建議（resolved）。</p></section>
+    </div>
+    <div class="ctrl"><button data-act="prev" aria-label="上一步">◀</button><button data-act="play" aria-label="播放">▶</button><button data-act="next" aria-label="下一步">▶▶</button><div class="dots"></div></div>
+  </div>
+  <p>這四個狀態全部寫成純函式（<code>src/lib/play.ts</code>）並有測試；結果存的是<b>文字快照</b>，所以日後籤池改寫或下架，玩家籤冊裡的卡不會變。</p>
+
+  <h2>3. 驗證方式（比功能更值得記）</h2>
+  <table>
+    <tr><th>驗證</th><th>做法</th><th>抓到什麼</th></tr>
+    <tr><td>引擎機率</td><td>單元測試跑 2 萬次，容許 1.5 個百分點</td><td>—</td></tr>
+    <tr><td>完整流程</td><td>真實 Edge、390×844，<code>scripts/e2e-smoke.mjs</code></td><td>首頁美術背景一開始沒顯示（CSS 變數放進 background 簡寫無效）</td></tr>
+    <tr><td>凶籤三條路線</td><td>用引擎預先算出「會走該路線」的名字，<code>scripts/e2e-bad-paths.mjs</code></td><td>測試本身的選擇器寫錯（擲筊按鈕尚未出現就判斷）</td></tr>
+    <tr><td>籤卡排版</td><td>挑池裡最長的 38 張 × 2 種結局，量測內文與資訊區的間距</td><td>日期壓到網址那一行（肉眼看截圖才發現，量測值當時還沒涵蓋）</td></tr>
+    <tr><td>計數</td><td>真 Redis 寫入、查詢、清除</td><td>線上 id 表是舊的，新籤會被擋，所以重新部署後又抽驗 25 筆</td></tr>
+    <tr><td>線上版</td><td>對 github.io 再跑一次完整流程</td><td>—</td></tr>
+  </table>
+  <div class="note"><b>學到的：</b>「量測通過」和「眼睛看起來對」是兩回事。這次兩個版面問題，都是看截圖才發現的。</div>
+
+  <h2>4. 美術怎麼接</h2>
+  <p>Claude 無法生圖，所以流程是：<code>docs/ART-PROMPTS.md</code> 寫 prompt → 使用者交給 Codex → 原圖放 <code>art-src/</code>（不進 git）→ <code>scripts/process-art.py</code> 切 sheet、白底墨印轉透明、清殘留點、縮圖轉 webp → <code>public/art/</code>。</p>
+  <ul>
+    <li>25 張 webp 共約 0.9MB。原圖約 20MB，所以不進 repo。</li>
+    <li>圖載入失敗時畫面仍可用（籤卡退回程式繪製的紙面與手印）。</li>
+    <li>驗收標準訂了 6 關（一眼認得、一套的、有梗、適合截圖、字要對、情緒對）。</li>
+    <li>已知不統一：神像、木槌、筊杯是「有外框卡通風」，籤筒、木魚、首頁是「繪本質感」。使用者決定上線後再檢視。</li>
+  </ul>
+
+  <h2>5. 計數的安全設計</h2>
+  <table>
+    <tr><th>風險</th><th>做法</th></tr>
+    <tr><td>金鑰外洩</td><td>Redis token 只存在 Edge Function secrets；提交前掃描 0 命中</td></tr>
+    <tr><td>別的網站亂打</td><td>檢查 Origin（實測陌生來源回 403）</td></tr>
+    <tr><td>偽造資料</td><td>等級由伺服器用籤 id 反查，不信前端傳的等級；木魚一次最多 40 下</td></tr>
+    <tr><td>洗數字</td><td>同 IP 2 秒只收一次（<code>SET NX EX</code> 一個指令）</td></tr>
+    <tr><td>壞掉</td><td>任何失敗回 200＋ok:false，前端忽略，遊戲照常</td></tr>
+  </table>
+
+  <h2>6. 沒做到、還沒驗證的</h2>
+  <ul>
+    <li><b>iPhone 的網頁震動</b>：印象中不支援，未驗證；已有畫面震動備援。</li>
+    <li><b>存圖到相簿</b>：各機型不同，只測了流程走得到。</li>
+    <li><b>籤詩有沒有共鳴</b>：沒有真人驗證。寫手是依檢查器規則調整的，有「為了過關而改」的風險。</li>
+    <li>每支籤獨立的連結預覽圖、合籤、造籤投稿：V1.1／V2。</li>
+  </ul>
+
+  <h2>下一步</h2>
+  <ol>
+    <li>使用者實機測（iPhone／Android）：震動、存圖、Threads 發文。</li>
+    <li>使用者抽樣 30 張籤標註「有感／普通／沒感」。</li>
+    <li>依回饋調整籤詩與美術一致性。</li>
+  </ol>
+</div>
+<script src="assets/note.js"></script>
+</body>
+</html>
