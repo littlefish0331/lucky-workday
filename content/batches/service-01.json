@@ -1,0 +1,453 @@
+[
+  {
+    "level": "上上籤", "topic": "service", "pain": "假日全滿班", "style": "quote",
+    "eye": "「這個月想休哪幾天，直接填。」",
+    "body": ["— 月初 10:02・店長", "大家先確認他的帳號有沒有被盜。"],
+    "tip": "跨年那天也能填，別問為什麼。", "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "service", "pain": "國假薪資", "style": "notice",
+    "eye": "【薪資單】12 月國定假日，加班費加倍入帳",
+    "body": ["備註欄是空的，連「另有規定」都沒有。", "會計還傳了一句：讓您久等了。"],
+    "tip": "截圖存 3 個地方，會計隨時會發現算錯。", "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "service", "pain": "客訴先找你", "style": "dialogue",
+    "eye": "客人：剛剛是我看錯了，抱歉。",
+    "body": ["（手還停在結帳鍵上）", "客人：這杯我請。", "（後面 7 個人鼓掌）"],
+    "tip": "宜：立刻收下　忌：問他有沒有發燒", "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "service", "pain": "打烊才開始", "style": "checklist",
+    "eye": "21:00 鐵門拉下，後面沒人喊「等一下」",
+    "body": ["最後一組客人 20:40 走完 ★★★★★", "垃圾不用重綁 ★★★★★", "交班本寫完 ★★★★☆", "21:00 打卡 ★★★★★"],
+    "tip": "（連廁所都沒人用過）", "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "service", "pain": "休假被叫回", "style": "murmur",
+    "eye": "廟公看了三遍班表：「連休 4 天，沒人敲？」",
+    "body": ["群組安靜到他以為手機壞了。", "重開機之後，還是 0 則未讀。"],
+    "tip": "手機沒壞，是真的沒人敲。", "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "service", "pain": "風雨照排班", "style": "yiji",
+    "eye": "颱風夜，總部群組：「全台門市停業」",
+    "body": ["連 24 小時營業的那間也關了。", "公告最後一行：薪資照算。"],
+    "tip": "宜：先睡　忌：問「真的假的」", "season": null, "meme": null
+  },
+
+  {
+    "level": "大吉", "topic": "service", "pain": "薪水寫好看", "style": "quote",
+    "eye": "「面試講的 3 種獎金，全寫進合約了。」",
+    "body": ["— 到職日 09:30・店長", "他還叫你影印一份帶走。"],
+    "tip": "合約背面也沒有小字。", "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "service", "pain": "休假被叫回", "style": "quote",
+    "eye": "「週三那班我頂，不用補我。」",
+    "body": ["— 週二 22:40・大夜同事阿凱", "他還順手把班表改好了。"],
+    "tip": "宜：現在就關群組　忌：回「真的嗎」", "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "service", "pain": "假日全滿班", "style": "notice",
+    "eye": "【班表】12/24 休假申請，已核准",
+    "body": ["備註：聖誕夜，是餐廳那種聖誕夜。", "核准人：店長本人，沒喝酒。"],
+    "tip": "別問原因，核准信先存檔。", "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "service", "pain": "工時被切掉", "style": "notice",
+    "eye": "【系統通知】多留的 20 分鐘，已核算為加班",
+    "body": ["連上個月少算的 7 次，也一起補了。", "財務附註：這次沒有拖。"],
+    "tip": "對，就是那 20 分鐘，沒有消失。", "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "service", "pain": "叫店長出來", "style": "dialogue",
+    "eye": "店長：這桌我來，你去後面喝杯水",
+    "body": ["（店長走過去，開口先道歉）", "店長：是我們的問題，同事處理得沒錯。", "（後場那杯水，喝完都沒人敲門）"],
+    "tip": "這種店長，建議供起來。", "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "service", "pain": "兩頭班", "style": "dialogue",
+    "eye": "店長：下午那段空班，直接回家睡",
+    "body": ["我：（確認一次）真的嗎？", "店長：嗯，17:00 回來就好。", "（鞋已經穿好了）"],
+    "tip": "宜：穿鞋要快　忌：問「是不是看錯」", "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "service", "pain": "交班靠通靈", "style": "checklist",
+    "eye": "交班本寫了 2 頁，連冰箱都有交代",
+    "body": ["冷凍庫溫度 ★★★★★", "客人交代的事 ★★★★★", "明早要叫的貨 ★★★★★", "猜謎 ☆☆☆☆☆"],
+    "tip": "（字很醜，但是看得懂）", "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "service", "pain": "福利要考核", "style": "murmur",
+    "eye": "土地公翻了翻公告：「生日禮金，沒附條件欸。」",
+    "body": ["祂把小字找了 2 遍，", "連「全勤」兩個字都沒有。"],
+    "tip": "生日當天可以收下，不用先考試。", "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "service", "pain": "身體跟不上", "style": "yiji",
+    "eye": "連續 3 週同一個班，鬧鐘只響 1 次",
+    "body": ["06:00 起床，22:30 睡著，", "同事問：是不是談戀愛了？"],
+    "tip": "宜：一覺到天亮　忌：問下月班表", "season": null, "meme": null
+  },
+
+  {
+    "level": "吉", "topic": "service", "pain": "班表突加班", "style": "quote",
+    "eye": "「明天班表沒變，我保證。」",
+    "body": ["— 週日 20:00・店長", "隔天 09:00，班表真的沒變。"],
+    "tip": "宜：先把截圖存雲端　忌：先高興", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "打烊才開始", "style": "quote",
+    "eye": "「掃地我來，先打卡走吧。」",
+    "body": ["— 22:00 打烊後・同事阿翔", "他已經拿走了那支拖把。"],
+    "tip": "明天換你還他一次。", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "臨時被砍班", "style": "notice",
+    "eye": "【店長群組】預約 38 桌，今天誰都不砍班",
+    "body": ["已讀 11 人，沒人敢回。", "怕一打字，他就改口。"],
+    "tip": "4 小時的班保住了，快去開工。", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "客訴先找你", "style": "notice",
+    "eye": "【客服】客訴單 #0417，客人已自行撤回",
+    "body": ["原因欄寫：吃完就氣消了。", "沒人需要寫報告。"],
+    "tip": "報告紙可以留著包便當。", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "國假薪資", "style": "dialogue",
+    "eye": "同事：5/1 那天的加倍進來了",
+    "body": ["你：真的假的？", "同事：我剛看完薪資單。", "你：（把剛放下的手機拿起來）"],
+    "tip": "宜：打開薪資單　忌：重算 3 遍", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "交班靠通靈", "style": "dialogue",
+    "eye": "同事：冰箱那桶醬，我寫在第 3 頁",
+    "body": ["你：我翻到了，字還滿工整。", "同事：我花 10 分鐘寫的。", "（這次沒有人需要猜）"],
+    "tip": "交班本，請當傳家寶保管。", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "兩頭班", "style": "checklist",
+    "eye": "兩頭班中間 3 小時，今天真的是空的",
+    "body": ["休息室有冷氣 ★★★★☆", "沙發沒人坐 ★★★★★", "Wi-Fi 還連得到 ★★★☆☆", "店長路過沒開口 ★★★★★"],
+    "tip": "（這種班很少見，建議多睡）", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "薪水寫好看", "style": "murmur",
+    "eye": "金身看著薪資單：「跟徵才頁的數字一樣。」",
+    "body": ["祂又算了一次，一塊都沒少。", "還多出 1 張便當券。"],
+    "tip": "祂算過 2 遍了，你別再算。", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "身體跟不上", "style": "murmur",
+    "eye": "神明看了班表：「這週不用關完店開店。」",
+    "body": ["週二關店，週三 14:00 才進。", "睡滿 8 小時，祂自己也嚇到。"],
+    "tip": "班表還沒改，現在去睡。", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "風雨照排班", "style": "yiji",
+    "eye": "暴雨天照排班，店長多發 200 元車馬費",
+    "body": ["群組寫：實報實銷，不用先墊。", "騎車進來的，多送 1 件雨衣。"],
+    "tip": "宜：收據留好　忌：嫌 200 太少", "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "service", "pain": "班表突加班", "style": "yiji",
+    "eye": "班表發出 72 小時，一個字都沒改",
+    "body": ["連店長自己都覺得不太對。", "他翻了一下，確認是這個月的。"],
+    "tip": "宜：趕快訂票　忌：說出「穩了」", "season": null, "meme": null
+  },
+
+  {
+    "level": "小吉", "topic": "service", "pain": "假日全滿班", "style": "quote",
+    "eye": "「這個週六，你可以 17:00 走。」",
+    "body": ["— 週五 15:20・店長", "原本排到 20:00，他說這叫彈性。"],
+    "tip": "宜：17:00 準時走　忌：回頭看群組", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "福利要考核", "style": "quote",
+    "eye": "「生日禮金，這個月考核你過了。」",
+    "body": ["— 月底 18:30・店長", "差 1 分，他說這 1 分他補。"],
+    "tip": "禮金 500 元，領到前別說話。", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "兩頭班", "style": "notice",
+    "eye": "【公告】今日空班 3 小時，附員工餐 1 份",
+    "body": ["雞腿便當，不用付錢，不用扣薪。", "上次說「員工餐」，是半個便當。"],
+    "tip": "便當盒洗乾淨，下次才有雞腿。", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "叫店長出來", "style": "dialogue",
+    "eye": "客人：我要找你們店長",
+    "body": ["你：店長今天休，我來幫您。", "客人：好，那就麻煩你了。", "（他沒有再問第 2 次）"],
+    "tip": "宜：把握這 1 次　忌：問他為什麼變乖", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "休假被叫回", "style": "dialogue",
+    "eye": "店長：明天整天休，不會有人 call",
+    "body": ["（盯著螢幕看了 3 遍）", "店長：真的，我只是通知一下。"],
+    "tip": "手機可以放到床那頭了。", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "身體跟不上", "style": "checklist",
+    "eye": "睡滿 6 小時，在這行已算豪華",
+    "body": ["午餐吃到熱的 ★★★★☆", "鬧鐘響前 3 分鐘醒 ★★★★★", "腰痠 ★☆☆☆☆", "咖啡因 ★★☆☆☆"],
+    "tip": "（把今天日期寫起來，很稀有）", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "打烊才開始", "style": "checklist",
+    "eye": "打烊收店，從 40 分鐘縮成 15 分鐘",
+    "body": ["掃地拖地 ★★★★☆", "收銀盤點 ★★★☆☆", "垃圾清運 ★★★★☆", "拉鐵門 ★★★★★"],
+    "tip": "（連垃圾車都剛好提早到）", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "交班靠通靈", "style": "murmur",
+    "eye": "籤筒裡多了一張交班便條：「冰箱第二層，別碰。」",
+    "body": ["只有 7 個字，但至少有字。", "祂打算幫這位同事加一炷香。"],
+    "tip": "第二層，看起來是店長的便當。", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "臨時被砍班", "style": "murmur",
+    "eye": "土地公看了排班表：「早退的 2 小時，照算薪。」",
+    "body": ["店長說客少，叫大家先走。", "祂也嚇到：薪水照給，是店長先提的。"],
+    "tip": "走出店門前，先別笑。", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "工時被切掉", "style": "yiji",
+    "eye": "打卡 08:03，系統當成 08:00",
+    "body": ["系統第一次幫員工進位。", "全店沒人敢跟店長講。"],
+    "tip": "宜：低調　忌：再遲到 4 分鐘", "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "service", "pain": "班表突加班", "style": "yiji",
+    "eye": "群組問誰能加班，阿傑 3 秒就接了",
+    "body": ["你剛好在洗澡，沒看到訊息。", "洗了 40 分鐘，沒人責怪。"],
+    "tip": "宜：多洗一下　忌：假裝很失望", "season": null, "meme": null
+  },
+
+  {
+    "level": "小凶", "topic": "service", "pain": "客訴先找你", "style": "quote",
+    "eye": "「規定是你們訂的，那你就負責。」",
+    "body": ["— 週六 12:40・第 5 位這樣說的客人", "訂這條規定的人，3 年前就離職了。"],
+    "tip": "宜：背熟那句規定　忌：說「我也不想」", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "薪水寫好看", "style": "quote",
+    "eye": "「大概 3 萬 2 左右，看你表現。」",
+    "body": ["— 面試 10:20・店長", "薪資單 29,000。他說：我是說左右。"],
+    "tip": "下次面試，請他把「大概」寫下來。", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "國假薪資", "style": "notice",
+    "eye": "【系統通知】5/1 出勤已記錄，加給計算中",
+    "body": ["小字：「計算中」已經 2 個月。", "財務說：快了，上次也這樣說。"],
+    "tip": "月底先別訂那間餐廳。", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "風雨照排班", "style": "notice",
+    "eye": "【公告】颱風外圍環流，今日照常營業",
+    "body": ["神明補充：外圍的意思是，只刮你的區。", "人事：騎車請穿雨衣。"],
+    "tip": "雨衣 1 件 120 元，自費。", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "叫店長出來", "style": "dialogue",
+    "eye": "客人：叫你們店長出來",
+    "body": ["你：（講第 10 次）規定是這樣。", "店長：（走來）規定是這樣。", "客人：好，早說嘛。"],
+    "tip": "同一句話，店長講才算。", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "假日全滿班", "style": "checklist",
+    "eye": "全台連假 4 天，這間店一天都沒休",
+    "body": ["約會 ☆☆☆☆☆", "睡到自然醒 ☆☆☆☆☆", "客人 ★★★★★", "店長笑容 ★☆☆☆☆"],
+    "tip": "（國定假日是別人的）", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "福利要考核", "style": "checklist",
+    "eye": "生日禮金 500 元，領取條件有 4 項",
+    "body": ["全勤（遲到 1 分鐘就沒了）★☆☆☆☆", "客訴 0 件 ★★☆☆☆", "月底業績達標 ★☆☆☆☆", "填問卷「公司好不好」★★★★★"],
+    "tip": "（領到的人，目前是傳說）", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "班表突加班", "style": "murmur",
+    "eye": "供桌上的手機一震：「今晚加一班。」",
+    "body": ["群組 21:47 才跳出來。", "神明本來要祝你週五愉快。"],
+    "tip": "週五的約，現在改成週六。", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "兩頭班", "style": "murmur",
+    "eye": "廟公幫你算：空班 3 小時，回家洗個頭就得回來",
+    "body": ["單程 55 分鐘，來回 110 分鐘。", "剩 70 分鐘，頭髮還沒吹乾。"],
+    "tip": "附近的超商座位，你坐過一輪了。", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "臨時被砍班", "style": "yiji",
+    "eye": "出門前 20 分鐘，6 小時的班變 4 小時",
+    "body": ["少的 2 小時，薪水沒有，貼圖有。", "貼圖是一隻小熊，在鞠躬。"],
+    "tip": "宜：把原班表截圖　忌：回「沒關係」", "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "service", "pain": "身體跟不上", "style": "yiji",
+    "eye": "昨天關店到 00:30，今天 06:30 開店",
+    "body": ["中間隔 6 小時，扣掉洗澡通勤，", "實際躺著的時間約 3 小時。"],
+    "tip": "宜：咖啡兩杯　忌：開店前數錯錢", "season": null, "meme": null
+  },
+
+  {
+    "level": "凶", "topic": "service", "pain": "休假被叫回", "style": "quote",
+    "eye": "「你今天不是休假嗎？可以進來嗎？」",
+    "body": ["— 排休日 10:15・店長", "句尾的問號，是客氣用的。"],
+    "tip": "宜：已讀不回 8 分鐘　忌：秒回", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "交班靠通靈", "style": "quote",
+    "eye": "「那個冰箱的東西我早就說過了啊。」",
+    "body": ["— 15:30・上一班的同事（已下班）", "沒人知道是哪個東西、哪個冰箱。"],
+    "tip": "他已下班，只能自己翻冰箱。", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "工時被切掉", "style": "notice",
+    "eye": "【打卡紀錄】本月多留 6 小時，採計 0 分鐘",
+    "body": ["備註：理由是「未達加班門檻」。", "門檻 30 分鐘，每天多留 25。"],
+    "tip": "差 5 分鐘，每天都差。", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "打烊才開始", "style": "dialogue",
+    "eye": "客人：我只是進來看一下",
+    "body": ["（你抬頭看時鐘：21:58）", "客人：不會很久。", "（你 22:41 才拉下鐵門）"],
+    "tip": "「不會很久」的平均值是 43 分鐘。", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "客訴先找你", "style": "dialogue",
+    "eye": "客人：這是你們公司的問題",
+    "body": ["你：我了解，我會幫您反映。", "客人：反映有用嗎？", "你：（內心）我在這間公司第 2 年，沒有。"],
+    "tip": "宜：微笑　忌：真的去反映", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "風雨照排班", "style": "checklist",
+    "eye": "停班停課，班表上你還是排 08:00",
+    "body": ["風速 ★★★★★", "雨衣口袋進水 ★★★★★", "路上積水 ★★★★☆", "店裡同事 ★☆☆☆☆"],
+    "tip": "（全區只有這間門市亮著燈）", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "薪水寫好看", "style": "checklist",
+    "eye": "4 種獎金，每一種都差一點點",
+    "body": ["底薪 ★★☆☆☆", "全勤 ★☆☆☆☆（缺 1 天）", "績效 ☆☆☆☆☆", "業績 ★☆☆☆☆（差 800）"],
+    "tip": "（徵才頁的數字，要 4 項全拿）", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "假日全滿班", "style": "murmur",
+    "eye": "廟公看著母親節班表：「全員到齊。」",
+    "body": ["連訂位電話都排人接了。", "他本來想幫你請假，被擋了。"],
+    "tip": "5 月第 2 個週日，神明也不敢排休。", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "叫店長出來", "style": "murmur",
+    "eye": "香爐燒完 3 炷香，客人還在等店長",
+    "body": ["店長休假，打了 3 通沒接。", "客人說：沒關係，我時間很多。"],
+    "tip": "他不走，你就不能下班。", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "國假薪資", "style": "yiji",
+    "eye": "國定假日上滿 8 小時，加給 0 元",
+    "body": ["備註欄：已含於月薪。", "月薪沒有變，國定假日變成平日。"],
+    "tip": "宜：把班表截圖　忌：只看實領數字", "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "service", "pain": "福利要考核", "style": "yiji",
+    "eye": "生日禮金要看績效，績效要看店長",
+    "body": ["績效怎麼算？", "店長說：看感覺。"],
+    "tip": "宜：生日那天特別勤快　忌：問標準", "season": null, "meme": null
+  },
+
+  {
+    "level": "大凶", "topic": "service", "pain": "班表突加班", "style": "quote",
+    "eye": "「明天早班改晚班，後天晚班改早班。」",
+    "body": ["— 週四 22:15・店長", "中間夾著一場早就訂好的聚餐。"],
+    "tip": "聚餐訂金 800 元，不退。", "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "service", "pain": "臨時被砍班", "style": "quote",
+    "eye": "「客人少，你先下班吧。」",
+    "body": ["— 14:05・店長（你 13:40 才到）", "車程 55 分鐘，這句話 3 秒。"],
+    "tip": "來回車費 90 元，時薪算 0。", "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "service", "pain": "休假被叫回", "style": "notice",
+    "eye": "【班表】明天休假已改為「06:00 開店」",
+    "body": ["更新人：店長，23:58。", "已讀人：你，23:58。"],
+    "tip": "鬧鐘 04:50，睡眠不到 5 小時。", "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "service", "pain": "兩頭班", "style": "dialogue",
+    "eye": "店長：午班 11:00，晚班 17:00",
+    "body": ["你：中間 3 小時算薪嗎？", "店長：那是你的休息時間。", "你：（在停車場坐了 3 小時）"],
+    "tip": "車上的冷氣，用的是你的油錢。", "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "service", "pain": "身體跟不上", "style": "checklist",
+    "eye": "早班連開 5 天，第 6 天排關店",
+    "body": ["睡眠 ☆☆☆☆☆", "情緒 ★☆☆☆☆", "咖啡 ★★★★★", "記得自己姓名 ★★★☆☆"],
+    "tip": "（客人問今天幾號，要先想一下）", "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "service", "pain": "打烊才開始", "style": "murmur",
+    "eye": "金身看著關了一半的鐵門：「還有人。」",
+    "body": ["23:20，一桌 6 人點了鍋底。", "祂對著香爐，沉默了 1 分鐘。"],
+    "tip": "鍋底煮 20 分鐘，收鍋 40 分鐘。", "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "service", "pain": "工時被切掉", "style": "yiji",
+    "eye": "打烊清到 23:50，系統只算到 22:30",
+    "body": ["中間 80 分鐘，被當成自己想留。", "隔天店長還問：昨天怎麼這麼晚？"],
+    "tip": "宜：留下打卡截圖　忌：大聲說出來", "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "service", "pain": "交班靠通靈", "style": "yiji",
+    "eye": "前一班忘記收現金，今天短少 1,200 元",
+    "body": ["交班本那頁，只有一個咖啡漬。", "店長看了你 3 秒，問：你覺得呢？"],
+    "tip": "宜：先翻監視器　忌：說「我不知道」", "season": null, "meme": null
+  },
+
+  {
+    "level": "下下籤", "topic": "service", "pain": "風雨照排班", "style": "quote",
+    "eye": "「颱風天不用上班，但要到店門口拍照。」",
+    "body": ["— 颱風當天 05:50・店長", "照片要有招牌，還要有雨。"],
+    "tip": "雨不夠大，要重拍。", "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "service", "pain": "客訴先找你", "style": "quote",
+    "eye": "「我要客訴你們的天氣。」",
+    "body": ["— 下雨天 15:00・外帶客人", "你說了 4 次「不好意思」。"],
+    "tip": "雨停之後，他會再來客訴太陽。", "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "service", "pain": "叫店長出來", "style": "notice",
+    "eye": "【系統通知】店長已被叫出 11 次，躲進倉庫",
+    "body": ["神明補充：第 12 位要找「老闆」。", "老闆在日本，剛下飛機。"],
+    "tip": "電話給客人打，說不定通。", "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "service", "pain": "薪水寫好看", "style": "notice",
+    "eye": "【徵才頁】月薪 40,000 起",
+    "body": ["小字：實領 28,400。", "第一天才知道，「起」是起床的起。"],
+    "tip": "40,000 要達標 7 項，目前達 2 項。", "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "service", "pain": "假日全滿班", "style": "dialogue",
+    "eye": "店長：這個月你的休假，我幫你排在 2/30",
+    "body": ["你：2 月沒有 30 號。", "店長：我知道，所以你這個月不用休。", "你：（已讀）"],
+    "tip": "2/30 那天，神明也想休。", "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "service", "pain": "福利要考核", "style": "murmur",
+    "eye": "神明收到生日禮金通知：「請先通過 3 關測驗。」",
+    "body": ["第 1 關：背 27 條員工守則。", "第 2 關：生日那天要來上班。"],
+    "tip": "第 3 關要等到你生日當天才公布。", "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "service", "pain": "國假薪資", "style": "yiji",
+    "eye": "5/1 勞動節，我們全店都在勞動",
+    "body": ["班表那格是紅的，薪資單那格是白的。", "店長說：紅色是用來提醒大家小心。"],
+    "tip": "宜：把班表紅格截圖　忌：算加給", "season": null, "meme": null
+  }
+]

@@ -1,0 +1,14 @@
+node_modules
+dist
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# 美術原圖（Codex 產出，約 20MB）只留在本機備份；網站用 public/art 的處理後版本
+art-src/
+shots/
+.tmp-*
+.tmp-*
+public/art/*.png

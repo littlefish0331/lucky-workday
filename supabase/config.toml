@@ -1,0 +1,4 @@
+# 只放函式設定，方便之後用 Supabase CLI 部署。
+# 新式 publishable key 不會被平台驗證，所以 verify_jwt = false，改由函式內自己比對 apikey 標頭。
+[functions.count]
+verify_jwt = false

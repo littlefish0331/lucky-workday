@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 舊版診斷與新設計｜準時下班宮</title>
+<link rel="stylesheet" href="assets/note.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><a href="index.html">← 目錄</a><button class="theme" type="button">深色／淺色</button></header>
+  <h1>01　舊版診斷與新設計</h1>
+  <p class="meta">2026-11-20・M0・目標 11/22 前上線</p>
+
+  <div class="tldr"><b>結論：</b>舊版把力氣花在「介紹網站」和「功能很多」，卻沒有一個讓人想貼出來的瞬間。新版把遊戲縮成一條 15 秒的儀式，結尾是一張寫著你名字的籤。</div>
+
+  <h2>1. 舊版哪裡不對</h2>
+  <p>我掃過舊版全部 200 支籤與手機畫面，下面都是實際量到的數字，不是印象。</p>
+  <table>
+    <tr><th>項目</th><th>量到的結果</th><th>影響</th></tr>
+    <tr><td>評語結構</td><td>200/200 都是「今日宜 X，忌 Y。」</td><td>抽到第三支就看出同一個模子</td></tr>
+    <tr><td>內文結構</td><td>200/200 都剛好兩句，92% 含「你」</td><td>像編輯寫的短文，不像人說的話</td></tr>
+    <tr><td>直接引述人說的話</td><td>0/200</td><td>沒有「聽得到的那句話」，也就沒有可截圖的句子</td></tr>
+    <tr><td>即時通訊語境</td><td>9/200</td><td>已讀、群組、LINE 這些最有共鳴的場景幾乎沒出現</td></tr>
+    <tr><td>服務業、輪班</td><td>1/200</td><td>整群打工人被排除在外</td></tr>
+    <tr><td>手機首頁</td><td>整頁約 2364px，CSS 有 7–12px 的字</td><td>要捲很久才開始玩，字小到要瞇眼</td></tr>
+    <tr><td>下載的籤圖</td><td>沒有名字、沒有日期、大片留白</td><td>每個人拿到的圖都一樣，沒有理由貼</td></tr>
+  </table>
+  <div class="note">這些數字只能證明「結構單一、場景有缺口」，不能證明好不好笑。共鳴最後要靠真人判斷，所以上線前會請使用者抽樣標註。</div>
+
+  <h2>2. 新流程（可以播放）</h2>
+  <p>從進廟到存圖，回訪的人只要約 15 秒。點 ▶ 自動播放，或用左右鍵手動切。</p>
+
+  <div class="stepper" data-autoplay>
+    <div class="stage">
+      <section class="step"><div class="no">STEP 1</div><div class="big">🏮</div><h4>首頁：一句話、一顆鈕</h4><p>不放說明卡、不放統計。流程靠引導，不靠文字。</p></section>
+      <section class="step"><div class="no">STEP 2</div><div class="big">✍️</div><h4>報上名來</h4><p>輸入名字。回訪者自動帶入。名字只存在手機裡，不上傳。</p></section>
+      <section class="step"><div class="no">STEP 3</div><div class="big">😩</div><h4>最痛的事</h4><p>六顆選項，可以「換一批」。選了之後，相關的籤被抽到的機率變 4 倍，並印在卡上。</p></section>
+      <section class="step"><div class="no">STEP 4</div><div class="big">👆</div><h4>按手印立契約</h4><p>長按紅印泥約 1 秒，手機震動。手印隨機：指印、掌印、貓掌、狗掌。</p></section>
+      <section class="step"><div class="no">STEP 5</div><div class="big">🎋</div><h4>搖籤筒</h4><p>拖曳搖晃，3 秒內出籤。不用手機感應器，不跳權限視窗。</p></section>
+      <section class="step"><div class="no">STEP 6</div><div class="big">🌗</div><h4>擲筊</h4><p>聖筊 75%、笑筊 22%、陰筊 3%。笑筊後第二擲保證聖筊，不會卡關。</p></section>
+      <section class="step"><div class="no">STEP 7</div><div class="big">📜</div><h4>揭曉</h4><p>蓋印、賜法號、顯示籤卡。吉側直接到存圖；凶側可以敲木魚重抽。</p></section>
+      <section class="step"><div class="no">STEP 8</div><div class="big">📲</div><h4>存圖、發 Threads</h4><p>卡上有你的名字、法號、日期、手印，每個人的圖都不一樣。</p></section>
+    </div>
+    <div class="ctrl"><button data-act="prev" aria-label="上一步">◀</button><button data-act="play" aria-label="播放">▶</button><button data-act="next" aria-label="下一步">▶▶</button><div class="dots"></div></div>
+  </div>
+
+  <h2>3. 凶籤的出口：木魚與化解</h2>
+  <p>抽到不好的籤不是結局，而是一個小遊戲。敲的次數隨機，玩家看不到目標。</p>
+  <pre class="mermaid">
+flowchart TD
+  A[揭曉] --> B{吉還是凶?}
+  B -- 吉 --> Z[存圖分享]
+  B -- 凶 --> C[敲木魚 8~32 下]
+  C --> D[重抽一次]
+  D --> E{這次呢?}
+  E -- 吉 --> Z2[存圖<br/>註記: 原抽凶 改判]
+  E -- 仍凶 --> F{選擇}
+  F -- 認命 --> Z3[保留原籤]
+  F -- 化解 --> G[再敲 24~36 下]
+  G --> Z4[蓋已化解章 附建議]
+  </pre>
+  <div class="note">「放棄」＝認命，保留原籤。「化解」＝再敲一輪並蓋章。這個詮釋已和使用者確認。</div>
+
+  <h2>4. 機率怎麼定</h2>
+  <h3>等級出現率（好運 55%、壞運 45%）</h3>
+  <div class="bars">
+    <div class="bar good"><span>上上籤</span><div class="track"><div class="fill" data-w="30"></div></div><span>6%</span></div>
+    <div class="bar good"><span>大吉</span><div class="track"><div class="fill" data-w="60"></div></div><span>12%</span></div>
+    <div class="bar good"><span>吉</span><div class="track"><div class="fill" data-w="85"></div></div><span>17%</span></div>
+    <div class="bar good"><span>小吉</span><div class="track"><div class="fill" data-w="100"></div></div><span>20%</span></div>
+    <div class="bar bad"><span>小凶</span><div class="track"><div class="fill" data-w="90"></div></div><span>18%</span></div>
+    <div class="bar bad"><span>凶</span><div class="track"><div class="fill" data-w="70"></div></div><span>14%</span></div>
+    <div class="bar bad"><span>大凶</span><div class="track"><div class="fill" data-w="40"></div></div><span>8%</span></div>
+    <div class="bar bad"><span>下下籤</span><div class="track"><div class="fill" data-w="25"></div></div><span>5%</span></div>
+  </div>
+  <p>內容數量和出現率分開設計：好壞各 250 支，但兩端出現率低，所以「抽到下下籤」本身就是值得貼的事。這組數字是設計假設，上線後可以用 Redis 的實際分布調整。</p>
+
+  <h3>500 支夠不夠</h3>
+  <p>用生日悖論近似：同一個朋友圈有 n 個人同時貼出時，至少兩人抽到同一支的機率。</p>
+  <table>
+    <tr><th>人數</th><th>200 支</th><th>500 支</th></tr>
+    <tr><td>10 人</td><td>20%</td><td>9%</td></tr>
+    <tr><td>30 人</td><td>89%</td><td>58%</td></tr>
+  </table>
+  <p>500 支夠上線，但只是降低撞籤。卡上還有名字、法號、手印、日期，看起來不會一樣。長期要靠 V2 社群投稿和時令籤輪替。</p>
+
+  <h2>5. 同名同日同籤</h2>
+  <p>亂數種子 = 名字（去空白、全形轉半形）＋台北日期＋第幾次抽。好處有三個：重新整理不會變；朋友輸入你的名字就能偷看你的籤；不需要後端也能還原結果。代價是換個名字就能重抽，對娛樂產品我認為可以接受。</p>
+
+  <h2>6. 計數怎麼接（V1 就上）</h2>
+  <p>GitHub Pages 是靜態站，瀏覽器不能放 Redis 金鑰，所以中間要一層代理。</p>
+  <pre class="mermaid">
+flowchart LR
+  B[瀏覽器<br/>GitHub Pages] -- "publishable key" --> F[Supabase Edge Function<br/>count]
+  F -- "Redis token (secret)" --> R[(Upstash Redis<br/>otld: 前綴)]
+  F -. "來源檢查 + 限流 + 驗證籤 id" .-> F
+  </pre>
+  <table>
+    <tr><th>防護</th><th>做法</th></tr>
+    <tr><td>金鑰不外洩</td><td>Redis token 只存在 Edge Function 的 secrets，前端只有 publishable key</td></tr>
+    <tr><td>擋陌生網站</td><td>檢查 Origin，只放行自己的網站與本機</td></tr>
+    <tr><td>不信前端傳的值</td><td>日期由伺服器算；等級由「籤 id」反查，不用前端傳的等級</td></tr>
+    <tr><td>防洗數字</td><td>同一個 IP 2 秒內只收一次；木魚一次最多 40 下</td></tr>
+    <tr><td>壞掉不影響遊戲</td><td>任何失敗都回 200，前端直接忽略，只是不顯示數字</td></tr>
+  </table>
+  <div class="note">新式 publishable key 不會被 Supabase 平台驗證，所以這個函式設 <code>verify_jwt=false</code>，由函式自己比對 apikey 標頭。實測：錯的 key、沒有 key、陌生來源都被擋；用對的 key 但 Redis 還沒設定時回 <code>not-configured</code>。</div>
+
+  <h2>7. 取捨</h2>
+  <table>
+    <tr><th>沒選的方案</th><th>為什麼</th></tr>
+    <tr><td>V1 就做造籤與共用籤筒</td><td>門檻高、要審核，而且不是讓人想貼的那個瞬間。改到 V2，只收一句話。</td></tr>
+    <tr><td>用 Supabase 資料表計數</td><td>也做得到，但使用者明確要 Redis。</td></tr>
+    <tr><td>用手機感應器搖籤</td><td>iOS 要跳權限視窗，會打斷流程。改用拖曳。</td></tr>
+    <tr><td>每支籤獨立的預覽圖</td><td>靜態站要在建置時預先產生，工作量大，放 V1.1。</td></tr>
+  </table>
+
+  <h2>8. 還沒驗證的事</h2>
+  <ul>
+    <li>iPhone 能不能震動：我印象中 iOS Safari 不支援，但沒確認，所以畫面震動是必備備援。</li>
+    <li>存圖到相簿：各手機的行為不同，要用實機測。</li>
+    <li>籤詩有不有共鳴：要請使用者抽樣標註。</li>
+    <li>Edge Function 在 Redis 設定好之後的完整流程：待使用者設定 secrets。</li>
+  </ul>
+
+  <h2>下一步</h2>
+  <ol>
+    <li>使用者在 Supabase 填入 Redis 的兩個 secrets。</li>
+    <li>做可玩骨架（M1）：流程、籤卡、存圖。</li>
+    <li>美術素材 Codex 清單：見 <code>docs/ART-PROMPTS.md</code>。</li>
+  </ol>
+</div>
+<script src="assets/note.js"></script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+[
+  {
+    "level": "上上籤", "topic": "money", "pain": "年終幾個月", "style": "notice",
+    "eye": "【入帳通知】年終 14.5 個月，已匯入",
+    "body": ["備註：財務部隨後寄來第二封信。", "「上一筆算錯了，但不追回，不用客氣。」"],
+    "tip": "宜：截圖存雲端　忌：回信問「確定嗎」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "money", "pain": "年終看人臉", "style": "dialogue",
+    "eye": "主管：年終金額你自己填，我簽名",
+    "body": ["你：（先填 2 個月，手在抖）", "主管：太少了，重填。", "（內心）這間公司是不是要倒了"],
+    "tip": "宜：填完立刻存檔　忌：問主管有沒有發燒",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "money", "pain": "調薪輸物價", "style": "quote",
+    "eye": "「這次調薪比物價漲得快，我們也很意外。」",
+    "body": ["— 週一 10:30・人資，附件 2 頁", "計算機按了 3 遍，每次都贏過排骨便當。"],
+    "tip": "今天中午，可以加蛋。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "money", "pain": "尾牙抽獎", "style": "murmur",
+    "eye": "籤筒搖了 7 次，掉出來全是 66 號",
+    "body": ["特獎、頭獎，都是 66 號。", "主持人念到第 7 次，開始道歉。"],
+    "tip": "66 號是你，上台時慢慢走。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "money", "pain": "紅包先扣掉", "style": "yiji",
+    "eye": "卡費 38,420 元，狀態：已有人繳清",
+    "body": ["App 重整 3 次，結果都一樣。", "繳款人欄位寫：不便透露。"],
+    "tip": "宜：低頭繼續生活　忌：打電話問銀行",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "大吉", "topic": "money", "pain": "有發是幾塊", "style": "quote",
+    "eye": "「年終 3 個月，剛剛轉進去了。」",
+    "body": ["— 發薪日前一天 16:20・會計", "薪資單那行數字，一個零都沒少。"],
+    "tip": "會計補一句：「不用謝，我要下班了。」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "money", "pain": "保十四個月", "style": "notice",
+    "eye": "【系統通知】保證 14 個月，已寫入合約",
+    "body": ["連「不含試用期」都沒偷寫。", "這份合約，比履歷還乾淨。"],
+    "tip": "宜：影印 2 份　忌：簽名前先笑出聲",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "money", "pain": "口頭保證", "style": "dialogue",
+    "eye": "主管：面試時講的那些，我都簽進去了",
+    "body": ["（你翻到第 2 頁，月數寫得清清楚楚）", "你：（這是詐騙嗎）", "主管：你先簽，我怕你反悔。"],
+    "tip": "宜：當場簽完　忌：說「我回去想想」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "money", "pain": "產業差一截", "style": "checklist",
+    "eye": "同學群開始報月數，這次你可以先講",
+    "body": ["報月數 ★★★★★", "裝沒看到 ☆☆☆☆☆", "被追問在哪間 ★★★★☆", "私訊要內推 ★★★☆☆（要排隊）"],
+    "tip": "貼完把群組靜音，私訊會很多。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "money", "pain": "年終看人臉", "style": "murmur",
+    "eye": "土地公把考績欄那個 A，描了 3 遍",
+    "body": ["「怕主管反悔。」", "祂吹乾墨水的時候，還笑了一下。"],
+    "tip": "存檔，再多備份一份。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "money", "pain": "加給拆太細", "style": "notice",
+    "eye": "【薪資單】本月加給 4 項，全數發放",
+    "body": ["小字：連最容易消失的全勤也在。", "會計說，這個月她也很意外。"],
+    "tip": "今天不用問為什麼沒少。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "money", "pain": "低底薪高包", "style": "yiji",
+    "eye": "底薪 4 萬 8，獎金只是加碼",
+    "body": ["13 個月共 62 萬 4，合約第 2 頁。", "HR 說：「最高可領」那頁，不用看。"],
+    "tip": "宜：先看底薪　忌：被「最高可領」帶走",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "money", "pain": "職責先加薪慢", "style": "quote",
+    "eye": "「新增的 3 個群組，薪水也跟著調了。」",
+    "body": ["— 週三 15:20・主管", "人資還補一句：從上個月追溯。"],
+    "tip": "那封信轉寄給自己，比存檔安心。",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "吉", "topic": "money", "pain": "年終幾個月", "style": "quote",
+    "eye": "「年終 2.5 個月，跟去年一樣。」",
+    "body": ["— 公布欄 09:10・人資", "公告抬頭的年份，也是去年的。"],
+    "tip": "晚餐照舊，滷肉飯不用升級。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "有發是幾塊", "style": "quote",
+    "eye": "「公告 1.5 個月，薪資單也是。」",
+    "body": ["— 發薪日 09:12・對了 3 次", "對完不放心，又對了 1 次。"],
+    "tip": "再對第 5 次，會計會走過來。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "未滿一年", "style": "notice",
+    "eye": "【公告】到職 10 個月，年終按比例計算",
+    "body": ["備註：寫的是「依在職月數」，", "「試用期」那三個字沒有出現。"],
+    "tip": "備註那行，截圖留著。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "等入帳再走", "style": "notice",
+    "eye": "【提醒】年終已入帳，草稿箱有 1 封信待寄",
+    "body": ["那封信已經放了 47 天。", "按寄出前，先看第 3 遍餘額。"],
+    "tip": "宜：寄完再關電腦　忌：寄給全公司",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "年終看人臉", "style": "dialogue",
+    "eye": "主管：考績給你 B+，放心吧",
+    "body": ["你：（B+ 是好還是壞）", "主管：跟去年一樣。", "你：（去年的我也沒搞懂）"],
+    "tip": "B+ 的意思，明年再問。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "調薪輸物價", "style": "dialogue",
+    "eye": "人資：這次調 3%，有參考物價",
+    "body": ["（內心）便當 +5 元，我 +1,200，贏", "人資：下半年再看一次。", "（內心）至少有看"],
+    "tip": "宜：點頭　忌：當場按計算機",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "保十四個月", "style": "checklist",
+    "eye": "兩份 Offer 月數乘完，還是這份贏",
+    "body": ["月薪 ★★★☆☆", "保證月數 ★★★★☆", "分紅 ★★☆☆☆（看天）", "算錯的機率 ★☆☆☆☆"],
+    "tip": "計算機截圖存著，下次談薪用。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "分紅何時發", "style": "murmur",
+    "eye": "廟公把分紅表翻了 3 遍，確定有日期",
+    "body": ["11/30，沒寫「另行通知」。", "他連背面都翻了，沒有小字。"],
+    "tip": "11/30 加進行事曆，設 2 個鬧鐘。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "尾牙抽獎", "style": "murmur",
+    "eye": "供桌上放著 33 號的獎：500 元禮券",
+    "body": ["不大不小，剛好夠 2 個人吃火鍋。", "33 號本人笑得很克制，香爐的煙還比較誇張。"],
+    "tip": "上台鞠躬 15 度，別太用力。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "產業差一截", "style": "yiji",
+    "eye": "同學群問年終，前 5 個人都回 2 個月",
+    "body": ["你是第 6 個，複製貼上就好。", "第 7 個人回 0.5，全群貼貼圖安慰他。"],
+    "tip": "宜：跟著貼貼圖　忌：問他在哪間",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "money", "pain": "紅包先扣掉", "style": "yiji",
+    "eye": "年終 52,000，卡費 31,000，還有剩",
+    "body": ["剩 21,000，紅包包完還吃得起燒肉。", "餘額那欄沒有紅字，App 都沒意見。"],
+    "tip": "宜：先包好紅包　忌：打開購物 App",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "小吉", "topic": "money", "pain": "加給拆太細", "style": "quote",
+    "eye": "「這個月，全勤那一行還在。」",
+    "body": ["— 月底 18:05・對著薪資單自言自語", "遲到 0 次，全靠 08:59 打卡那一天。"],
+    "tip": "300 元，剛好一個便當加一杯飲料。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "職責先加薪慢", "style": "quote",
+    "eye": "「那個 200 人的群組，我幫你退了。」",
+    "body": ["— 週二 11:40・隔壁同事", "薪水沒動，手機少震 1 個。"],
+    "tip": "請他喝杯手搖，群組別再加回來。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "口頭保證", "style": "notice",
+    "eye": "【班表】面試說的「彈性上班」，已兌現 1 天",
+    "body": ["神明補充：其餘 364 天，主管說再觀察。", "兌現的那天，是颱風假。"],
+    "tip": "兌現的那天，記得拍照。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "分紅何時發", "style": "dialogue",
+    "eye": "會計：分紅日期出來了，下個月 15 號",
+    "body": ["你：（先記進行事曆，連鬧鐘都設了）", "會計：金額還沒定喔。", "你：（日期有就好，我不挑）"],
+    "tip": "宜：日期收好　忌：先算金額",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "尾牙抽獎", "style": "dialogue",
+    "eye": "主持人：安慰獎，81 號",
+    "body": ["（你低頭看手上的號碼：81）", "（全桌轉頭看你）", "你：（第 3 年了，第一次被念到）"],
+    "tip": "宜：小跑步上台　忌：說「我不用了」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "紅包先扣掉", "style": "checklist",
+    "eye": "卡費繳完，帳戶還剩 1,280 元",
+    "body": ["帳戶餘額 ★★☆☆☆", "晚餐 ★★★☆☆", "再買一樣東西 ☆☆☆☆☆", "手搖飲 ★★★★☆（只限今天）"],
+    "tip": "半糖少冰，是今天的最大預算。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "年終幾個月", "style": "checklist",
+    "eye": "年終公告貼出來了，辦公室沒人哭",
+    "body": ["公告時間 ★★★★☆", "月數 ★★★☆☆", "群組吵架 ☆☆☆☆☆", "回家買雞排 ★★★★★（要加辣）"],
+    "tip": "雞排加辣，不要問隔壁領多少。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "等入帳再走", "style": "murmur",
+    "eye": "香爐旁的月曆，25 號被圈起來，還差 3 天",
+    "body": ["草稿箱那封信，放著不會壞。", "帳戶餘額才會。"],
+    "tip": "再等 3 天，信的格式可以再改。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "調薪輸物價", "style": "murmur",
+    "eye": "籤詩本人算過了：這個月多 600 元",
+    "body": ["不夠換新手機，夠喝 10 杯珍奶。", "籤詩本人從籤筒探頭：別一次喝完。"],
+    "tip": "喝到第 6 杯，記得看看餘額。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "未滿一年", "style": "yiji",
+    "eye": "公告備註：到職滿 3 個月者，按比例發",
+    "body": ["到職第 92 天，剛好跨過去。", "人資沒說恭喜，只說「下一位」。"],
+    "tip": "宜：把到職日記起來　忌：提早 1 天去問",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "money", "pain": "低底薪高包", "style": "yiji",
+    "eye": "底薪沒變，獎金那一行多了 1,500",
+    "body": ["實領 3 萬 4，月底那週不用算便當錢。", "獎金欄的名稱是「本月限定」。"],
+    "tip": "宜：只看實領　忌：算全年平均",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "小凶", "topic": "money", "pain": "年終幾個月", "style": "quote",
+    "eye": "「年終還在算，下週一定公布。」",
+    "body": ["— 本月第 3 次・主管", "同學群的人已經在慶祝了。"],
+    "tip": "「下週」的意思是下週的下週。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "有發是幾塊", "style": "quote",
+    "eye": "「年終有發喔，金額依個人狀況。」",
+    "body": ["— 公告當天 16:30・人資", "薪資單那行 2,800，兩個紅包就沒了。"],
+    "tip": "紅包袋，可以買薄的。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "產業差一截", "style": "notice",
+    "eye": "【群組】同學群有 3 人貼出年終 6 個月",
+    "body": ["小字：你家公告寫的是「視營運狀況」。", "視到什麼時候，沒人敢問。"],
+    "tip": "宜：把手機扣在桌上　忌：回「恭喜」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "未滿一年", "style": "notice",
+    "eye": "【系統通知】年終備註：到職未滿 1 年者另議",
+    "body": ["「另議」的意思，是另外開會討論。", "那場會，沒有邀請你。"],
+    "tip": "「另議」2 個字，建議截圖。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "等入帳再走", "style": "dialogue",
+    "eye": "會計：年終改 1 月 15 日發",
+    "body": ["你：（離職信寫了 3 版，全放回草稿）", "會計：這樣比較公平。", "你：（誰覺得的）"],
+    "tip": "草稿存第 4 版，標題改短一點。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "年終看人臉", "style": "checklist",
+    "eye": "考績面談倒數 10 分鐘",
+    "body": ["主管心情 ★☆☆☆☆", "自評那一頁 ★★★☆☆", "笑容 ★★☆☆☆（練習過）", "考績 A ★☆☆☆☆（看他早餐）"],
+    "tip": "宜：帶筆　忌：問「這個 B 是哪種 B」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "低底薪高包", "style": "checklist",
+    "eye": "面試說年薪 90 萬，薪資單底薪 3 萬 2",
+    "body": ["面試講的數字 ★★★★★", "每月實領 ★☆☆☆☆", "獎金何時發 ☆☆☆☆☆", "底薪那一行 ★☆☆☆☆（字最小）"],
+    "tip": "宜：認真看合約附件　忌：用年薪除以 12",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "保十四個月", "style": "murmur",
+    "eye": "籤筒旁放著計算機，按出來保證只有 12 個月",
+    "body": ["另外那 2 個月，合約寫「視績效」。", "計算機放回香爐旁，沒人說話。"],
+    "tip": "Offer 原檔，請另存一份。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "調薪輸物價", "style": "murmur",
+    "eye": "金身低頭看了看：調薪 2%，便當漲 10 元",
+    "body": ["祂沒說話，又把便當價格看了 2 遍。", "調薪 600 元，這個月多花 900 元。"],
+    "tip": "中午帶便當，老闆娘漲價不關你的事。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "職責先加薪慢", "style": "yiji",
+    "eye": "前同事的 3 個群組，今天都把你加進去",
+    "body": ["職稱沒變，薪水沒變。", "其中 1 個群組叫「緊急」。"],
+    "tip": "宜：先關通知　忌：說「我試試看」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "money", "pain": "加給拆太細", "style": "yiji",
+    "eye": "薪資單少了 800，要翻 4 行才找得到",
+    "body": ["是全勤，條件寫在公告第 6 點。", "第 6 點，沒人讀過。"],
+    "tip": "宜：先算差額　忌：馬上傳訊息給會計",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "凶", "topic": "money", "pain": "有發是幾塊", "style": "quote",
+    "eye": "「年終 1 個月，改用公司商品券發放。」",
+    "body": ["— 公告 14:00・全員信", "商品券只能買公司賣的一種保溫瓶。"],
+    "tip": "宜：先看保溫瓶有幾款　忌：問能不能換現金",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "產業差一截", "style": "quote",
+    "eye": "「我們公司年終 6 個月，你們幾個月？」",
+    "body": ["— 同學會 19:40・敬酒敬到這桌", "整桌的人，同時低頭喝湯。"],
+    "tip": "宜：多夾一塊肉　忌：說「還在算」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "未滿一年", "style": "notice",
+    "eye": "【系統通知】到職 11 個月，年終 0 元",
+    "body": ["基準日是 12/1，差 10 天。", "人資說：制度就是這樣。"],
+    "tip": "到職日期，下次簽約前先看。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "等入帳再走", "style": "notice",
+    "eye": "【公告】年終發放日更新：另行通知",
+    "body": ["備註：離職信裡的「最後工作日」，", "已經改了第 4 次。"],
+    "tip": "第 5 版，記得改檔名。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "低底薪高包", "style": "dialogue",
+    "eye": "主管：獎金看業績，底薪就是底薪",
+    "body": ["你：（月底實領 28,000）", "主管：面試給你的是年薪喔。", "（內心）120 萬那個數字，在哪裡"],
+    "tip": "宜：寫下每月實領　忌：用年薪算房租",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "職責先加薪慢", "style": "checklist",
+    "eye": "職稱沒變，群組變成 7 個",
+    "body": ["調薪通知 ☆☆☆☆☆", "新群組 ★★★★★", "被 @ 的次數 ★★★★☆", "回「收到」★★★☆☆（已設成快速鍵）"],
+    "tip": "邀請信請全部留著。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "加給拆太細", "style": "checklist",
+    "eye": "本月薪資單，看完得按計算機",
+    "body": ["底薪 ★★★☆☆", "全勤 ★☆☆☆☆", "伙食津貼 ☆☆☆☆☆", "交通補助 ★★☆☆☆（看里程）"],
+    "tip": "計算機的電池，建議先換。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "分紅何時發", "style": "murmur",
+    "eye": "土地公翻到分紅那頁，日期欄寫「待董事會」",
+    "body": ["祂往前翻 3 頁，往後翻 3 頁，", "找不到董事會哪天開。"],
+    "tip": "先別規劃，12 月看看就好。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "尾牙抽獎", "style": "yiji",
+    "eye": "尾牙抽了 46 輪，這桌的號碼 0 次被念",
+    "body": ["連隔壁桌的 8 歲小孩，都中了吸塵器。", "他說：「這個好重。」"],
+    "tip": "宜：早點去搭車　忌：看別桌拆獎品",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "紅包先扣掉", "style": "yiji",
+    "eye": "年終 38,000，卡費通知 41,200",
+    "body": ["App 首頁先跳出「恭喜入帳」。", "往下滑，才是繳款截止日。"],
+    "tip": "宜：先繳卡費　忌：重新整理 2 次",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "money", "pain": "口頭保證", "style": "yiji",
+    "eye": "面試說往年 3 個月，公告寫今年 0.5 個月",
+    "body": ["主管說：今年比較特別。", "他去年也是這樣說的。"],
+    "tip": "宜：把面試信留著　忌：說「當初你有講」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "大凶", "topic": "money", "pain": "年終幾個月", "style": "quote",
+    "eye": "「今年年終改成感謝信，每人 1 封。」",
+    "body": ["— 12/20 15:00・全員郵件", "17:30 又寄一封：明年調薪暫緩。"],
+    "tip": "宜：印出來摺好　忌：問能不能換現金",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "money", "pain": "口頭保證", "style": "quote",
+    "eye": "「那個 6 個月是最高值，不是保證值。」",
+    "body": ["— 週四 16:10・主管", "同一天，信用卡帳單也到了。"],
+    "tip": "吃完晚餐再看帳單。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "money", "pain": "調薪輸物價", "style": "notice",
+    "eye": "【帳單】房租下月漲 2,500，調薪月增 780",
+    "body": ["小字：調薪 1.5% 今天生效。", "房東的信，比人資早 2 小時到。"],
+    "tip": "宜：兩封分開看　忌：同一晚看完",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "money", "pain": "年終看人臉", "style": "dialogue",
+    "eye": "主管：考績送出去了，你自己看系統",
+    "body": ["（你打開考績系統，只有一個字母：C）", "主管：年終按 C 算，0.5 個月。", "你：（自評我寫了 1 頁半）"],
+    "tip": "自評那頁，留著當紀念。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "money", "pain": "保十四個月", "style": "dialogue",
+    "eye": "人資：那 14 個月，包含 2 個月看績效",
+    "body": ["你：（所以保證是 12 個月）", "人資：對，名稱沿用舊的。", "你：（Offer 我已經回簽了）"],
+    "tip": "宜：問清「保證」的定義　忌：只看總額",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "money", "pain": "職責先加薪慢", "style": "checklist",
+    "eye": "今日運勢：專案多 3 個，薪水 0 元",
+    "body": ["新專案 ★★★★★", "新職稱 ☆☆☆☆☆", "卡費通知 ★★★★★", "帳戶餘額 ☆☆☆☆☆（剩 438 元）"],
+    "tip": "438 元，要撐到 25 號。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "money", "pain": "加給拆太細", "style": "murmur",
+    "eye": "神明翻開薪資單，從第 3 行開始搖頭",
+    "body": ["祂指著那行，只說兩個字：「沒了。」", "然後又指向房貸的扣款日。"],
+    "tip": "今天早點睡，網銀明天再開。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "money", "pain": "低底薪高包", "style": "yiji",
+    "eye": "底薪 24,000，房租 12,500，現在淡季",
+    "body": ["扣完剩 11,500。", "主管群組：「這個月大家辛苦了，加油！」"],
+    "tip": "宜：自己煮飯　忌：滑購物車",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "下下籤", "topic": "money", "pain": "有發是幾塊", "style": "quote",
+    "eye": "「年終已發放，共 87 元，請查收。」",
+    "body": ["— 發放日 10:00・銀行簡訊", "簡訊最後一行：手續費 15 元。"],
+    "tip": "實收 72 元，剛好不夠一個便當。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "money", "pain": "產業差一截", "style": "notice",
+    "eye": "【系統通知】同學群平均 5.8 個月，你：鳳梨酥",
+    "body": ["神明補充：是品質很好的那種鳳梨酥，", "有效期限到 12 月 28 日。"],
+    "tip": "宜：趁新鮮吃完　忌：拍照傳同學群",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "money", "pain": "口頭保證", "style": "dialogue",
+    "eye": "老闆：面試那句「年終穩拿」，我說的是我",
+    "body": ["你：（他當時明明看著我）", "老闆：我在看你後面的玻璃牆。"],
+    "tip": "那面玻璃牆，擦得很乾淨。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "money", "pain": "分紅何時發", "style": "checklist",
+    "eye": "今日運勢：分紅發放日，暫定 2031 年",
+    "body": ["分紅金額 ☆☆☆☆☆", "發放日期 ☆☆☆☆☆", "「暫定」兩個字 ★★★★★", "主管說會準時 ★☆☆☆☆（上次也這樣說）"],
+    "tip": "宜：設 2031 年的提醒　忌：期待",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "money", "pain": "尾牙抽獎", "style": "murmur",
+    "eye": "廟公數了數：特獎 7 號念了 3 次，你在廁所",
+    "body": ["主持人宣布：過期作廢。", "你回到座位，全桌正在拍大合照。"],
+    "tip": "特獎 5 萬元，現在在 12 號桌。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "money", "pain": "紅包先扣掉", "style": "yiji",
+    "eye": "年終 62,000 入帳，帳單也是 62,000",
+    "body": ["金額一模一樣，連零頭都對得上。", "App 兩則通知，只隔 40 秒。"],
+    "tip": "宜：把 App 關掉　忌：再按重新整理",
+    "season": null, "meme": null
+  }
+]

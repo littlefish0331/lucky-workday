@@ -1,0 +1,527 @@
+[
+  {
+    "level": "上上籤", "topic": "engineer", "pain": "週五上線", "style": "quote",
+    "eye": "「這週不上版，下週二再說。」",
+    "body": ["— 週四 16:30・PM", "他還補一句：「週末好好休息。」", "測試組有人當場傳了哭臉。"],
+    "tip": "宜：週五放心下班　忌：說「那我提早上線」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "engineer", "pain": "履歷黑洞", "style": "notice",
+    "eye": "【已讀通知】8 個月前投的履歷，剛被打開了",
+    "body": ["對方回信，第一句是「抱歉久等」。", "薪資範圍寫在第二行，比期望多 2 萬。"],
+    "tip": "宜：隔 10 分鐘再回　忌：秒回「好」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "engineer", "pain": "需求改口", "style": "dialogue",
+    "eye": "客戶：這次需求，維持原樣就好。",
+    "body": ["工程師：（立刻截圖）", "客戶：真的，我是說真的。", "（內心）他今天是不是被盜帳號了"],
+    "tip": "神明蓋章：今天的運氣，用完了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "engineer", "pain": "半夜待命", "style": "checklist",
+    "eye": "待命一整週，手機安靜得很可疑",
+    "body": ["告警 ☆☆☆☆☆（0 封）", "睡眠 ★★★★★（連睡 7 晚）", "半夜醒來檢查手機壞了沒 ★★★★☆", "待命津貼 ★★★★★（沒修半台，照領）"],
+    "tip": "別問為什麼，問了可能被收回。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "engineer", "pain": "舊碼考古", "style": "murmur",
+    "eye": "土地公託夢：那段不能刪的程式，有留說明",
+    "body": ["2019 年的註解，三行，連原因都寫了。", "最後一行是聯絡電話，打得通。"],
+    "tip": "祂說這種註解，一輩子只會遇到一次。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "engineer", "pain": "面試關卡多", "style": "yiji",
+    "eye": "一面結束，HR 說不用二三面了",
+    "body": ["當天下午 4:20，Offer 就寄到信箱。", "主管還問下週一能不能先到。"],
+    "tip": "宜：看完條款再簽　忌：當場尖叫",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "大吉", "topic": "engineer", "pain": "PR 塞車", "style": "quote",
+    "eye": "「看完了，每一行都看了。」",
+    "body": ["— 週三 10:12・組長", "那個 2,300 行的 PR，一次過。", "他看完還有力氣吃便當。"],
+    "tip": "新紀錄：零來回，零「請再修改」。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "engineer", "pain": "本機正常", "style": "quote",
+    "eye": "「欸，正式環境也過了。」",
+    "body": ["— 週二 14:03・測試組", "本機、測試、正式，三個結果一致。", "這個月第一次。"],
+    "tip": "宜：再跑一次確認　忌：寫「已修復」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "engineer", "pain": "AI 催交件", "style": "dialogue",
+    "eye": "老闆：測試抓兩週，工程師說了算。",
+    "body": ["組員：不是說 AI 五分鐘寫完？", "老闆：寫完是寫完，驗證要時間。", "（內心）有人跟他講過話了"],
+    "tip": "全組的人，同時轉頭看他。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "engineer", "pain": "現場救援", "style": "dialogue",
+    "eye": "班長：標籤機我們自己重開了。",
+    "body": ["資訊：（拿著工具箱愣住）", "班長：照你貼在機台上那張紙做的。", "（內心）原來有人看那張紙"],
+    "tip": "那張 A4，貼了 8 個月。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "engineer", "pain": "技術綁死", "style": "checklist",
+    "eye": "今日面試運：舊系統年資全被認",
+    "body": ["技能可帶走 ★★★★☆", "年資折抵 ★★★★★", "被問 AI ☆☆☆☆☆", "被問 SQL ★★★★★（對口了）"],
+    "tip": "面試官說：下週一能簽約嗎？",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "engineer", "pain": "履歷寫 AI", "style": "murmur",
+    "eye": "廟公看完這則職缺：寫 SQL，就只考 SQL",
+    "body": ["沒有偷加 AI，也沒有偷加簡報。", "薪資範圍 7 萬到 9 萬，也寫了。"],
+    "tip": "先截圖，明天它可能就加 AI 了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "engineer", "pain": "缺額縮水", "style": "yiji",
+    "eye": "求職網今天一口氣多了 340 筆後端缺",
+    "body": ["一半有寫薪資範圍。", "另一半，是真的有缺人。"],
+    "tip": "宜：多投幾家　忌：只投第一家",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "engineer", "pain": "進廠抉擇", "style": "yiji",
+    "eye": "廠方說：資訊室在辦公區，不用穿無塵衣",
+    "body": ["薪水還是那個高的數字。", "午餐有冷氣，也有座位。"],
+    "tip": "宜：問清楚班別　忌：先簽名",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "engineer", "pain": "面試關卡多", "style": "notice",
+    "eye": "【公告】面試流程已由 5 關縮短為 1 關",
+    "body": ["備註：另外 4 關，主管說看履歷就夠了。", "不用再交作業。"],
+    "tip": "作業題原本是：做一個待辦清單。",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "吉", "topic": "engineer", "pain": "週五上線", "style": "quote",
+    "eye": "「上線完成，監控全綠。」",
+    "body": ["— 週五 16:52・值班同事", "他說完，就把筆電闔上。", "沒人敢說恭喜，怕講了會出事。"],
+    "tip": "宜：悄悄收包包　忌：說「太順了吧」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "需求改口", "style": "quote",
+    "eye": "「這個需求，照昨天說的做。」",
+    "body": ["— 週二 11:20・業務", "昨天的紀錄翻出來對過了。", "一個字都沒改。"],
+    "tip": "今天，沒有人說「順便」。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "技術綁死", "style": "notice",
+    "eye": "【系統通知】舊系統的維護預算，延長 3 年",
+    "body": ["好消息：年資有地方放。", "壞消息：還是同一個地方。"],
+    "tip": "合約簽到 2029，名字也在上面。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "技能表暴增", "style": "notice",
+    "eye": "【提醒】面試考題範圍已公布，與職缺一致",
+    "body": ["寫後端，就考後端。", "小字：AI 那題只佔 10 分鐘。"],
+    "tip": "宜：照原本準備　忌：多背 3 個新框架",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "本機正常", "style": "dialogue",
+    "eye": "同事：本機能跑，正式也能跑欸。",
+    "body": ["（打開紀錄檔，看了 3 次）", "測試：真的欸。", "同事：那中午吃什麼？"],
+    "tip": "吃飯皇帝大，錯誤明天再說。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "現場救援", "style": "dialogue",
+    "eye": "產線來電：標籤機又不能印了！",
+    "body": ["資訊：先關機，等 10 秒再開。", "產線：好了欸！", "（內心）全公司最貴的重開機"],
+    "tip": "這招 10 年前就有效，今天也有效。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "履歷黑洞", "style": "checklist",
+    "eye": "今日投遞運：有人已讀了",
+    "body": ["投出 5 份 ★★★★☆", "已讀 ★★★☆☆", "有回信 ★☆☆☆☆", "有署名的回信 ★☆☆☆☆（1 封）"],
+    "tip": "宜：冷靜回信　忌：寫「期待與您共事」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "舊碼考古", "style": "murmur",
+    "eye": "神明路過舊資料夾，沒敢點開",
+    "body": ["裡面那段程式，沒人知道為什麼在。", "今天沒人動它，全員平安。"],
+    "tip": "宜：路過就好　忌：順手整理",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "缺額縮水", "style": "murmur",
+    "eye": "神明數了一遍職缺：今天沒有少",
+    "body": ["上週 41 筆，今天還是 41 筆。", "沒人消失，算好日子。"],
+    "tip": "明天會不會少，神明也不知道。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "PR 塞車", "style": "yiji",
+    "eye": "同事發 PR 前，先寫好了說明文字",
+    "body": ["連測試結果都貼好了。", "最後還附一句「請放心看」。"],
+    "tip": "宜：當面誇他　忌：說「下次也這樣」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "engineer", "pain": "AI 催交件", "style": "yiji",
+    "eye": "老闆今天沒問 AI 能不能再快一點",
+    "body": ["他問的是：測試做完了沒。", "回他下午 3 點，他點頭。"],
+    "tip": "宜：測試排進時程　忌：說「AI 全包」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "小吉", "topic": "engineer", "pain": "PR 塞車", "style": "quote",
+    "eye": "「整份只有一個意見：第 88 行多一個空格。」",
+    "body": ["— 週四 15:30・組長", "800 行的 PR，他只挑出這個。", "後面補一句：「不改也行。」"],
+    "tip": "你還是改了，測試重跑 20 分鐘。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "需求改口", "style": "quote",
+    "eye": "「週一不用做了，再說。」",
+    "body": ["— 週五 17:05・PM", "那個「再說」，通常就是永遠。", "決定先下班。"],
+    "tip": "週一他會說：我哪有說不用。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "PR 塞車", "style": "notice",
+    "eye": "【系統通知】待審 PR：0 個",
+    "body": ["連機器人提的也沒有。", "已重新整理 3 次。"],
+    "tip": "宜：趁現在寫自己的　忌：再按第 4 次",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "面試關卡多", "style": "notice",
+    "eye": "【系統通知】面試邀請註明：二面即最後一關",
+    "body": ["神明補充：他們用了「最後」兩個字。", "先相信 1 次。"],
+    "tip": "上一家也寫「最後一關」，後面還有 2 關。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "現場救援", "style": "dialogue",
+    "eye": "產線阿姨：資訊室的，吃飯沒？",
+    "body": ["資訊：（拎著工具箱，準備去修機器）", "阿姨：先吃，機器等你。", "（內心）今天最大的是她"],
+    "tip": "阿姨多給了 1 顆滷蛋。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "進廠抉擇", "style": "checklist",
+    "eye": "進廠參觀日：餐廳有滷肉飯",
+    "body": ["薪水 ★★★★☆", "無塵衣 ★★☆☆☆（有 M 尺寸）", "午餐 ★★★★★（滷肉飯 55 元）", "專車 ★★★☆☆（6:10 發車）"],
+    "tip": "宜：多吃一碗　忌：問更衣要多久",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "履歷寫 AI", "style": "checklist",
+    "eye": "今日職缺運：有一則不是 AI 的",
+    "body": ["寫 AI 的職缺 ★★★★★（63 筆）", "寫 SQL 的職缺 ★☆☆☆☆（1 筆）", "那 1 筆有薪資範圍 ★★★★☆", "今晚就寄 ★★★★★"],
+    "tip": "宜：標題改成 SQL　忌：硬加 AI",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "技術綁死", "style": "murmur",
+    "eye": "香爐旁壓著獵頭名片：徵 COBOL 人才",
+    "body": ["獵頭開價 9 萬，問你會不會 COBOL。", "你回：會。其實只會看。"],
+    "tip": "至少有人問，這年頭算有行情。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "履歷黑洞", "style": "murmur",
+    "eye": "籤筒搖出一封回信，3 週來第一封",
+    "body": ["是自動回覆：「已收到您的履歷」。", "你看了 2 次，還截圖傳給朋友。"],
+    "tip": "原來有人真的在收信。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "履歷寫 AI", "style": "yiji",
+    "eye": "今天看到的職缺，只要求會 SQL",
+    "body": ["沒有 AI，也沒有「抗壓性高」。", "薪水面議，但有寫範圍。"],
+    "tip": "宜：先存職缺　忌：問「還有嗎」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "engineer", "pain": "技能表暴增", "style": "yiji",
+    "eye": "面試官只問了 SQL，沒問 AI",
+    "body": ["背了 3 天的 AI 簡報，沒用到。", "最後他問：你平常幾點下班？"],
+    "tip": "宜：誠實回答　忌：硬把簡報念完",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "小凶", "topic": "engineer", "pain": "AI 催交件", "style": "quote",
+    "eye": "「AI 不是 5 分鐘就好了嗎？」",
+    "body": ["— 週一 9:30・老闆", "這個功能，你已經做到第 4 天。"],
+    "tip": "他的 5 分鐘，是你的第 4 天。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "需求改口", "style": "quote",
+    "eye": "「對了，簽核流程順便加一下。」",
+    "body": ["— 週三 16:40・業務", "昨天講的是「純查詢」。", "今天的順便，要 2 週。"],
+    "tip": "宜：把昨天的信貼回去　忌：說「大概可以」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "缺額縮水", "style": "quote",
+    "eye": "「這個職缺，我們暫時凍結了。」",
+    "body": ["— 週二 14:00・人資", "上週還說缺 3 個人。", "這週缺 0 個人，也缺預算。"],
+    "tip": "面試日期，月曆上還標著。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "週五上線", "style": "notice",
+    "eye": "【部署通知】週五 16:00 上線（已確認）",
+    "body": ["備註：確認的人是你主管。", "沒有人問過你。"],
+    "tip": "宜：週六先別訂位　忌：說「應該沒事」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "舊碼考古", "style": "notice",
+    "eye": "【系統通知】剛存檔的檔案，註解寫著「勿動」",
+    "body": ["作者 2017 年離職。", "已經存檔了。"],
+    "tip": "宜：還原到上一版　忌：存第 2 次",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "本機正常", "style": "dialogue",
+    "eye": "你：我這邊可以跑啊。",
+    "body": ["測試：正式環境一直報錯。", "你：我這邊真的可以。", "測試：那你來正式環境跑。"],
+    "tip": "說「這邊可以」的人，通常要去那邊。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "PR 塞車", "style": "dialogue",
+    "eye": "同事：這 5 個 PR 是 AI 寫的，麻煩看。",
+    "body": ["你：你看過了嗎？", "同事：沒有，所以才拜託你。", "（內心）我是這條流程的第一個人類"],
+    "tip": "AI 寫 5 個，人類審 5 個，薪水 1 份。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "技術綁死", "style": "checklist",
+    "eye": "今日學習運：學的都帶不走",
+    "body": ["公司內部框架 ★★★★★", "別家公司也在用 ☆☆☆☆☆", "可帶走的技能 ★☆☆☆☆", "文件完整度 ☆☆☆☆☆（全在腦中）"],
+    "tip": "履歷上寫不出這個框架的名字。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "履歷寫 AI", "style": "checklist",
+    "eye": "面試運：問的都不是你天天做的",
+    "body": ["SQL ★★★★★（天天寫）", "AI ★☆☆☆☆（只寫過提示詞）", "面試被問 AI ★★★★★", "面試被問 SQL ★☆☆☆☆"],
+    "tip": "宜：背幾個專有名詞　忌：說「我主要寫 SQL」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "半夜待命", "style": "murmur",
+    "eye": "凌晨 2:10，手機震一下就停，金身都醒了",
+    "body": ["祂陪你點開看了 3 次，是外送廣告。", "天亮前，兩個都沒再睡著。"],
+    "tip": "宜：關掉廣告通知　忌：關掉告警通知",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "engineer", "pain": "進廠抉擇", "style": "yiji",
+    "eye": "面試當天，先換無塵衣才能談薪水",
+    "body": ["口罩加面罩，HR 的話聽不清楚。", "你點頭 3 次，不知道答應了什麼。"],
+    "tip": "宜：點頭前先問一次　忌：說「都可以」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "凶", "topic": "engineer", "pain": "面試關卡多", "style": "quote",
+    "eye": "「我們還有第四關，跟老闆聊聊。」",
+    "body": ["— 週四 17:30・HR", "當初信上寫的是「一面即可」。", "已經請了 3 次半天假。"],
+    "tip": "上一關的主管，已經忘了你叫什麼。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "現場救援", "style": "quote",
+    "eye": "「標籤全是亂碼，出貨車在等！」",
+    "body": ["— 週三 15:45・產線班長", "貨車司機在門口抽第 2 根菸。", "你人在會議室，簡報剛翻到第 12 頁。"],
+    "tip": "簡報還剩 30 頁，司機剩半根菸。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "履歷黑洞", "style": "notice",
+    "eye": "【投遞紀錄】12 份履歷，狀態皆為「已讀」",
+    "body": ["已讀，不回，連罐頭信都沒有。", "有一家 3 秒就已讀，手機還沒放下。"],
+    "tip": "宜：改投第 13 家　忌：重新整理信箱",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "週五上線", "style": "notice",
+    "eye": "【告警】17:20 上線失敗，復原也失敗",
+    "body": ["神明補充：週五，資料庫停在一半。", "滷肉飯已經送到，沒人有空下樓。"],
+    "tip": "週末的第 1 天，已先被借走。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "技能表暴增", "style": "dialogue",
+    "eye": "面試官：這題請現場用 AI 做一個 App。",
+    "body": ["你：職缺寫的是後端。", "面試官：是。但請做一個 App。", "（內心）90 分鐘，我已經吵掉 2 分鐘"],
+    "tip": "宜：確認題目範圍　忌：說「我試試」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "缺額縮水", "style": "dialogue",
+    "eye": "主管：這季預算，不補人了。",
+    "body": ["你：那離職 2 個人的案子呢？", "主管：就拜託你囉。", "（內心）原來我的職稱是人力補充包"],
+    "tip": "「拜託」兩個字，月薪不變。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "半夜待命", "style": "checklist",
+    "eye": "待命第 4 晚：被叫醒 3 次",
+    "body": ["告警 ★★★★★（3 封）", "睡眠 ★☆☆☆☆（共 2 小時）", "咖啡 ★★★★★", "9:30 站會 ★★★★★（準時）"],
+    "tip": "站會輪到你，說的是「待命正常」。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "舊碼考古", "style": "murmur",
+    "eye": "神明看你刪了「勿動」那一行，倒抽一口氣",
+    "body": ["測試全綠。上線後 2 小時，報表全空。", "那行註解 2017 年就警告過了。"],
+    "tip": "宜：把那行還原　忌：說「先觀察」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "技術綁死", "style": "murmur",
+    "eye": "供桌上多了張公司公告：下個月換掉整套系統",
+    "body": ["新系統的語言，全組沒人寫過。", "你修了 6 年的那套，下週改叫「舊版」。"],
+    "tip": "神明說：恭喜，你成了舊版的唯一專家。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "本機正常", "style": "yiji",
+    "eye": "測試機、正式機都報錯，只有你的電腦正常",
+    "body": ["全組圍過來，問你當初怎麼裝的。", "你說：忘了，那是 2 年前的事。"],
+    "tip": "宜：先備份　忌：順手更新",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "engineer", "pain": "AI 催交件", "style": "yiji",
+    "eye": "週一早會，老闆秀出他用 AI 做的 Demo",
+    "body": ["10 分鐘做完，沒登入，沒資料庫。", "他問：下週可以上線嗎？"],
+    "tip": "宜：問資料從哪來　忌：說「那只是畫面」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "大凶", "topic": "engineer", "pain": "週五上線", "style": "quote",
+    "eye": "「今天上的版，客戶說登不進去。」",
+    "body": ["— 週五 18:03・業務", "同一天，資料庫在 18:05 滿了。"],
+    "tip": "週六的早午餐，改成線上會議。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "engineer", "pain": "需求改口", "style": "quote",
+    "eye": "「整個流程重做，下週三要看。」",
+    "body": ["— 週五 17:50・PM", "昨天他才說：「這版不會再改了。」", "分支名稱：final-v7-真的最後"],
+    "tip": "宜：週末先訂外送　忌：回「沒問題」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "engineer", "pain": "現場救援", "style": "notice",
+    "eye": "【工單】產線停機 40 分鐘，責任單位：資訊",
+    "body": ["原因：早上，延長線被踢掉。", "下午，另一條也被踢掉。", "兩次都是先打給資訊。"],
+    "tip": "白板上，責任欄寫了 2 次「資訊」。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "engineer", "pain": "半夜待命", "style": "dialogue",
+    "eye": "客戶：我們這邊早上 9 點，系統怎麼掛了？",
+    "body": ["你：現在台灣是凌晨 2 點。", "客戶：所以修好了嗎？", "（內心）時差條款，我有簽過嗎"],
+    "tip": "宜：先喝水　忌：說「我睡了」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "engineer", "pain": "舊碼考古", "style": "checklist",
+    "eye": "接手舊系統第 1 天，17:30 要出報表",
+    "body": ["文件 ☆☆☆☆☆（叫「新增資料夾」）", "測試 ☆☆☆☆☆", "上一任的電話 ★☆☆☆☆（停用）", "「勿動」註解 ★★★★★（共 41 條）"],
+    "tip": "產報表的程式在哪，沒人知道。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "engineer", "pain": "進廠抉擇", "style": "murmur",
+    "eye": "神明翻開班表：進廠第 1 天就排夜班",
+    "body": ["無塵衣只剩 XL，本人穿 M。", "袖子捲了 3 折，走路還是踩褲管。", "薪水倒是準時匯入。"],
+    "tip": "夜班津貼 2,000，洗無塵衣自費。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "engineer", "pain": "缺額縮水", "style": "yiji",
+    "eye": "早上說凍結缺額，下午說專案提前",
+    "body": ["離職的 2 人不補。", "專案從 12 月提前到下週。"],
+    "tip": "宜：記下實際工時　忌：說「再看看」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "engineer", "pain": "面試關卡多", "style": "yiji",
+    "eye": "走完 4 關面試，收到一封感謝函",
+    "body": ["「您非常優秀，但我們決定內部晉升。」", "寄信時間：週五 17:59。"],
+    "tip": "宜：把 4 關的題目留著　忌：回謝謝",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "下下籤", "topic": "engineer", "pain": "AI 催交件", "style": "quote",
+    "eye": "「我讓 AI 幫我上線了，你看看對不對。」",
+    "body": ["— 週日 23:40・老闆", "他直接放到正式環境了。", "客戶已經在用，還下了 3 張錯單。"],
+    "tip": "宜：先關掉網站　忌：說「AI 寫的」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "engineer", "pain": "舊碼考古", "style": "notice",
+    "eye": "【系統通知】test 機器已服務 9 年",
+    "body": ["神明補充：訂單、薪資、請假都在上面。", "沒有備份，因為它叫 test。"],
+    "tip": "宜：別碰它　忌：重開機",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "engineer", "pain": "本機正常", "style": "dialogue",
+    "eye": "主管：那客戶就用你的筆電吧。",
+    "body": ["你：它只在我的電腦上能跑。", "主管：所以客戶用你的電腦。", "你：（看了一眼電量，12%）"],
+    "tip": "充電器，放在上一個辦公室。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "engineer", "pain": "進廠抉擇", "style": "checklist",
+    "eye": "進廠第 1 天：先學會少喝水",
+    "body": ["更衣一次 ★★★★★（12 分鐘）", "去廁所 ★★★★★（來回 25 分鐘）", "喝水 ☆☆☆☆☆", "手機 ☆☆☆☆☆（鎖在置物櫃）"],
+    "tip": "宜：中午前少喝水　忌：想去廁所",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "engineer", "pain": "半夜待命", "style": "murmur",
+    "eye": "廟公陪你看凌晨 3 點的告警，嘆了口氣",
+    "body": ["原因：同事週五測試告警，忘了關。", "他現在在花蓮，手機關機。"],
+    "tip": "他的自動回覆：休假中，勿擾。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "engineer", "pain": "履歷黑洞", "style": "murmur",
+    "eye": "籤詩本人不忍心念：6 週來唯一的新信",
+    "body": ["寄件人：你自己。", "是上週測試信箱，寄給自己那封。"],
+    "tip": "神明說：至少這封，沒有已讀不回。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "engineer", "pain": "技能表暴增", "style": "yiji",
+    "eye": "職缺要求列了 17 項，薪水寫 3 萬 8",
+    "body": ["第 1 項是「後端工程師」。", "第 17 項是「會剪影片」。"],
+    "tip": "宜：先數有幾項　忌：準備第 17 項",
+    "season": null, "meme": null
+  }
+]

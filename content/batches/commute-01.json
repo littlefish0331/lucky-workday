@@ -1,0 +1,520 @@
+[
+  {
+    "level": "上上籤", "topic": "commute", "pain": "擠不上車", "style": "quote",
+    "eye": "「這節車廂是空的欸。」",
+    "body": ["— 週一 08:12・尖峰第 4 節車廂", "36 個座位，挑了半天才坐。"],
+    "tip": "坐定後，隔壁還問要不要換窗邊。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "commute", "pain": "轉乘套娃", "style": "notice",
+    "eye": "【APP 通知】轉乘 3 次，已改為直達",
+    "body": ["備註：下車就是公司電梯。", "按了 3 次「重新規劃」，還是直達。"],
+    "tip": "回程不保證，神明只管去程。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "commute", "pain": "雨天加時", "style": "dialogue",
+    "eye": "公車司機：下雨，我開進巷子接人。",
+    "body": ["（巷口，傘才撐到一半）", "司機：不急，撐好再上。", "（全車乘客一起點頭）"],
+    "tip": "明天他排休，神明查過了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "commute", "pain": "車資算進去", "style": "checklist",
+    "eye": "悠遊卡餘額，自己多了 500 元",
+    "body": ["餘額 ★★★★★（+500）", "閘門 ★★★★☆（全程綠燈）", "嗶聲 ★★★★★（特別清脆）", "原因 ☆☆☆☆☆（查不到）"],
+    "tip": "別打給客服，問了會被收回。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "commute", "pain": "列車延誤", "style": "murmur",
+    "eye": "籤詩本人愣住：這班車提早進站了。",
+    "body": ["「早 2 分鐘，門還開著等人。」", "廟公說他守了 30 年，沒見過。"],
+    "tip": "愣著幹嘛，門要關了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "commute", "pain": "近家或晚到", "style": "yiji",
+    "eye": "公司搬家，新辦公室在住家一樓",
+    "body": ["彈性上班改到 10:30。", "通勤時間：電梯 1 分 40 秒。"],
+    "tip": "宜：睡到 10:00　忌：被同事知道地址",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "大吉", "topic": "commute", "pain": "提早出門", "style": "quote",
+    "eye": "「這麼早？吃早餐了沒？」",
+    "body": ["— 週三 07:48・同搭電梯的老闆", "提早 40 分鐘到，剛好被看見。"],
+    "tip": "明天可以晚點，老闆只記得今天。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "commute", "pain": "轉乘套娃", "style": "quote",
+    "eye": "「欸，你上車的位置超準。」",
+    "body": ["— 週二 08:05・站旁邊的陌生人", "車門正對轉乘樓梯，省 3 分鐘。"],
+    "tip": "這扇門，從今天起歸你站。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "commute", "pain": "月票省錢", "style": "notice",
+    "eye": "【系統通知】本月月票回饋 387 元已入帳",
+    "body": ["小字：月底前用掉，下月歸零。", "什麼都沒做，它自己給的。"],
+    "tip": "宜：拿去買早餐　忌：存到過期",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "commute", "pain": "車資算進去", "style": "notice",
+    "eye": "【薪資單】交通津貼每月 2,400 元",
+    "body": ["神明補充：車資付 1,600，剩 800。", "合約翻了 3 遍，沒有「但是」。"],
+    "tip": "面試時講的，居然是真的。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "commute", "pain": "開車或轉車", "style": "dialogue",
+    "eye": "導航：預計 22 分鐘，全程順暢。",
+    "body": ["（先檢查手機是不是壞了）", "導航：沒壞，今天真的順。", "（14 個紅綠燈，14 個都綠）"],
+    "tip": "開到一半，導航說又快了 1 分鐘。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "commute", "pain": "搬家算時間", "style": "checklist",
+    "eye": "新家到公司，從 55 分鐘縮成 20 分鐘",
+    "body": ["通勤 ★★★★★（少 35 分鐘）", "早餐 ★★★★☆（終於坐著吃）", "新房東 ★★☆☆☆（半夜傳長輩圖）", "舊房東 ★☆☆☆☆（押金下週再說）"],
+    "tip": "鬧鐘忘了改，第一天就早醒 35 分鐘。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "commute", "pain": "近家或晚到", "style": "murmur",
+    "eye": "籤筒晃了 3 下：主管批了 10:00 上班。",
+    "body": ["廟公湊過來看，說這支很少抽到。", "「明天可以睡到 9:15。」"],
+    "tip": "但彈性只到月底，神明有講。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "commute", "pain": "早餐繞路", "style": "murmur",
+    "eye": "廟公端著蛋餅回來：早餐店今天沒人排隊。",
+    "body": ["「1 分鐘就出了，豆漿免等。」", "他吃到一半，才想到那份是你的。"],
+    "tip": "宜：豆漿加冰　忌：跟廟公搶蛋餅",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "commute", "pain": "接駁再轉車", "style": "yiji",
+    "eye": "接駁車停在出口，司機還在招手",
+    "body": ["下車 2 步，上車，整段 40 秒。", "手機地圖還在說：步行 12 分鐘。"],
+    "tip": "宜：記住這班車　忌：問司機明天還在不在",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "吉", "topic": "commute", "pain": "車門擋路", "style": "quote",
+    "eye": "「借過，我要下車。」",
+    "body": ["— 週四 08:31・站在門邊的大姐", "全車往兩邊靠，中間空出一條路。"],
+    "tip": "今天這批人潮，聽得懂人話。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "捷運臨停", "style": "quote",
+    "eye": "「前方號誌已排除，即將開車。」",
+    "body": ["— 週二 08:19・廣播，只停了 40 秒", "備案路線都查好了，用不到。"],
+    "tip": "手機裡 3 個分頁，可以關了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "雨天加時", "style": "dialogue",
+    "eye": "同事：我多帶了一把傘。",
+    "body": ["（公司門口，褲管濕到膝蓋）", "同事：拿去，鞋子我沒辦法。", "（傘柄上寫著另一個人的名字）"],
+    "tip": "宜：還傘時附早餐　忌：借了不還",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "提早出門", "style": "dialogue",
+    "eye": "同事：欸，今天這麼早？",
+    "body": ["「怕塞車。」", "同事：今天根本沒塞。", "（多出來的 28 分鐘，發呆用）"],
+    "tip": "印表機還沒開機，今天贏了它。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "每天兩小時", "style": "checklist",
+    "eye": "平常 2 小時的通勤，今天 1 小時 40 分",
+    "body": ["準點 ★★★★☆", "座位 ★★★☆☆（坐了 6 站）", "轉乘 ★★★★☆（0 秒等候）", "精神 ★★☆☆☆（還是想睡）"],
+    "tip": "少了 20 分鐘，全拿去睡了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "開車或轉車", "style": "checklist",
+    "eye": "公司對面的停車格，剛好剩 1 個",
+    "body": ["車位 ★★★★★（不用繞第 2 圈）", "紅燈 ★★★☆☆（6 個等 3 個）", "電台 ★★★★☆（剛好播愛聽的）", "停車費 ★☆☆☆☆（還是要錢）"],
+    "tip": "下班記得：車在 B2，不是 B1。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "擠不上車", "style": "murmur",
+    "eye": "香爐聞了聞：這節車廂，沒有味道。",
+    "body": ["「沒有韭菜盒，也沒人噴香水。」", "香爐補一句：旁邊有空位。"],
+    "tip": "先坐，下一站有人帶韭菜盒上車。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "月票省錢", "style": "murmur",
+    "eye": "神明按著計算機：這個月月票回本了。",
+    "body": ["「搭了 38 次，剛好打平。」", "「再搭 1 次，就是賺的。」"],
+    "tip": "週末不用為了賺 1 趟去搭車。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "早餐繞路", "style": "yiji",
+    "eye": "多繞 150 公尺，買到最後一份蛋餅",
+    "body": ["打卡前 6 分鐘，一手蛋餅一手傘。", "豆漿來不及，算了。"],
+    "tip": "宜：繞路前先看隊伍　忌：再加點豆漿",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "轉乘套娃", "style": "yiji",
+    "eye": "轉乘走 2 分鐘，下一班 3 分鐘後到",
+    "body": ["8:58 刷進公司，沒人發現。", "手扶梯左邊，今天沒人擋路。"],
+    "tip": "宜：腳步放快　忌：停在手扶梯左側",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "commute", "pain": "列車延誤", "style": "notice",
+    "eye": "【車站廣播】本班列車誤點 3 分鐘，造成不便",
+    "body": ["本來要用跑的轉乘，今天用走的。", "接駁車也剛好晚走，沒有不便。"],
+    "tip": "遲到證明這次用不到，先收好。",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "小吉", "topic": "commute", "pain": "雨天加時", "style": "quote",
+    "eye": "「雨到公司門口才開始下。」",
+    "body": ["— 週五 08:52・屋簷下的人", "傘一路收在包包裡，沒拿出來。"],
+    "tip": "同事問怎麼這麼乾，說是運氣。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "擠不上車", "style": "quote",
+    "eye": "「這站我下，你坐。」",
+    "body": ["— 週三 08:40・隔壁的陌生人", "座位還是熱的，可以接受。"],
+    "tip": "坐 3 站，賺 3 站。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "車資算進去", "style": "notice",
+    "eye": "【帳單】本月轉乘優惠 12 元已折抵",
+    "body": ["沒人申請，系統自己折的。", "12 元，差 3 元買顆茶葉蛋。"],
+    "tip": "宜：看一下明細　忌：以為每月都有",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "接駁再轉車", "style": "notice",
+    "eye": "【到站資訊】顯示 3 分鐘，實際也 3 分鐘",
+    "body": ["神明補充：這種事一個月 2 次。", "今天用掉 1 次。"],
+    "tip": "App 今天沒騙人，先不罵它。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "車門擋路", "style": "dialogue",
+    "eye": "門口大哥：我貼緊一點，你先。",
+    "body": ["（背包轉到胸前）", "大哥：不急，我也要上班。", "（擠出去了，鞋子沒被踩）"],
+    "tip": "大哥的背包拉鍊沒拉，要不要說？",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "早餐繞路", "style": "dialogue",
+    "eye": "早餐店阿姨：蛋餅今天多煎一下。",
+    "body": ["「我沒說要酥一點。」", "阿姨：上次你看了 2 次。", "（我以為我沒表情）"],
+    "tip": "宜：下次也點蛋餅　忌：換店",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "提早出門", "style": "checklist",
+    "eye": "早出門 15 分鐘，今天只賺到一杯熱咖啡",
+    "body": ["咖啡 ★★★★☆（還燙）", "廁所 ★★★★★（沒人排）", "座位 ★★☆☆☆（站著，靠柱子）", "會議 ★☆☆☆☆（9:00 還是有）"],
+    "tip": "咖啡太燙，喝完剛好 8:59。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "捷運臨停", "style": "murmur",
+    "eye": "金身低聲說：廣播說稍候，這次真的稍候。",
+    "body": ["30 秒，剛好把主管那則回完。", "祂說：別高興，今天才剛開始。"],
+    "tip": "車門一關，主管又傳來一則。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "每天兩小時", "style": "murmur",
+    "eye": "土地公算了一下：今天通勤少 6 分鐘。",
+    "body": ["「夠吃半根香蕉。」", "祂不太懂上班族。"],
+    "tip": "一天兩小時，平均還是兩小時。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "開車或轉車", "style": "yiji",
+    "eye": "公司旁機車格，剛好有人要走",
+    "body": ["等了 40 秒，後面那台也想進來。", "這次是我比較快。"],
+    "tip": "宜：一把停好　忌：回頭看按喇叭的",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "commute", "pain": "擠不上車", "style": "yiji",
+    "eye": "月台同一格，站了 2 年的陌生人點頭了",
+    "body": ["我回禮，他轉頭看手機。", "明天他大概會假裝不認識。"],
+    "tip": "宜：維持點頭之交　忌：開口搭話",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "小凶", "topic": "commute", "pain": "捷運臨停", "style": "quote",
+    "eye": "「各位乘客，請稍候。」",
+    "body": ["— 週一 08:23・廣播，第 3 次", "「稍候」的單位，今天是 7 分鐘。"],
+    "tip": "宜：耳機音量開大　忌：看手錶",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "雨天加時", "style": "quote",
+    "eye": "「沒事，只是傘水滴到而已。」",
+    "body": ["— 週二 08:11・前面那把傘的主人", "水順著傘尖，流進左邊袖子。"],
+    "tip": "整天，只有左半邊是濕的。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "車資算進去", "style": "notice",
+    "eye": "【悠遊卡】餘額不足，閘門嗶了 3 聲",
+    "body": ["後面排了 14 個人，沒人出聲。", "閘門又嗶了一聲，第 4 次。"],
+    "tip": "加值機在 B1，人在 B2。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "接駁再轉車", "style": "notice",
+    "eye": "【系統通知】手機剩 3%，無法顯示到站時間",
+    "body": ["接駁車到底在哪，沒人知道。", "站牌下，賭 15 分鐘。"],
+    "tip": "宜：問旁邊的阿伯　忌：滑社群",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "提早出門", "style": "dialogue",
+    "eye": "保全：8:10 才開門，先坐一下。",
+    "body": ["（現在 7:35）", "保全：隔壁便利商店有位子。", "（35 分鐘，自己提早起床的）"],
+    "tip": "保全已經認得這張臉了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "早餐繞路", "style": "dialogue",
+    "eye": "店員：蛋餅賣完了，只剩三明治。",
+    "body": ["（手錶 8:41）", "店員：要等 5 分鐘喔。", "（等，不等，等）"],
+    "tip": "宜：改吃口袋裡的餅乾　忌：看第 2 次手錶",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "每天兩小時", "style": "checklist",
+    "eye": "抓著吊環站著睡，睡到第 6 站",
+    "body": ["睡眠 ★★★☆☆（站著補 15 分鐘）", "吊環 ★★★★☆（全程沒放）", "口水 ★★☆☆☆（沒人看到）", "下車 ★★★☆☆（醒在最後一秒）"],
+    "tip": "還剩 9 站，可以再睡一輪。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "搬家算時間", "style": "checklist",
+    "eye": "看了一間近 2 站的房，月租貴 4,000",
+    "body": ["房租 ★☆☆☆☆（貴 4,000）", "通勤 ★★★★☆（近 2 站）", "睡眠 ★★★☆☆（多 25 分鐘）", "房仲 ★★★★★（笑得很開心）"],
+    "tip": "多睡 1 分鐘，要付 7 元。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "列車延誤", "style": "murmur",
+    "eye": "供桌上的時刻表，被多插了三炷香",
+    "body": ["表訂 8:07，現在 8:19。", "廟公說：時刻表是拿來許願的。"],
+    "tip": "月台上，只有你一直看時間。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "擠不上車", "style": "yiji",
+    "eye": "擠上第 3 班，旁邊外放短影音",
+    "body": ["同一首洗腦歌，聽了 9 站。", "副歌，現在會唱了。"],
+    "tip": "宜：開降噪　忌：耳機忘在家",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "commute", "pain": "車門擋路", "style": "yiji",
+    "eye": "車廂中段，有位背大背包的朋友",
+    "body": ["他轉身，背包掃過臉一次。", "他再轉身，兩次。"],
+    "tip": "宜：往前站一步　忌：靠近大背包",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "凶", "topic": "commute", "pain": "車門擋路", "style": "quote",
+    "eye": "「借過，借過，我要下車！」",
+    "body": ["— 週四 08:44・喊到第 3 次", "車門在面前關起來，下一站才開。"],
+    "tip": "走回頭要 12 分鐘，還下雨。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "轉乘套娃", "style": "quote",
+    "eye": "「電扶梯維修中，請走樓梯。」",
+    "body": ["— 週二 08:02・站務公告，共 87 階", "手上有一杯豆漿，一把滴水的傘。"],
+    "tip": "豆漿到第 52 階，剩一半。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "開車或轉車", "style": "quote",
+    "eye": "「抱歉，停車場滿了。」",
+    "body": ["— 週五 08:47・管理員，第 4 次", "繞了 4 圈，最後停在 600 公尺外。"],
+    "tip": "走到公司，剛好第一場會開始。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "列車延誤", "style": "notice",
+    "eye": "【APP 通知】列車預計誤點 40 分鐘",
+    "body": ["備註：8:30 簡報，投影機你開。", "「車子有延誤。」主管聽過 6 次。"],
+    "tip": "宜：拿遲到證明　忌：只靠嘴巴講",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "月票省錢", "style": "notice",
+    "eye": "【提醒】月票已於昨日 23:59 到期",
+    "body": ["續購櫃檯 9:00 才開。", "下面還有一行：今天照單程票價。"],
+    "tip": "宜：下班前就去續　忌：以為還有 1 天",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "近家或晚到", "style": "dialogue",
+    "eye": "主管：彈性上班，下週起取消。",
+    "body": ["（搬家就是為了 10:00 到）", "主管：9:00，沒有例外。", "（開始算每天要早起幾分鐘）"],
+    "tip": "租約還有 11 個月。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "每天兩小時", "style": "checklist",
+    "eye": "18:00 準時下班，20:10 才踏進家門",
+    "body": ["晚餐 ★☆☆☆☆（21:00 的泡麵）", "洗澡 ★★★☆☆（10 分鐘）", "追劇 ☆☆☆☆☆（看到睡著）", "人生 ★☆☆☆☆（明天再說）"],
+    "tip": "明天 7:20 要出門，很快。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "搬家算時間", "style": "murmur",
+    "eye": "土地公看著新租約，沉默很久。",
+    "body": ["「近了 2 站，貴了 5,000。」", "祂指著月台：8:10 連過 3 班都擠不上。"],
+    "tip": "簽約前，先站一次 8:10 的月台。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "雨天加時", "style": "murmur",
+    "eye": "廟公低頭看你的鞋：兩隻都進水了。",
+    "body": ["「8:20 進水，下班是 18:00。」", "這雙襪子，要陪你快 10 個小時。"],
+    "tip": "辦公室冷氣 24 度，沒人借你拖鞋。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "擠不上車", "style": "yiji",
+    "eye": "連續 3 班都滿，第 4 班才擠進去",
+    "body": ["黃線前站了 17 分鐘。", "8:30 的會，現在 8:31。"],
+    "tip": "宜：改站第 2 個車門　忌：數班次",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "commute", "pain": "捷運臨停", "style": "yiji",
+    "eye": "捷運卡在隧道，廣播說稍候",
+    "body": ["第 1 個 10 分鐘，還有耐心。", "第 2 個 10 分鐘，研究隔壁在看什麼。"],
+    "tip": "宜：先傳訊息給主管　忌：偷看隔壁螢幕",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "大凶", "topic": "commute", "pain": "捷運臨停", "style": "quote",
+    "eye": "「捷運暫停服務，請改搭公車。」",
+    "body": ["— 週一 08:15・站務員，已講 40 遍", "公車站排到轉角，第 1 班客滿不停。"],
+    "tip": "宜：直接回家　忌：試第 3 個方案",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "commute", "pain": "接駁再轉車", "style": "quote",
+    "eye": "「這班只到前一站，後面自己走。」",
+    "body": ["— 週三 08:20・接駁車司機", "1.8 公里，下雨，會議 8:50。"],
+    "tip": "傘忘在接駁車上了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "commute", "pain": "早餐繞路", "style": "notice",
+    "eye": "【公告】早餐店今日公休",
+    "body": ["對面那家排了 22 個人。", "手錶 8:44，打卡 8:50。"],
+    "tip": "今天的早餐，是空氣。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "commute", "pain": "車資算進去", "style": "dialogue",
+    "eye": "HR：加薪 3,000，交通津貼取消。",
+    "body": ["（每月車資 2,600）", "HR：淨加薪 400，很不錯吧。", "（謝謝，我去買早餐）"],
+    "tip": "400 元，8 份蛋餅，不含豆漿。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "commute", "pain": "搬家算時間", "style": "dialogue",
+    "eye": "房仲：走到捷運，只要 3 分鐘。",
+    "body": ["（現在第 14 分鐘，上坡，下雨）", "房仲：我是用跑的。", "（合約上寫的是步行）"],
+    "tip": "三年租約，今天是第 1 天。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "commute", "pain": "提早出門", "style": "checklist",
+    "eye": "比平常早 40 分鐘出門，9:07 才打到卡",
+    "body": ["雨 ★★★★★（整路）", "公車 ★☆☆☆☆（過站不停）", "轉乘 ★☆☆☆☆（錯過 1 班）", "打卡 ☆☆☆☆☆（9:07）"],
+    "tip": "打卡機只記得 9:07，不記得 7:50。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "commute", "pain": "開車或轉車", "style": "murmur",
+    "eye": "神明低頭：今天選了開車啊。",
+    "body": ["「路上塞 1 小時 20 分，停車場又滿。」", "祂說，搭捷運的人已經在吃早餐。"],
+    "tip": "宜：下次抽籤再決定　忌：說自己有算過",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "commute", "pain": "轉乘套娃", "style": "yiji",
+    "eye": "轉乘第 3 次，月台說：改到對面",
+    "body": ["對面要上 2 層樓，再下 2 層樓。", "手裡抱著早餐，繞了 1 圈。"],
+    "tip": "宜：早餐先吃完　忌：相信地上的箭頭",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "下下籤", "topic": "commute", "pain": "車門擋路", "style": "quote",
+    "eye": "「借過！我要在第 9 站下車！」",
+    "body": ["— 週三 08:40・喊了 5 次的人", "最後在終點站下車，這條線 23 站。"],
+    "tip": "請假理由：被人潮帶走了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "commute", "pain": "接駁再轉車", "style": "notice",
+    "eye": "【系統通知】此接駁車終點為車廠",
+    "body": ["司機沒發現後座有人，熄火下車。", "院子裡有 40 台公車，沒有一台會動。"],
+    "tip": "宜：先拍照　忌：說自己沒睡著",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "commute", "pain": "列車延誤", "style": "dialogue",
+    "eye": "站務員：您等的那班，是昨天的。",
+    "body": ["（看板寫「2 分鐘後進站」）", "站務員：那個看板，昨天就卡住了。", "（已經站了 40 分鐘）"],
+    "tip": "宜：拍下看板　忌：跟看板講道理",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "commute", "pain": "每天兩小時", "style": "checklist",
+    "eye": "睡覺的時間，比搭車還短",
+    "body": ["通勤 ★★★★★（來回 4 小時）", "睡眠 ★☆☆☆☆（3 小時 40 分）", "晚餐 ☆☆☆☆☆（捷運上吃 2 顆糖）", "到家 ☆☆☆☆☆（23:50）"],
+    "tip": "恭喜，這是本月第 3 次破紀錄。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "commute", "pain": "搬家算時間", "style": "murmur",
+    "eye": "神明：公司剛宣布，搬到你舊家隔壁。",
+    "body": ["「你上週五，才簽下 3 年租約。」", "祂把那一頁蓋起來，不忍心看。"],
+    "tip": "宜：留著舊房東電話　忌：算違約金",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "commute", "pain": "近家或晚到", "style": "yiji",
+    "eye": "住最近的人，被發了公司大門鑰匙",
+    "body": ["每天 7:20 開門，冷氣也是我開。", "9:00 同事陸續到，說辛苦了。"],
+    "tip": "宜：說自己住很遠　忌：被看見走路上班",
+    "season": null, "meme": null
+  }
+]

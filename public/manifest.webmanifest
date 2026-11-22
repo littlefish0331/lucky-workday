@@ -1,0 +1,15 @@
+{
+  "name": "準時下班宮",
+  "short_name": "準時下班宮",
+  "description": "報上名來，神明替你看看今天能不能準時下班",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1b1410",
+  "theme_color": "#c0392b",
+  "lang": "zh-Hant",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

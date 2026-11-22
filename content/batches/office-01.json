@@ -1,0 +1,527 @@
+[
+  {
+    "level": "上上籤", "topic": "office", "pain": "準點下班", "style": "quote",
+    "eye": "「走啦走啦，這份我明天自己看。」",
+    "body": ["— 週五 17:31・主管", "說完他已經在電梯口，還幫我按了。"],
+    "tip": "宜：趕快走　忌：回頭確認他是不是本人",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "office", "pain": "請假被盤問", "style": "notice",
+    "eye": "【簽核】請假單已核准，事由欄免填。",
+    "body": ["小字：申請 5 天。主管批註：", "「再多請兩天，不用交接。」"],
+    "tip": "先截圖，他 3 分鐘後可能反悔。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "office", "pain": "缺人不補", "style": "dialogue",
+    "eye": "人資：缺額一次補三個，下週一到。",
+    "body": ["我：（把信看了 3 遍）", "人資：三個都面試完了。", "（內心）這封是不是寄錯人了"],
+    "tip": "先別告訴別部門，會被搶走。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "office", "pain": "主管看天氣", "style": "checklist",
+    "eye": "今日主管氣象：晴，體感 26 度",
+    "body": ["提案被採用 ★★★★★", "被叫進辦公室 ☆☆☆☆☆", "被請喝手搖 ★★★★☆", "搞懂原因 ☆☆☆☆☆（沒人敢問）"],
+    "tip": "他明天可能就變回來了，今天快提案。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "office", "pain": "開會又開會", "style": "murmur",
+    "eye": "週三整天沒會，土地公打給 IT 問是不是壞了。",
+    "body": ["IT：沒壞，真的沒有會。", "IT：要不要順便把週四也清掉？"],
+    "tip": "宜：假裝很忙　忌：主動問有沒有會",
+    "season": null, "meme": null
+  },
+  {
+    "level": "上上籤", "topic": "office", "pain": "下班訊息", "style": "yiji",
+    "eye": "週日 21:00，主管傳來：「早點睡。」",
+    "body": ["後面沒有附件，也沒有「順便」。", "我把手機翻過來，確認是同一支。"],
+    "tip": "宜：回個貼圖　忌：回「收到，我整理一下」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "大吉", "topic": "office", "pain": "甩鍋留痕", "style": "quote",
+    "eye": "「這案子是我當時批的，責任我扛。」",
+    "body": ["— 週三 16:20・直屬主管", "我存的那 14 封信，今天失業了。"],
+    "tip": "信還是留著，下一任主管不一定這樣。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "office", "pain": "主管要通靈", "style": "quote",
+    "eye": "「就是這份，照 v3 改，其他不動。」",
+    "body": ["— 週一 09:12・主管，附上標紅截圖", "連標點符號要改哪裡都圈好了。"],
+    "tip": "宜：截圖存證　忌：問他是不是被附身",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "office", "pain": "代理人失蹤", "style": "notice",
+    "eye": "【公告】列印密碼已貼在印表機上",
+    "body": ["旁邊還貼了「卡紙怎麼辦」，", "用紅筆圈了第 3 個蓋子。"],
+    "tip": "寫這張的人，下週要請長假。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "office", "pain": "午餐搭子", "style": "dialogue",
+    "eye": "同事：吃飯就好，公司的事不聊。",
+    "body": ["我：真的？", "同事：真的。我連主管名字都忘了。", "我：（加點了一碗貢丸湯）"],
+    "tip": "這種搭子，別告訴第三個人。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "office", "pain": "新人沒手冊", "style": "dialogue",
+    "eye": "前輩：手冊我昨晚整理好了，38 頁。",
+    "body": ["我：（翻開）有目錄欸", "前輩：後面還有一章叫「地雷」", "我：我想帶回家供起來"],
+    "tip": "手冊請放雲端，不要放前輩抽屜。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "office", "pain": "準點下班", "style": "checklist",
+    "eye": "主管 17:55 先走，沒交代任何事。",
+    "body": ["被轉頭看 ☆☆☆☆☆", "電梯不用等 ★★★★★", "趕上 18:07 那班 ★★★★☆", "晚餐有力氣煮 ★☆☆☆☆（泡麵）"],
+    "tip": "別跟他搭同一班電梯，他會想起有事。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "office", "pain": "茶水間情報", "style": "murmur",
+    "eye": "廟公在茶水間站了 10 分鐘，沒聽到半個八卦。",
+    "body": ["咖啡豆補滿了，也沒人問誰喝的。", "他打算明天再來一趟。"],
+    "tip": "宜：多倒一杯　忌：說「好安靜喔」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "office", "pain": "救火成常態", "style": "murmur",
+    "eye": "香爐一個上午沒冒煙，廟公拿起來搖了搖。",
+    "body": ["上午 4 小時，沒有一個「急」字。", "沒壞。他放回去，還是有點不安。"],
+    "tip": "宜：把原本那份做完　忌：說「今天好閒」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大吉", "topic": "office", "pain": "被主管追蹤", "style": "yiji",
+    "eye": "主管追蹤了私帳，近 30 則全是美食。",
+    "body": ["他按了其中一則的讚，", "還留言：「這家在哪？」"],
+    "tip": "宜：回地址　忌：回「謝謝主管關心」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "吉", "topic": "office", "pain": "下班訊息", "style": "quote",
+    "eye": "「這個週一再看就好，週末別回。」",
+    "body": ["— 週五 18:20・主管", "他又補一句「真的啦」。我先不信。"],
+    "tip": "手機先放客廳，週一再說。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "開會又開會", "style": "quote",
+    "eye": "「這件事 email 講就好，不用開會。」",
+    "body": ["— 週二 10:00・主持人", "他用 3 分鐘開完了「不開會」的會。"],
+    "tip": "省下的 57 分鐘，會被下一場會吃掉。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "請假被盤問", "style": "notice",
+    "eye": "【請假單】半天假已核准，事由：個人事務",
+    "body": ["神明補充：主管只回了一個「好」。", "祂特地多看了兩眼，確認不是陷阱。"],
+    "tip": "宜：馬上改行事曆　忌：多解釋",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "安逸焦慮", "style": "notice",
+    "eye": "【工時週報】本週 40.0 小時，無異常。",
+    "body": ["備註：連續準時下班第 3 週。", "系統偵測到您開始心慌，已忽略。"],
+    "tip": "宜：把空檔拿來睡　忌：自己找事做",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "缺人不補", "style": "dialogue",
+    "eye": "主管：補人的單子，今天簽出去了。",
+    "body": ["我：簽到哪一關了？", "主管：最後一關。", "（內心）人沒到之前，不准開心"],
+    "tip": "新人報到前，這兩人份還是我的。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "主管看天氣", "style": "dialogue",
+    "eye": "同事：主管今天心情不錯，哼歌欸。",
+    "body": ["我：哼什麼歌？", "同事：不知道，但有旋律。", "我：（把要簽的單子全抱出來）"],
+    "tip": "趁他哼到第二段，趕快遞。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "午餐搭子", "style": "checklist",
+    "eye": "今日午餐運：有人約，不用選邊",
+    "body": ["有人約 ★★★★☆", "不談主管 ★★★☆☆", "點到想吃的 ★★★★☆", "結帳找零 ★☆☆☆☆（誰都沒有 5 塊）"],
+    "tip": "手機翻面放，吃完再回訊息。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "新人沒手冊", "style": "murmur",
+    "eye": "籤筒裡夾著新人的 SOP，日期是 2016 年。",
+    "body": ["廟公翻了一遍，8 成還能用，", "剩 2 成是已經不存在的部門。"],
+    "tip": "先照做，出事就說是手冊寫的。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "甩鍋留痕", "style": "murmur",
+    "eye": "供桌上多了一份會議紀錄，負責人欄寫著主管。",
+    "body": ["神明湊近看了 3 遍，", "確認字不是後來改的。"],
+    "tip": "存兩份，列印一份放抽屜。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "準點下班", "style": "yiji",
+    "eye": "18:00 整，我收電腦，沒人轉頭。",
+    "body": ["隔壁小林小聲說：「我也走。」", "整排椅子，陸續往後推。"],
+    "tip": "宜：走快一點　忌：回頭說「那我先走囉」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "吉", "topic": "office", "pain": "茶水間情報", "style": "yiji",
+    "eye": "問了一句「咖啡還有嗎」，得到「有」。",
+    "body": ["就一個字，沒有後續。", "我端著杯子走回座位，沒人跟過來。"],
+    "tip": "宜：只問咖啡　忌：問「大家覺得呢」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "小吉", "topic": "office", "pain": "茶水間情報", "style": "quote",
+    "eye": "「欸，咖啡我剛煮的，還燙。」",
+    "body": ["— 週四 15:10・隔壁部門姐姐", "她倒完就走，沒有順便問任何事。"],
+    "tip": "杯子洗乾淨，不要留下線索。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "代理人失蹤", "style": "quote",
+    "eye": "「印表機卡紙喔？我會弄。」",
+    "body": ["— 週二 11:40・實習生", "全辦公室第 2 個會的人，誕生了。"],
+    "tip": "別再教他第二件事，會被叫去弄。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "開會又開會", "style": "notice",
+    "eye": "【會議通知】明天 14:00 的會，已取消",
+    "body": ["下面還有一行：取消原因「無」。", "沒人敢問是不是要改開更大的。"],
+    "tip": "這 1 小時，趁還沒被補上快用掉。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "午餐搭子", "style": "dialogue",
+    "eye": "同事：吃什麼都好，除了便當。",
+    "body": ["我：我也是。", "（兩人同時看向新開的拉麵店）", "同事：走，12:05 前到。"],
+    "tip": "宜：趁人潮前到　忌：先在群組問「大家吃什麼」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "主管要通靈", "style": "dialogue",
+    "eye": "主管：上次那個，照舊就好。",
+    "body": ["我：（腦中閃過 3 個版本）", "我：好，那就照舊。", "（內心）擲筊成功"],
+    "tip": "賭對這次，下次他會更省話。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "安逸焦慮", "style": "checklist",
+    "eye": "18:40 到家，開始擔心公司是不是倒了。",
+    "body": ["洗衣服 ★★★★☆", "看影集 ★★★☆☆", "覺得漏了什麼 ★★★★★", "公司倒了 ☆☆☆☆☆（官網還在）"],
+    "tip": "擔心可以，但別傳訊息問同事。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "救火成常態", "style": "checklist",
+    "eye": "今日運勢：只冒了一小撮煙",
+    "body": ["客戶來電 ★★★☆☆", "報表出錯 ★★☆☆☆", "找得到原因 ★★★★☆", "午餐吃得到 ★★★★★（熱的）"],
+    "tip": "原本那份工作，明天再說。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "被主管追蹤", "style": "murmur",
+    "eye": "金身偷看主管追蹤名單，4 個帳號 3 家火鍋店。",
+    "body": ["第 4 個是他自己的小帳，", "粉絲 2 人，其中 1 個是他媽。"],
+    "tip": "今天可以發限動，但先檢查背景。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "下班訊息", "style": "murmur",
+    "eye": "供桌上供著手機，今晚只亮了 1 次。",
+    "body": ["是外送 App 傳的：「您的餐點到了」。", "神明點頭：這則可以回。"],
+    "tip": "先拿外送，群組晚點再開。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "請假被盤問", "style": "yiji",
+    "eye": "請半天去銀行，主管只問「幾點回來」。",
+    "body": ["沒追問辦什麼，也沒要看存摺。", "銀行 15:30 就關了，他大概也知道。"],
+    "tip": "宜：在 15:20 前進銀行　忌：領號碼牌後回信",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小吉", "topic": "office", "pain": "新人沒手冊", "style": "yiji",
+    "eye": "新人第 3 週，聽到前輩說「我也不知道」。",
+    "body": ["前輩當場開了新文件，", "檔名：照以前做.docx"],
+    "tip": "宜：第一個寫進去　忌：寫太多變成負責人",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "小凶", "topic": "office", "pain": "主管要通靈", "style": "quote",
+    "eye": "「這個我上週有講過吧？」",
+    "body": ["— 週三 14:05・主管", "沒講過。我翻了 3 次群組紀錄。"],
+    "tip": "先說「對，我再確認一下」。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "準點下班", "style": "quote",
+    "eye": "「還沒走吧？剛好有個小東西。」",
+    "body": ["— 週三 17:59・隔壁座位", "「小東西」是 4 頁，看完 18:40。"],
+    "tip": "宜：假裝戴著耳機　忌：回頭問「多小」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "下班訊息", "style": "notice",
+    "eye": "【群組通知】主管 22:47 傳了 1 則訊息",
+    "body": ["內容：「明早前，幫我確認 3 個數字」", "他傳完就關燈睡了。"],
+    "tip": "宜：早上再看　忌：現在就回「好的」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "缺人不補", "style": "notice",
+    "eye": "【HR 公告】本部門缺額，改以「內部調整」處理",
+    "body": ["「內部」指的是在座各位。", "調整後，每人多 0.5 個人的份。"],
+    "tip": "走的人不用交接，剩的人用猜的。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "甩鍋留痕", "style": "dialogue",
+    "eye": "主管：這個當初是誰批的？",
+    "body": ["我：我找一下當初那封信。", "（找到了，核准的人是我）", "我：主管，這個我來處理。"],
+    "tip": "留痕之前，先看清楚誰簽的。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "開會又開會", "style": "checklist",
+    "eye": "今日運勢：會議之後還有會議",
+    "body": ["09:30 例會 ★☆☆☆☆", "11:00 開會前先開會 ★☆☆☆☆", "15:00 檢討剛剛的會 ★☆☆☆☆", "17:50 約下一場 ☆☆☆☆☆（大家有會）"],
+    "tip": "把水杯帶進會議室，別出來了。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "茶水間情報", "style": "checklist",
+    "eye": "我一走進茶水間，大家的話題剛好停了。",
+    "body": ["是不是在講我 ★★★★★", "有人開口說話 ☆☆☆☆☆", "裝水的速度 ★☆☆☆☆（3 分鐘才滿）", "回座位被問「你聽到什麼」 ★★☆☆☆"],
+    "tip": "裝完就走，別問「剛剛在聊什麼」。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "午餐搭子", "style": "murmur",
+    "eye": "廟公看著桌邊 3 個人，沒人先說吃什麼。",
+    "body": ["「隨便」「都可以」「看大家」", "他等到 12:40，先走了，去吃自己的供品。"],
+    "tip": "宜：先講一個店名　忌：問「大家想吃什麼」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "主管看天氣", "style": "yiji",
+    "eye": "主管今天進門沒開燈，也沒說早。",
+    "body": ["他的咖啡還沒喝，", "代表整層樓今天都還沒開始。"],
+    "tip": "宜：下午再報告　忌：說「我有個好消息」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "被主管追蹤", "style": "yiji",
+    "eye": "主管剛追蹤私帳，限動是 20 分鐘前發的。",
+    "body": ["內容：「今天又被 3 個人叫去救火」", "他按了讚。1 分鐘後，我被叫進去。"],
+    "tip": "宜：先檢查設定　忌：現在才改成私密",
+    "season": null, "meme": null
+  },
+  {
+    "level": "小凶", "topic": "office", "pain": "代理人失蹤", "style": "yiji",
+    "eye": "同事休假第 1 天，我才知道他會 5 件事。",
+    "body": ["其中 3 件我連名字都沒聽過，", "還有 1 件需要指紋。"],
+    "tip": "宜：先找他的交接信　忌：打給正在海邊的他",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "凶", "topic": "office", "pain": "請假被盤問", "style": "quote",
+    "eye": "「請假可以，先寫一份交接，三頁。」",
+    "body": ["— 週四 17:20・主管", "半天假的交接，比我上週的報告長。"],
+    "tip": "半天假要預留 3 小時寫說明。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "主管看天氣", "style": "quote",
+    "eye": "「我什麼都沒說，大家自己看著辦。」",
+    "body": ["— 週二 13:40・主管，剛開完上層會議", "沒人敢離開座位，連廁所都在觀望。"],
+    "tip": "趁他還沒點名，先把螢幕切成報表。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "下班訊息", "style": "quote",
+    "eye": "「晚上有空嗎？客戶想看一下。」",
+    "body": ["— 週三 20:34・主管", "我頭髮還是濕的。客戶的「一下」是 3 小時。"],
+    "tip": "宜：先洗完頭　忌：說「我現在不方便」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "缺人不補", "style": "notice",
+    "eye": "【系統通知】離職交接 47 項，承接人：您",
+    "body": ["離職的人很貼心，", "另附「其他」資料夾，內有 214 個檔案。"],
+    "tip": "宜：先看資料夾名稱　忌：打開「新資料夾 (3)」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "救火成常態", "style": "notice",
+    "eye": "【緊急】今天第 5 次「急」：客戶要昨天的資料",
+    "body": ["備註：昨天沒人要，今天要昨天的。", "「5 分鐘後」，意思是 3 分鐘前。"],
+    "tip": "水先喝，下一把火已經在排隊。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "準點下班", "style": "dialogue",
+    "eye": "主管：這麼早走，是有什麼事嗎？",
+    "body": ["我：現在 18:00。", "主管：嗯，我是說，這週一直很早。", "我：（這週我總共 40 小時）"],
+    "tip": "回「有約」，不要說細節。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "主管要通靈", "style": "checklist",
+    "eye": "今日運勢：猜中主管心意的機率 12%",
+    "body": ["讀懂「看著辦」 ★☆☆☆☆", "記得他上週說的 ★☆☆☆☆", "被問「怎麼沒做」 ★★★★★", "證據留存 ★★★☆☆（只有一句「嗯」）"],
+    "tip": "把每次口頭交辦，都傳文字確認。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "開會又開會", "style": "murmur",
+    "eye": "金身點開行事曆：今天 7 場會，3 場重疊。",
+    "body": ["祂決定分靈出席，", "分到第 3 尊，祂也想請假。"],
+    "tip": "宜：把自己分成三份　忌：忘記哪一份是本人",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "安逸焦慮", "style": "murmur",
+    "eye": "神明看到：23:40，有人還在刷主管的動態。",
+    "body": ["準時下班第 10 天，沒收到任何事。", "祂想託夢給主管，叫他派點事。"],
+    "tip": "睡前把信箱關掉，神明說的。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "新人沒手冊", "style": "yiji",
+    "eye": "照以前做，做了一下午，才發現以前也沒人做過。",
+    "body": ["前輩翻了 3 個資料夾，說：", "「喔，這是上上任口頭傳下來的。」"],
+    "tip": "宜：先問以前是哪一年　忌：說「那我自己想」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "凶", "topic": "office", "pain": "甩鍋留痕", "style": "yiji",
+    "eye": "那封「我先留著」的信，寄錯人了。",
+    "body": ["原本只想寄給自己存檔，", "收件人欄自動帶出了「全體同仁」。"],
+    "tip": "宜：先按「收回」　忌：寫「請忽略」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "大凶", "topic": "office", "pain": "救火成常態", "style": "quote",
+    "eye": "「系統掛了，客戶已經在樓下了。」",
+    "body": ["— 週四 09:05・同事，邊跑邊說", "我包包還在肩上，咖啡已經灑了。"],
+    "tip": "先擦咖啡，再決定先救哪一個。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "office", "pain": "代理人失蹤", "style": "quote",
+    "eye": "「他在飛機上，這個你先處理。」",
+    "body": ["— 週五 14:50・主管，2 分鐘後要開會", "密碼只有他知道。航班還要 11 小時。"],
+    "tip": "宜：查航班動態　忌：期待他有網路",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "office", "pain": "被主管追蹤", "style": "notice",
+    "eye": "【社群通知】主管追蹤了您，並往下滑了 4 年",
+    "body": ["神明補充：他在 2022 年按了一個讚，", "那則寫著「今天又想離職」。"],
+    "tip": "宜：先裝沒看到　忌：說「我帳號被駭了」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "office", "pain": "請假被盤問", "style": "dialogue",
+    "eye": "主管：生病還能發限動喔？",
+    "body": ["我：那是之前存的照片。", "主管：（轉過手機）今天 10:12。", "我：（內心）我為什麼不設摯友"],
+    "tip": "病假期間，動態也請一起請假。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "office", "pain": "主管要通靈", "style": "dialogue",
+    "eye": "主管：我什麼時候說過不用做了？",
+    "body": ["我：上週三，您說不用做。", "主管：我說的是「先不用急」。", "主管：明早 9 點要，38 頁。"],
+    "tip": "下次先問清楚是「先不用急」還是「不用」。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "office", "pain": "缺人不補", "style": "checklist",
+    "eye": "3 支分機同時在響，辦公室只剩我。",
+    "body": ["要做的事 ★★★★★", "做事的人 ★☆☆☆☆（我）", "午休 ☆☆☆☆☆", "準時下班 ☆☆☆☆☆（明天也是）"],
+    "tip": "宜：午餐帶到座位吃　忌：回頭數空位",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "office", "pain": "午餐搭子", "style": "murmur",
+    "eye": "土地公看著他，同時答應了兩桌午餐。",
+    "body": ["祂沒攔。12:00 兩桌都在等，", "下午兩邊各跟主管說：他不合群。"],
+    "tip": "宜：只答應一桌　忌：說「我看看」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "大凶", "topic": "office", "pain": "新人沒手冊", "style": "yiji",
+    "eye": "照以前做，寄出去的是 2019 年報價。",
+    "body": ["客戶回信：「這價格很好，就照這個。」", "我入職第 6 天。"],
+    "tip": "宜：找前輩一起認錯　忌：說「手冊沒寫」",
+    "season": null, "meme": null
+  },
+
+  {
+    "level": "下下籤", "topic": "office", "pain": "主管看天氣", "style": "quote",
+    "eye": "「今天第一個開口的人，負責下週簡報。」",
+    "body": ["— 週一 09:00・主管，戴著墨鏡進辦公室", "11:30，全辦公室 38 人用貼圖點便當。"],
+    "tip": "宜：用貼圖　忌：說「早安」",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "office", "pain": "甩鍋留痕", "style": "notice",
+    "eye": "【系統通知】信箱已清空 912 封，請改用背的",
+    "body": ["同一天，主管問：「當初誰批的？」", "附註：這題是申論題。"],
+    "tip": "宜：自己手寫一份　忌：相信雲端",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "office", "pain": "代理人失蹤", "style": "notice",
+    "eye": "【自動回覆】本人休假中，緊急事項請洽：本人",
+    "body": ["代理人欄位也填他自己，", "括號裡寫著「放心」。"],
+    "tip": "別打了，他說的放心，就是不接。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "office", "pain": "救火成常態", "style": "dialogue",
+    "eye": "主管：從今天起，救火也要寫 SOP。",
+    "body": ["我：那火已經在燒了，SOP 先寫？", "主管：對，順序很重要。", "（身後的機房傳來嗶嗶聲）"],
+    "tip": "宜：邊寫邊救　忌：問有沒有範本",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "office", "pain": "安逸焦慮", "style": "checklist",
+    "eye": "今日運勢：太閒，閒到去問主管有沒有事",
+    "body": ["準時下班 ★★★★★", "心裡踏實 ☆☆☆☆☆", "主動問有沒有事 ★★★☆☆", "主管的回覆 ★★★★★（「正好，來」）"],
+    "tip": "想問的衝動，大約 3 分鐘會過。",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "office", "pain": "茶水間情報", "style": "murmur",
+    "eye": "廟公問一句「咖啡還有嗎」，傳成他要罷工。",
+    "body": ["下午 3 點，主委來關心。", "晚上 7 點，他在寫 2 頁的說明。"],
+    "tip": "宜：只說「謝謝」　忌：提到任何飲料",
+    "season": null, "meme": null
+  },
+  {
+    "level": "下下籤", "topic": "office", "pain": "安逸焦慮", "style": "yiji",
+    "eye": "準時下班 3 個月，半夜 2 點我自己開了信箱。",
+    "body": ["有 1 封未讀。是廣告。", "我失望了 40 分鐘。"],
+    "tip": "宜：登出　忌：回信給廣告",
+    "season": null, "meme": null
+  }
+]
