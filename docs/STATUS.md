@@ -1,26 +1,66 @@
 # 目前進度（新 session 先看這份）
 
-最後更新：2026-11-22 深夜（第三個 session 結束，Context 用到約 64% 時交接）。
+最後更新：2026-11-23（第四個 session，Context 用到約 55% 時交接）。
 
 ## 一句話現況
 
 V1 在 **Vercel**：https://lucky-workday.vercel.app/ ，repo `littlefish0331/lucky-workday`（公開）。
-**所有程式都已 push 並上線**：遠端 `main` ＝ 本機 ＝ `d3ad985`（2026-11-22 深夜用 `git ls-remote origin refs/heads/main` 查證，領先 0、工作區乾淨）。Edge Function 為 **v7**（含 `vote`）。線上 `e2e-smoke` 15/15 通過，三個 chunk 在線上可下載（three 的 chunk Brotli 後約 146KB）。
-**接手第一件事不是 push，而是：等使用者貼回實機測試結果**（他說會在新 session 回報）。見下方「等使用者回報什麼」。
+**遠端 `main` ＝ `8f71d9e`（已上線）；本機領先 3 個 commit、尚未 push**：`62b03cc` 清理未使用資產、`2ee6593` 抽籤權重改乙案、再加一個「刪 ART-PROMPTS-V2、更新文件」的 commit。接手第一件事用 `git ls-remote origin refs/heads/main` 與 `git rev-list --count origin/main..HEAD` 查實際狀態。Edge Function 仍是 **v7**（這個 session 沒改籤詩，不需要重新部署）。
 
-## 等使用者回報什麼（他已在實機測過，結果會貼在新 session）
+## 這個 session（第四個，2026-11-23）做了什麼
 
-使用者已上線實測以下項目，**請先看他的回報、先處理回報的問題，再做下一步施工順序**。他貼的內容若不完整，逐項追問：
+**使用者實機回報（2026-11-22）**：搖手機有點難搖，甚至會誤觸 iPhone 的「還原」；擲筊沒問題；木魚棒子頭尾反了。
 
-| # | 項目 | 要確認的事 | 若有問題，調哪裡 |
-|---|---|---|---|
-| 1 | 搖手機搖籤 | 好不好搖出籤？走路會不會誤觸？iOS 授權鈕與視窗是否正常？Android 是否直接能搖？ | `src/lib/shake.ts` 的 `SHAKE_DEFAULTS.threshold`（現 11）；`Steps.tsx` 的 `SHAKE_STEP`（現 0.05，約 2.5 秒出籤） |
-| 2 | 擲筊 3D | 掉不掉幀？第一次進頁要等多久（「筊杯準備中……」）？畫面比例、筊杯大小、落點是否好看？是否有退回 2D 的情況？ | 鏡頭在 `jiaobei-scene.ts`；軌跡高度／落點範圍在 `jiaobei-physics.ts`（`FLOOR`、`HAND_HEIGHT`、`apex`）。要不要在搖籤頁預載 three 由使用者決定（見下） |
-| 3 | 投票 | 「有感／沒感」按得下去嗎？回應句與神明圖對不對？ | **用 Upstash 讀 `otld:vu`、`otld:vd`（`mcp__plugin_upstash_upstash__redis_run_command`，`HGETALL`）確認真的有寫入**；這是投票唯一還沒驗證的部分。注意：使用者自己測的票也會被算進去 |
-| 4 | 存圖、Threads 發文 | 實機存到相簿成不成功？Threads 發文是否開 App？ | `lib/share.ts`、STATUS 的「已知風險」 |
-| 5 | 手機震動 | Android 有沒有真的震？iPhone 沒震是否有畫面抖動備援？ | `lib/haptics.ts` |
+| 項目 | 結果 |
+|---|---|
+| 木魚棒子 | **已修、已上線**（`8f71d9e`）。原圖握柄在左、紅球在右，CSS 改成 `scaleX(-1)` 讓紅球朝下對準木魚；敲下去壓到木魚頂。舊版還超出畫面右緣 8px（會橫向捲動），一併消掉。看過閒置與敲下去兩張截圖。 |
+| 搖手機太難搖 | **已調、已上線**。門檻 11→8、release 5→4、每下進度 0.05→0.07（約 15 下出籤）。合成資料量測：幅度 10 就算（舊要 15）；走路、搭車顛簸仍 0 下，只有「用力走路（幅度 10）」會誤觸 1 下。**這是依回報方向調的估計，沒有實機驗證，下次要請使用者再搖一次。** |
+| **iPhone「還原」彈窗** | **沒修，原因不確定。** 推測是「報名」頁的輸入框（輸入文字後搖手機會觸發 iOS 的「搖動以還原」）。但沒有實機、查資料也失敗（搜尋被擋）。**要先問使用者：彈窗出現在哪一頁？** 只有搖籤頁會聽搖動；若彈在搖籤頁就和輸入框無關，要換方向查。 |
+| 抽籤權重（方案乙） | **已做、已 commit、未 push**（`2ee6593`）。選了行業只抽那個行業的籤：同痛點 ×12、同主題別痛點 ×1、別主題 ×0。真實籤池實測 3 個日期×90 痛點×40 人：同痛點 39.0%、同主題別痛點 61.0%、別主題 0%（舊權重是 3.7%／26%／70%）。每個「主題×等級」常駐籤最少 5 張（money／上上籤），沒有就退回同權重。vitest 90→94。 |
+| 清理 | `preview-version/` 使用者已自行刪除。已刪 8 張未使用動作圖（`wangcai-typing/mrt/payday/overtime`、`pangju-yarn/mrt/glasses/keyboard`，原圖仍在 `art-src/`，`process-art.py` 清單清空並留註解）、`_debug` 匯出、`.clock-logo`、`docs/ART-PROMPTS-V2.md`（用完了）。暫存 `shots/` 已清。 |
+| 籤詩檢視 | 新增 `scripts/export-fortunes.py` → `export/fortunes.xlsx`（`export/` 已加進 `.gitignore`）。530 張，含籤眼、內文、結語、主題、痛點、籤型、時令、梗；最右兩欄黃底「你的判斷」（下拉：保留／修改／刪除／再想想）與「備註」，另有公式統計頁。已逐張與 JSON 比對、統計公式用 LibreOffice 重算驗過 0 錯誤。**使用者還沒回填**。注意：`recalc.py` 在 Windows 跑不起來（缺 `AF_UNIX`），改用 `soffice --headless --convert-to xlsx` 轉一份再讀值。 |
 
-**我（上一個 session）沒辦法確認、只能請使用者回報的**：以上全部。搖手機只用合成 `devicemotion` 事件驗過；擲筊只用軟體 WebGL（SwiftShader）驗過；投票只驗過「壞輸入被擋」，沒對正式資料庫送過合法票。
+**籤詩存放位置（使用者問過）**：沒有存進 PostgreSQL（Supabase `public` 沒有任何資料表）。原稿在 `content/batches/*.json`，網站用 `src/data/fortunes.generated.json`（打包進網站）；Redis（`otld:` 前綴）只存計數與票數，Edge Function 另有「籤 id→等級」對照 `known-ids.json`，不含籤文。
+
+**使用者實機驗證過的**：擲筊沒問題。投票有 1 票寫進 Redis（`otld:vu` 的 `fdc6971f`＝1），所以「合法票寫進 Redis」這步通了；**同 IP 一天一票的限流仍沒驗到**。
+
+## 下一步（這個順序）
+
+### 0. 先處理（很小）
+- 問使用者：iPhone 的「還原」彈窗出現在哪一頁？（見上）
+- 請使用者再試一次搖手機，看新門檻好不好搖、會不會誤觸。
+- 把本機 3 個 commit 推上去前先問使用者（push 平常要先問）。**推之前先跑 `npm run build && node scripts/with-preview.mjs scripts/e2e-smoke.mjs`。**
+
+### 1. 步驟② 改成「先選行業 → 再選今天的困擾」（使用者已同意）
+現在是一次給 6 個不同行業的痛點（每個主題挑一個），辦公室族要在 6 個裡找自己。改成：先出 6 個行業鈕（`TOPIC_LABEL`：辦公室、工程師、業務接案、服務輪班、通勤、錢與年終），點了才列出該行業的痛點（每主題 15 個，一次出 6 個、可「換一批」）。`PainStep` 在 `src/screens/Steps.tsx`、批次邏輯 `pickPainBatch` 在 `src/data/pains.ts`。**抽籤權重已改，這一步沒做完前，玩家選到的痛點仍會讓權重生效，但畫面上還是一次 6 個行業混著選。** e2e 的 `scripts/e2e-smoke.mjs`、`e2e-bad-paths.mjs`、`e2e-vote.mjs`、`e2e-shake.mjs` 都用 `.pain` 的第一顆，改了流程要同步改腳本。
+
+### 2. 手印互動重做（使用者已拍板，細節見下一節）
+
+### 3. 補張數少的痛點（使用者已同意）
+全部 530 張裡，90 個痛點每個 4～9 張（4 張×4、5 張×32、6 張×34、7 張×13、8 張×4、9 張×3）。最少的 4 個：被主管追蹤（office）、已讀就消失（sales）、月票省錢（commute）、分紅何時發（money）；其次是 5 張的：缺人不補、救火成常態、主管看天氣、新人沒手冊（都是 office）等。**權重改成 12/1/0 之後，每個痛點被抽到的重複感會變強，所以優先補這些。** 用 `write-fortunes` skill；補完要 `npm run build:fortunes`、跑 `check-fortunes`、**重新部署 Edge Function**。先問使用者補幾張、要不要同時做諧音籤（見下）。
+
+### 4. 諧音籤（`write-fortunes`；先問使用者是新增張數還是改寫現有籤的一句；只取 `reference/ai-response-02.md` 的梗，不自創）。
+
+### 5. 第 3 篇開發筆記（`dev-note` skill）：搬到 Vercel、回饋整理、投票機制、四神明、og 圖自己疊字、抽籤權重為何改（70%→0% 的算法與實測）。**還沒寫。**
+
+### 6. 更新 `CLAUDE.md`、`SPEC.md`、`README.md`
+- `CLAUDE.md`：`preview-version/` 那行已改成「已刪除」（2026-11-23）。`SPEC.md` 的流程、法號格式、「不跳權限視窗」「陰德→功德」「500 支→530 支」「揪同事合籤」都過時；`SPEC.md` 第 43 行「挑籤權重：痛點相同×4、主題相同×2、其他×1」要改成 12/1/0。`README.md` 與 `package.json` 的名稱仍是「準時下班宮／ontime-lucky-day」。
+- `docs/NEW-SESSION-PROMPT.md` 已更新成這個 session 的交接版。
+
+## 手印互動重做：使用者已拍板的規格（2026-11-23）
+
+使用者給了三支參考影片（vecteezy 的 fingerprint scanner animation，手機設定指紋那種「線條一段一段出現」的效果），並做了以下決定：
+
+| 項目 | 決定 |
+|---|---|
+| 標題 | 「**蓋個指印**」（不是「蓋個手印」）。原本的「掌印」素材（`stamp-palm-0/1`）**畫面改成別的**，要做的是：不再用掌印，改用什麼畫面要和使用者再確認（可選：只留指印、或貓掌狗掌的「代為簽收」仍保留）。**先問，不要自己決定。** |
+| 流程 | ① 先按紅印泥 → ② 再按「想蓋的位置」→ ③ 指紋出現在按下去的位置、**一段一段出現**（像手機設定指紋，不要一次整個出現）→ ④ 按滿 1 秒完成 → ⑤ 沒按滿，出現提示文字「按久一點」 |
+| 蓋章區域 | **框出一個區域，或是四個角標示位置**（使用者的話）。不是整張單子都能蓋，我先前建議限制在單子下半部的簽署框，使用者同意用框／四角標示 |
+| 時間 | **先按一秒即可** |
+| 震動 | **只讓 Android 有**（`navigator.vibrate`）。iPhone 不震。**iPhone 也不要畫面微震**——只要做「指紋一段一段出現」的動畫、按久一點就好。所以手印這一步**不要再呼叫會觸發畫面 `jolt` 的 `buzz()`**（`lib/haptics.ts` 的 `buzz` 目前會同時做畫面微震，要另外寫只震動不微震的版本，或加參數） |
+| 素材 | 指紋是點陣 webp（`stamp-finger-0..3`），要「一段一段出現」可用遮罩由中心往外或由下往上掃；若要真正一圈圈線條要 SVG 描線，需要重畫素材（**先用遮罩做，不夠好再請使用者重生**，只給一小段 prompt） |
+
+目前實作在 `src/screens/Steps.tsx` 的 `StampStep`（按住紅色圓鈕 1 秒，手印在「求籤登記單」右下出現）、`src/lib/stamp.ts`、`src/lib/storage.ts` 的 `randomStamp`（指印 35%／掌印 25%／貓掌 20%／狗掌 20%）、籤卡上由 `src/lib/card.ts` 畫手印。**改了手印種類，籤卡與籤冊舊紀錄還要能顯示**（`Result.stamp` 存 `kind`＋`idx`，不能讓舊紀錄的 `palm` 圖消失）。
 
 ## 第三個 session（2026-11-22 深夜）：投票機制完成
 
@@ -79,12 +119,12 @@ V1 在 **Vercel**：https://lucky-workday.vercel.app/ ，repo `littlefish0331/lu
 | # | 事項 | 狀態 | 怎麼辦 |
 |---|---|---|---|
 | 1 | ~~Edge Function 重新部署~~ | **已完成（2026-11-22 晚）**。注意：之後只要改籤詩（known-ids 變動）或加投票，就要再部署一次 | 部署用 `mcp__plugin_supabase_supabase__deploy_edge_function`，專案 `csykldmxxzlnwzbamswl`，檔案 `index.ts`、`logic.ts`、`known-ids.json`，`verify_jwt=false` |
-| 2 | ~~push 本機新 commit~~ | **已完成（2026-11-22 深夜）**，遠端 ＝ 本機 `d3ad985` | — |
-| 3 | ~~旺財擠捷運~~ | **已處理**（`public/art/wangcai-mrt.webp`），看過圖 | 程式還沒用 |
+| 2 | push | `8f71d9e` 已推並上線；之後的 commit 見頂端「一句話現況」 | 推之前先問使用者 |
+| 3 | ~~旺財擠捷運~~ | 已處理後因為沒用到，2026-11-23 隨動作圖一起刪除 | 原圖在 `art-src/wangcai-mrt.png` |
 
 ## git 狀態
 
-- 遠端 `main` ＝ 本機 ＝ `d3ad985`（2026-11-22 深夜查證，領先 0、工作區乾淨）。近期 commit：`d3ad985` 搖手機＋擲筊 3D、`27e6ea5` 投票機制、`f2da64a` 之前是交接文件與改名／神明／新籤筒。
+- **以頂端「一句話現況」與現場查詢為準**（`git ls-remote origin refs/heads/main`、`git rev-list --count origin/main..HEAD`）。2026-11-23：遠端 `8f71d9e`（已上線）；本機再領先 3 個 commit 未推。
 - 所有 commit 的作者與提交者信箱都是 `littlefish0331@gmail.com`。
 - 改寫信箱前有備份分支 `backup-before-email-rewrite`（只在本機；遠端已確認沒問題，可刪）。
 - Vercel 與 GitHub 已連好：push 到 `main` 就自動部署（production），約 20 秒上線。專案 `lucky-workday`，id `prj_CI7RwyMSwUqqc8yIJoU816v0mAsi`，團隊 `youjuns-projects`（`team_IzBxrz0HlLp7LxzfLHPRvUOi`），Hobby 方案。
@@ -103,7 +143,7 @@ V1 在 **Vercel**：https://lucky-workday.vercel.app/ ，repo `littlefish0331/lu
 | commit 信箱 | `littlefish0331@gmail.com`，允許 force push |
 | **搖手機搖籤（2026-11-22 深夜新拍板）** | **允許**。有不確定的事再和使用者討論。注意 iOS 要點一下授權（DeviceMotion），會改變 SPEC「不跳權限視窗」；建議手機搖＋拖曳備援，授權鈕要放在自然的位置（例如搖籤那一頁的一顆按鈕），不能卡關 |
 | **擲筊改 Three.js（2026-11-22 深夜新拍板）** | **允許**。包體積會變大，要用動態載入（只在擲筊頁才載），並量測前後差異回報。有不確定的事再討論 |
-| 美術請求的方式 | 使用者覺得 `ART-PROMPTS-V2.md` 太複雜。**之後要請他用生成 AI 時，只給一小段可直接貼的 prompt＋一行規格，不要長文件** |
+| 美術請求的方式 | 使用者覺得 `ART-PROMPTS-V2.md`（已刪）太複雜。**之後要請他用生成 AI 時，只給一小段可直接貼的 prompt＋一行規格，不要長文件** |
 | 順序 | 使用者說之後照 Claude 的順序做，可平行派 subagent |
 
 **投票回應句**（按完後依「這支籤的負責神明」顯示）：
@@ -129,10 +169,10 @@ V1 在 **Vercel**：https://lucky-workday.vercel.app/ ，repo `littlefish0331/lu
 |---|---|---|
 | 1 首頁變亮 | **已做**（等使用者看實機） | 底色與紅光調亮，主視覺插圖沒動；亮不亮是主觀的 |
 | 2 報名 | **已做** | 「信眾請留名」＋稱呼 chips；兩句說明已刪 |
-| 3 痛點 | **部分** | 問句、「換一批」已改。**「選了某類卻抽到別類很怪」＋職業標籤還沒動，要先和使用者討論設計**（現有 6 個主題其實就是職業：先選職業再問困擾、籤上預先標好） |
-| 4 手印 | **只換字** | 「蓋個手印」「求籤登記單」。**互動沒重做**：先按印泥→選位置→手印出現在按下處→按下震動→沒蓋完提示「按久一點」→指紋動畫（線條一段一段出現）。震動：Android 可 `navigator.vibrate`，iOS Safari 網頁據我所知不支援（未驗證），要有畫面備援並如實告訴使用者 |
-| 5 搖籤 | **已做（待實機）** | 搖手機＋拖曳並存，iOS 授權鈕；只用合成事件驗過 |
-| 6 擲筊 | **已做（待實機）** | Three.js 3D：散落隨機落點、拋起近大遠小；失敗退回 2D；只用軟體 WebGL 驗過 |
+| 3 痛點 | **部分** | 問句、「換一批」已改。**抽籤權重已改成選了行業就只抽該行業**（`2ee6593`，未 push）；**步驟② 改成「先選行業→再選困擾」已與使用者說定，還沒做**（見「下一步」第 1 項）。不需要新增「職業標籤」：現有 6 個主題就是職業，籤上早已標好 `topic` |
+| 4 手印 | **規格已定，還沒做** | 使用者 2026-11-23 拍板，見「手印互動重做：使用者已拍板的規格」。標題改「蓋個指印」、掌印畫面改別的（先問）、Android 才震、iPhone 不震也不微震、按 1 秒、框出蓋章區 |
+| 5 搖籤 | **已做；實機回報太難搖，已調低門檻（待再試）** | 搖手機＋拖曳並存，iOS 授權鈕；門檻 8／進度 0.07。iPhone「還原」彈窗原因未查明 |
+| 6 擲筊 | **已做；使用者實機確認沒問題** | Three.js 3D：散落隨機落點、拋起近大遠小；失敗退回 2D |
 | 7 籤卡 | **已做** | 法號、邀請語移出、折行。**「交班本寫了 2 頁…」那張沒專門檢查** |
 | 8 分享 | **已做** | |
 | 9 截圖 | 保持 | |
@@ -140,10 +180,10 @@ V1 在 **Vercel**：https://lucky-workday.vercel.app/ ，repo `littlefish0331/lu
 ## 美術現況
 
 - 已處理進 `public/art/` 並接進程式：四位神明各 4 個表情、新籤筒、新筊杯。
-- 已處理但**程式還沒用**：動作圖 8 張（`wangcai-typing/mrt/payday/overtime`、`pangju-yarn/mrt/glasses/keyboard`，768×768 webp）。可用在投票回應、結果頁、時令籤配圖等，用法待討論。
+- 動作圖 8 張（`wangcai-typing/mrt/payday/overtime`、`pangju-yarn/mrt/glasses/keyboard`）程式從未用到，**2026-11-23 已從 `public/art` 刪除**；原圖在 `art-src/`，要用時把檔名加回 `scripts/process-art.py` 的清單再跑一次。
 - `public/art/stick.webp`（跳出來的那支籤）仍是舊圖，與新長籤筒比例略不搭；**要換的話才需要請使用者重生**（短 prompt 即可）。
 - og 圖的貓是三花貓而不是胖橘；要換才需重生。
-- 角色 prompt：`docs/ART-PROMPTS-CHARACTERS.md`；V2 prompt：`docs/ART-PROMPTS-V2.md`（太長，使用者嫌複雜，不要再照這個格式給）。
+- 角色 prompt：`docs/ART-PROMPTS-CHARACTERS.md`。V2 prompt 檔（`ART-PROMPTS-V2.md`）已用完並刪除；使用者嫌長文件複雜，之後只給一小段可直接貼的 prompt。
 
 ## 諧音梗與時事語料（`reference/ai-response-02.md`，155 行）
 
@@ -151,19 +191,6 @@ V1 在 **Vercel**：https://lucky-workday.vercel.app/ ，repo `littlefish0331/lu
 - 二、**56 條台灣諧音梗用例**（七類，附來源、認得度、流行狀態、台灣原生／兩岸共用）。
 - (a) 10 個老到翻白眼的梗（**不要用**）；(b) 「打工」語感：台灣單用時多指工讀兼職，「打工人」是 2020 年對岸流行語、台灣有人借用，「打工仔」有港式色彩，中性說法是「上班族」。→ 名稱已定「打工庇佑廟」，使用者看過仍選它；文案裡「打工」與「上班族」交替用即可。(c) 排除與不確定項，其中 #22「人生在世 Bee嘴兩字」、#34「一場騙橘」地域不確定；「大橘為重」「喵不可言」「汪事如意」兩岸都有人用。
 - **寫諧音籤前**：先和使用者確認是「新增張數」還是「改寫現有籤的一句」。改籤眼會改 id（舊票作廢），所以優先考慮新增，或只改內文。新增要同步調 SPEC 的配額、`check-fortunes` 的配額檢查，並重新部署 Edge Function。
-
-## 下一步施工順序
-
-0. **先處理使用者的實機回報**（見上方「等使用者回報什麼」）。
-1. ~~push 與線上驗證~~ **已完成**（線上 `e2e-smoke` 15/15）。
-2. ~~**投票機制**~~ **已完成**（見上方「第三個 session」）。待辦只剩：使用者線上投過之後，用 Upstash 讀 `otld:vu`／`otld:vd` 確認真的有寫入（見「等使用者回報什麼」第 3 項）。
-3. ~~**搖手機搖籤**~~ **已完成**，但只在桌機用合成事件驗過，**等使用者實機回報**（見上方）。
-4. ~~**擲筊 Three.js**~~ **已完成**，只用軟體 WebGL 驗過，**等使用者實機回報**（見上方）。
-5. **手印互動重做**（見上表第 4 頁）。
-6. **職業標籤**與「選了某類卻抽到別類」的設計討論，再動手。
-7. **諧音籤**（`write-fortunes`，派寫手＋審稿；先問使用者是新增張數還是改寫現有籤的一句；只取 `ai-response-02.md` 的梗）。改籤詩後務必重新部署 Edge Function。
-8. 寫**第 3 篇開發筆記**（`dev-note` skill）：搬到 Vercel、回饋整理、投票機制、四神明、og 圖自己疊字的做法。**還沒寫。**
-9. 更新 `CLAUDE.md`、`SPEC.md`、`README.md` 的名稱與網址（`CLAUDE.md` 的網址已先改；SPEC 的流程、法號格式、「不跳權限視窗」都要更新）。
 
 ## 已完成並驗證（V1 當時，仍有效）
 
@@ -199,7 +226,7 @@ Claude Code 的自動模式分類器擋過：`git push`、`git remote set-url`�
 - GitHub：`littlefish0331/lucky-workday`（git 在 `ontime-lucky-day/` 內，不是上層資料夾；資料夾名稱還沒改）
 - Supabase：專案 `ontime-lucky-day`，ref `csykldmxxzlnwzbamswl`；Function `https://csykldmxxzlnwzbamswl.supabase.co/functions/v1/count`
 - Upstash Redis：`free-tier`（id 見 CLAUDE.md），key 前綴 `otld:`
-- 上層還有 `preview-version/`（舊版，不要動）、`reference/`（規格與聯網 AI 蒐集的語料，唯讀）
+- 上層有 `reference/`（規格與聯網 AI 蒐集的語料，唯讀）。`preview-version/`（舊版）已由使用者刪除，不用再提。
 
 ## 改了籤詩之後一定要做的事
 
