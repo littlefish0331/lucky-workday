@@ -1,24 +1,32 @@
 # 目前進度（新 session 先看這份）
 
-最後更新：2026-11-22 深夜。Context 用到約 60% 時交接。
+最後更新：2026-11-22 深夜（第三個 session 結束，Context 用到約 64% 時交接）。
 
 ## 一句話現況
 
 V1 在 **Vercel**：https://lucky-workday.vercel.app/ ，repo `littlefish0331/lucky-workday`（公開）。
-本機有**幾個 commit 還沒推上線**（`3a6c54d` 改名與神明、`548480d` 新籤筒筊杯與 og，以及之後的交接文件 commit；確切個數用 `git rev-list --count origin/main..HEAD` 查，別信文件）。
-**遠端 `main` 其實已經是 `94d36d1`、信箱也已是 `littlefish0331@gmail.com`**（用 `git ls-remote origin refs/heads/main` 查證，2026-11-22 深夜）——之前的 force push 早就完成了，所以**現在只要普通 push，不需要 force**：
+**所有程式都已 push 並上線**：遠端 `main` ＝ 本機 ＝ `d3ad985`（2026-11-22 深夜用 `git ls-remote origin refs/heads/main` 查證，領先 0、工作區乾淨）。Edge Function 為 **v7**（含 `vote`）。線上 `e2e-smoke` 15/15 通過，三個 chunk 在線上可下載（three 的 chunk Brotli 後約 146KB）。
+**接手第一件事不是 push，而是：等使用者貼回實機測試結果**（他說會在新 session 回報）。見下方「等使用者回報什麼」。
 
-```
-cd ontime-lucky-day && git push origin main
-```
+## 等使用者回報什麼（他已在實機測過，結果會貼在新 session）
 
-我的 git push 被分類器擋，不要繞路，由使用者自己執行。推上去之前，線上看到的還是舊名「準時下班宮」；推完 Vercel 自動部署。**接手第一件事：問使用者推了沒。**
+使用者已上線實測以下項目，**請先看他的回報、先處理回報的問題，再做下一步施工順序**。他貼的內容若不完整，逐項追問：
+
+| # | 項目 | 要確認的事 | 若有問題，調哪裡 |
+|---|---|---|---|
+| 1 | 搖手機搖籤 | 好不好搖出籤？走路會不會誤觸？iOS 授權鈕與視窗是否正常？Android 是否直接能搖？ | `src/lib/shake.ts` 的 `SHAKE_DEFAULTS.threshold`（現 11）；`Steps.tsx` 的 `SHAKE_STEP`（現 0.05，約 2.5 秒出籤） |
+| 2 | 擲筊 3D | 掉不掉幀？第一次進頁要等多久（「筊杯準備中……」）？畫面比例、筊杯大小、落點是否好看？是否有退回 2D 的情況？ | 鏡頭在 `jiaobei-scene.ts`；軌跡高度／落點範圍在 `jiaobei-physics.ts`（`FLOOR`、`HAND_HEIGHT`、`apex`）。要不要在搖籤頁預載 three 由使用者決定（見下） |
+| 3 | 投票 | 「有感／沒感」按得下去嗎？回應句與神明圖對不對？ | **用 Upstash 讀 `otld:vu`、`otld:vd`（`mcp__plugin_upstash_upstash__redis_run_command`，`HGETALL`）確認真的有寫入**；這是投票唯一還沒驗證的部分。注意：使用者自己測的票也會被算進去 |
+| 4 | 存圖、Threads 發文 | 實機存到相簿成不成功？Threads 發文是否開 App？ | `lib/share.ts`、STATUS 的「已知風險」 |
+| 5 | 手機震動 | Android 有沒有真的震？iPhone 沒震是否有畫面抖動備援？ | `lib/haptics.ts` |
+
+**我（上一個 session）沒辦法確認、只能請使用者回報的**：以上全部。搖手機只用合成 `devicemotion` 事件驗過；擲筊只用軟體 WebGL（SwiftShader）驗過；投票只驗過「壞輸入被擋」，沒對正式資料庫送過合法票。
 
 ## 第三個 session（2026-11-22 深夜）：投票機制完成
 
-- **投票已做完、已 commit（`27e6ea5`）、Edge Function 已部署 v7**。前端 `src/components/VoteBox.tsx`＋`src/lib/vote.ts`（本機記票，每支籤一次不能改）；伺服器 `vote` action（`parseVote`／`voteCommand`／`voteRateCommand`，同 IP 同一支籤一天一票，寫 `otld:vu`／`otld:vd`）。凶籤還沒決定（重抽／認命）與陰筊隱藏款不顯示投票。
+- **投票已做完、已 commit 並 push（`27e6ea5`）、Edge Function 已部署 v7**。前端 `src/components/VoteBox.tsx`＋`src/lib/vote.ts`（本機記票，每支籤一次不能改）；伺服器 `vote` action（`parseVote`／`voteCommand`／`voteRateCommand`，同 IP 同一支籤一天一票，寫 `otld:vu`／`otld:vd`）。凶籤還沒決定（重抽／認命）與陰筊隱藏款不顯示投票。
 - **驗證**：vitest 63 通過；`scripts/e2e-vote.mjs` 18 項（攔截 Supabase 請求，不污染正式票數）；線上 Function 用壞輸入探測（不存在的籤、票別錯、缺 fid、亂 fid、別人的 Origin→403、沒 apikey→401）都被正確擋掉，`stats` 正常。
-- **還沒驗證**：真正的一張票寫進 Redis、同 IP 一天一票的限流。要等前端 push 上線後，使用者在線上投一次，再用 Upstash 讀 `otld:vu`／`otld:vd` 確認。我刻意沒有對正式資料庫送合法的票。
+- **還沒驗證**：真正的一張票寫進 Redis、同 IP 一天一票的限流。前端已上線，等使用者在線上投票後，用 Upstash 讀 `otld:vu`／`otld:vd` 確認。我刻意沒有對正式資料庫送合法的票。
 - **只看過發薪婆婆那組的「有感」截圖**；績效伯伯、旺財、胖橘與「沒感」的版面沒逐一看。
 
 ## 第三個 session 後半：搖手機搖籤、擲筊 Three.js（已做、已測、**未經真機**）
@@ -71,15 +79,16 @@ cd ontime-lucky-day && git push origin main
 | # | 事項 | 狀態 | 怎麼辦 |
 |---|---|---|---|
 | 1 | ~~Edge Function 重新部署~~ | **已完成（2026-11-22 晚）**。注意：之後只要改籤詩（known-ids 變動）或加投票，就要再部署一次 | 部署用 `mcp__plugin_supabase_supabase__deploy_edge_function`，專案 `csykldmxxzlnwzbamswl`，檔案 `index.ts`、`logic.ts`、`known-ids.json`，`verify_jwt=false` |
-| 2 | **push 本機新 commit** | 舊的信箱 force push **已完成**（遠端已是新信箱）。現在只要普通 push；我的 push 會被分類器擋，由使用者執行 | `cd ontime-lucky-day && git push origin main`。推完 Vercel 自動部署 |
+| 2 | ~~push 本機新 commit~~ | **已完成（2026-11-22 深夜）**，遠端 ＝ 本機 `d3ad985` | — |
 | 3 | ~~旺財擠捷運~~ | **已處理**（`public/art/wangcai-mrt.webp`），看過圖 | 程式還沒用 |
 
 ## git 狀態
 
-- 遠端 `main` = `94d36d1`（2026-11-22 深夜查證）；本機在它之上多了 `3a6c54d`、`548480d` 與幾個交接文件 commit。
-- 所有 commit 的作者與提交者信箱都是 `littlefish0331@gmail.com`，**遠端也已經是**（已實際查證，不是推測）。
-- 改寫前有備份分支 `backup-before-email-rewrite`（只在本機，確認遠端沒問題後可刪）。
-- Vercel 與 GitHub 已連好：push 到 `main` 就自動部署（production）。專案 `lucky-workday`，id `prj_CI7RwyMSwUqqc8yIJoU816v0mAsi`，團隊 `youjuns-projects`（`team_IzBxrz0HlLp7LxzfLHPRvUOi`），Hobby 方案。
+- 遠端 `main` ＝ 本機 ＝ `d3ad985`（2026-11-22 深夜查證，領先 0、工作區乾淨）。近期 commit：`d3ad985` 搖手機＋擲筊 3D、`27e6ea5` 投票機制、`f2da64a` 之前是交接文件與改名／神明／新籤筒。
+- 所有 commit 的作者與提交者信箱都是 `littlefish0331@gmail.com`。
+- 改寫信箱前有備份分支 `backup-before-email-rewrite`（只在本機；遠端已確認沒問題，可刪）。
+- Vercel 與 GitHub 已連好：push 到 `main` 就自動部署（production），約 20 秒上線。專案 `lucky-workday`，id `prj_CI7RwyMSwUqqc8yIJoU816v0mAsi`，團隊 `youjuns-projects`（`team_IzBxrz0HlLp7LxzfLHPRvUOi`），Hobby 方案。
+- **使用者這次明確要我 push，所以 push 成功；平常沒有明說時，push 仍要先問**（分類器之前擋過 push，這次是使用者在對話中明確授權後才執行的）。
 
 ## 使用者已確認的決定（2026-11-22）
 
@@ -145,8 +154,9 @@ cd ontime-lucky-day && git push origin main
 
 ## 下一步施工順序
 
-1. **問使用者 force push 做了沒**；推完後用 `URL=https://lucky-workday.vercel.app/ node scripts/e2e-smoke.mjs` 驗線上，並看線上首頁截圖是不是新名稱。
-2. ~~**投票機制**~~ **已完成**（見上方「第三個 session」）。待辦只剩：push 後請使用者線上投一次，再用 Upstash 讀 `otld:vu`／`otld:vd` 確認真的有寫入。
+0. **先處理使用者的實機回報**（見上方「等使用者回報什麼」）。
+1. ~~push 與線上驗證~~ **已完成**（線上 `e2e-smoke` 15/15）。
+2. ~~**投票機制**~~ **已完成**（見上方「第三個 session」）。待辦只剩：使用者線上投過之後，用 Upstash 讀 `otld:vu`／`otld:vd` 確認真的有寫入（見「等使用者回報什麼」第 3 項）。
 3. ~~**搖手機搖籤**~~ **已完成**，但只在桌機用合成事件驗過，**等使用者實機回報**（見上方）。
 4. ~~**擲筊 Three.js**~~ **已完成**，只用軟體 WebGL 驗過，**等使用者實機回報**（見上方）。
 5. **手印互動重做**（見上表第 4 頁）。
@@ -230,3 +240,12 @@ python -X utf8 scripts/process-art.py   # art-src 原圖 → public/art
 - **og 圖不用請使用者重生**：`art-src/og-notext.png` 在瀏覽器裡用網站字型疊字即可（Canvas，輸出 `public/og.jpg`），文字壓到神像時往左縮、往上挪。
 - **分類器擋了 `git push`**：commit 可以做，push 要使用者自己執行。
 - **交接文件裡的「狀態」要現場查證**：我這次沿用舊記錄寫了「遠端還是舊信箱、要 force push、領先 4 個」，實際遠端早已更新、也不是領先 4 個。寫進文件前用 `git ls-remote`／`git rev-list --count origin/main..HEAD` 查。
+- **檢查器沒輸出≠通過**：`e2e-toss3d` 有一次整段沒有任何輸出，是腳本在例外中崩潰（等 `.verdict` 逾時），不是通過。跑完要看「全部通過」那行與 exit code，沒有就當失敗查。
+- **e2e 不要寫死動畫時間**：3D 擲筊比 2D 長，寫死 `waitForTimeout(1250)` 會誤判。改成等狀態（籤卡出現或「再擲一次」可按）。聖筊／陰筊會在約 1.1～1.5 秒後自動換頁，要分析畫面就「先截圖、後分析」。
+- **雜訊要驗到不是自己造成的**：vitest 全壞時，我先 `git stash` 對照乾淨樹也一樣壞，才確定是環境（小寫磁碟機代號），不是自己的改動。
+- **前景＋自己關**：用 `scripts/with-preview.mjs` 或 e2e 腳本自己 spawn 預覽伺服器，不要背景啟動後留著（分類器擋終止程序）。
+- **裝套件要使用者同意**：`npm install` 被分類器擋過，使用者自己執行後才能繼續；套件版本固定（`three@0.187.0`、`@types/three@0.187.0`）。
+- **鏡頭、軌跡這類數字用量測，不要目測**：擲筊鏡頭是用軌跡掃描確認全程不出畫面，再看截圖；第一次目測的版本拋起時筊杯被切掉。
+- **three.js 的圓面貼圖不要用旋轉 180° 做鏡像**：輪廓會左右反過來，邊緣冒出「耳朵」。用同輪廓、`BackSide`。
+- **Windows 的 `git add` 會警告 LF→CRLF**：無害，照常。
+- **使用者要求 push 時我才 push**：平常沒明說就先問；這次他在對話中明確要求，執行成功。
