@@ -28,7 +28,9 @@ export interface ShakeOptions {
   gravityTau?: number;
 }
 
-export const SHAKE_DEFAULTS = { threshold: 11, release: 5, minGapMs: 130, rearmMs: 260, gravityTau: 0.12 } as const;
+// 實機回報「有點難搖」（2026-11-22），門檻由 11 降到 8、release 5 → 4。這是依回報方向調的估計值，不是實測；
+// 降低門檻會讓走路更容易誤觸，所以只在搖籤那一頁才聽。
+export const SHAKE_DEFAULTS = { threshold: 8, release: 4, minGapMs: 130, rearmMs: 260, gravityTau: 0.12 } as const;
 
 export interface ShakeReading {
   /** 這一筆是否算一下搖動 */

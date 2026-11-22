@@ -108,13 +108,14 @@ h2 { font-size: 28px; color: var(--paper); }
 .deity.s1 { background: radial-gradient(circle, rgba(212, 166, 74, 0.28), transparent 70%); }
 .deity.s2 { background: radial-gradient(circle, rgba(212, 166, 74, 0.5), transparent 70%); box-shadow: 0 0 30px rgba(212, 166, 74, 0.4); }
 
-.woodwrap { position: relative; width: 100%; max-width: 270px; margin: 4px auto 0; touch-action: manipulation; cursor: pointer; background: none; border: 0; padding: 0; user-select: none; -webkit-user-select: none; display: block; }
+.woodwrap { position: relative; width: 100%; max-width: 270px; margin: 22px auto 0; touch-action: manipulation; cursor: pointer; background: none; border: 0; padding: 0; user-select: none; -webkit-user-select: none; display: block; }
 
 .woodfish { width: 100%; display: block; transition: transform 0.06s; pointer-events: none; filter: drop-shadow(0 14px 14px rgba(0, 0, 0, 0.5)); }
 .woodfish.hit { transform: scale(0.965, 0.93); }
 
-.mallet { position: absolute; width: 74%; right: -22%; top: 9%; transform: rotate(24deg); transform-origin: 92% 52%; transition: transform 0.07s; pointer-events: none; }
-.mallet.hit { transform: rotate(-2deg) translate(-18px, 20px); }
+/* 棒子圖：左邊是握柄（掛牌）、右邊是紅球。scaleX(-1) 翻過來，紅球在左下、對準木魚頂，握柄往右上舉起；敲下去時紅球壓到木魚上 */
+.mallet { position: absolute; width: 56%; left: 44%; top: -17%; transform: rotate(-11deg) scaleX(-1); transform-origin: 50% 50%; transition: transform 0.07s; pointer-events: none; }
+.mallet.hit { transform: translate(-2px, 24px) rotate(-5deg) scaleX(-1); }
 .quip { min-height: 52px; font: 400 19px/1.5 var(--kai); color: var(--gold); animation: floatq 0.5s ease-out; }
 @keyframes floatq { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
 .count { font: 700 40px var(--serif); color: var(--paper); }

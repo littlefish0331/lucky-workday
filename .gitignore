@@ -12,3 +12,6 @@ shots/
 .tmp-*
 .tmp-*
 public/art/*.png
+
+# 籤詩檢視用副本（由 scripts/export-fortunes.py 產生，不進 git）
+export/

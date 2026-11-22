@@ -191,8 +191,8 @@ export function StampStep({ name, pain, spec, onDone }: { name: string; pain: st
 }
 
 /* ④ 搖籤筒：搖手機、或手指左右拖曳，兩種都可以，同時有效 */
-/** 手機搖一下加多少進度（0～1）。來回各算一下，用力搖約 8 下/秒，大約搖 2.5 秒籤就跳出來 */
-const SHAKE_STEP = 0.05;
+/** 手機搖一下加多少進度（0～1）。來回各算一下，約 15 下籤就跳出來（實機回報太難搖：0.05 → 0.07） */
+const SHAKE_STEP = 0.07;
 export function ShakeStep({ onDone }: { onDone: () => void }) {
   const [prog, setProg] = useState(0);
   const [tilt, setTilt] = useState(0);
