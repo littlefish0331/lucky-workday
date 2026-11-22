@@ -27,8 +27,9 @@ V1 已上線。你的工作是照使用者的回饋繼續做、維護內容。
 （預期：vitest 52 通過、tsc 無輸出、籤詩 530 張 0 錯誤。若 art-src/ 不在，代表換了電腦，美術原圖需向使用者要。）
 
 【第一件事】
-問使用者：本機領先遠端 4 個 commit（最新 548480d），他有沒有執行
-  cd ontime-lucky-day && git push --force-with-lease origin main
+先用 `git ls-remote origin refs/heads/main` 與 `git rev-list --count origin/main..HEAD` 查實際狀態。預期本機領先遠端 3 個 commit（最新 e6fe51c），遠端是 94d36d1、信箱已是新的，**不需要 force**。
+問使用者有沒有執行：
+  cd ontime-lucky-day && git push origin main
 （我的 push 被分類器擋，只有他能推。）推完之後，用
   URL=https://lucky-workday.vercel.app/ node scripts/e2e-smoke.mjs
 驗線上，並看線上首頁截圖確認是新名稱「打工庇佑廟」。Edge Function 已部署（v6），不用再處理。

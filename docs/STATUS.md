@@ -5,13 +5,14 @@
 ## 一句話現況
 
 V1 在 **Vercel**：https://lucky-workday.vercel.app/ ，repo `littlefish0331/lucky-workday`（公開）。
-本機已有 **2 個新 commit 還沒推上線**（`3a6c54d`、`548480d`），**使用者要自己執行 force push**（我的 git push 被分類器擋，不要繞路）：
+本機領先遠端 **3 個 commit 還沒推上線**（`3a6c54d` 改名與神明、`548480d` 新籤筒筊杯與 og、`e6fe51c` 交接文件）。
+**遠端 `main` 其實已經是 `94d36d1`、信箱也已是 `littlefish0331@gmail.com`**（用 `git ls-remote origin refs/heads/main` 查證，2026-11-22 深夜）——之前的 force push 早就完成了，所以**現在只要普通 push，不需要 force**：
 
 ```
-cd ontime-lucky-day && git push --force-with-lease origin main
+cd ontime-lucky-day && git push origin main
 ```
 
-推上去之前，線上看到的還是舊名「準時下班宮」；推完 Vercel 自動部署。**接手第一件事：問使用者推了沒。**
+我的 git push 被分類器擋，不要繞路，由使用者自己執行。推上去之前，線上看到的還是舊名「準時下班宮」；推完 Vercel 自動部署。**接手第一件事：問使用者推了沒。**
 
 ## 這個 session（2026-11-22 晚）做完並驗證的事
 
@@ -37,13 +38,13 @@ cd ontime-lucky-day && git push --force-with-lease origin main
 | # | 事項 | 狀態 | 怎麼辦 |
 |---|---|---|---|
 | 1 | ~~Edge Function 重新部署~~ | **已完成（2026-11-22 晚）**。注意：之後只要改籤詩（known-ids 變動）或加投票，就要再部署一次 | 部署用 `mcp__plugin_supabase_supabase__deploy_edge_function`，專案 `csykldmxxzlnwzbamswl`，檔案 `index.ts`、`logic.ts`、`known-ids.json`，`verify_jwt=false` |
-| 2 | **force push** | 使用者要自己執行（我的 push 被分類器擋）。本機領先遠端 4 個 commit（含前兩個舊 commit 改信箱） | `cd ontime-lucky-day && git push --force-with-lease origin main`。推完 Vercel 自動部署 |
+| 2 | **push 本機 3 個新 commit** | 舊的信箱 force push **已完成**（遠端已是新信箱）。現在只要普通 push；我的 push 會被分類器擋，由使用者執行 | `cd ontime-lucky-day && git push origin main`。推完 Vercel 自動部署 |
 | 3 | ~~旺財擠捷運~~ | **已處理**（`public/art/wangcai-mrt.webp`），看過圖 | 程式還沒用 |
 
 ## git 狀態
 
-- 本機 `main` 比遠端多 4 個 commit（網址搬家、交接文件、`3a6c54d` 改名與神明、`548480d` 新籤筒筊杯與 og）。
-- 所有 commit 的作者與提交者信箱已改為 `littlefish0331@gmail.com`（本機 repo 設定也已改）。**遠端還是舊信箱 `youjun.yu@ibm.com`，force push 後才會換掉**。
+- 本機 `main` 比遠端多 **3** 個 commit（`3a6c54d`、`548480d`、`e6fe51c`）；遠端 `main` = `94d36d1`。
+- 所有 commit 的作者與提交者信箱都是 `littlefish0331@gmail.com`，**遠端也已經是**（已實際查證，不是推測）。
 - 改寫前有備份分支 `backup-before-email-rewrite`（只在本機，確認遠端沒問題後可刪）。
 - Vercel 與 GitHub 已連好：push 到 `main` 就自動部署（production）。專案 `lucky-workday`，id `prj_CI7RwyMSwUqqc8yIJoU816v0mAsi`，團隊 `youjuns-projects`（`team_IzBxrz0HlLp7LxzfLHPRvUOi`），Hobby 方案。
 
@@ -194,4 +195,5 @@ python -X utf8 scripts/process-art.py   # art-src 原圖 → public/art
 - **背景伺服器要自己關**：用 `Get-NetTCPConnection -LocalPort <埠>` 找 PID 再關；啟動後要輪詢到真的回應再跑測試（這次有一次起得太慢，e2e 吃到 connection refused）。
 - **Edge 上跑 e2e 的名字**：`e2e-smoke` 輸入框標籤已改成「你的名字或暱稱」，腳本已同步；之後再改標籤要同步改腳本。
 - **og 圖不用請使用者重生**：`art-src/og-notext.png` 在瀏覽器裡用網站字型疊字即可（Canvas，輸出 `public/og.jpg`），文字壓到神像時往左縮、往上挪。
-- **分類器擋了 `git push --force-with-lease`**：commit 可以做，push 要使用者自己執行。
+- **分類器擋了 `git push`**：commit 可以做，push 要使用者自己執行。
+- **交接文件裡的「狀態」要現場查證**：我這次沿用舊記錄寫了「遠端還是舊信箱、要 force push、領先 4 個」，實際遠端早已更新、只領先 3 個。寫進文件前用 `git ls-remote`／`git rev-list --count origin/main..HEAD` 查。
