@@ -131,11 +131,10 @@ def process_characters():
 
     # 動作圖：1024 → 768（畫面實際顯示 ≤ 270 CSS px，3x 螢幕也夠）。保留正方形畫布，不裁邊，前端版面好處理。
     # 殘點多半是 alpha 1~23 的淡點，clean 的門檻（24）會清掉；min_area 清掉剩下的孤立小塊。
+    # 2026-11-23：wangcai-typing/mrt/payday/overtime、pangju-yarn/mrt/glasses/keyboard 這 8 張程式沒用到，
+    # 已從 public/art 移除。原圖仍在 art-src/，要用時把檔名加回下面的清單再跑一次。
     print("== 動作圖 ==")
-    for name in [
-        "wangcai-typing", "wangcai-mrt", "wangcai-payday", "wangcai-overtime",
-        "pangju-yarn", "pangju-mrt", "pangju-glasses", "pangju-keyboard",
-    ]:
+    for name in []:
         im = load(f"{name}.png")
         if im:
             c, n = clean(im, thr=24, min_area=150)

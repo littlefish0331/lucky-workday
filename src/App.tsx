@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { art } from './data/art';
-import { FORTUNES, SPECIAL_YIN, fortuneById } from './data/fortunes';
+import { FORTUNES, SPECIAL_YIN } from './data/fortunes';
 import type { Pain } from './data/pains';
 import { drawFortune, knocksNeeded } from './engine/draw';
 import { normalizeName, taipeiDateKey } from './engine/rng';
-import { kindOf, type Topic } from './engine/types';
+import type { Topic } from './engine/types';
 import { fetchStats, countHit, countKnock, type Stats } from './lib/api';
 import { applyKeep, applyReroll, applyResolve, buildResult } from './lib/play';
 import { clearBook, findResult, loadStore, randomStamp, saveResult, setName as persistName, type Result, type StampSpec } from './lib/storage';
@@ -162,6 +162,3 @@ export function App() {
     </div>
   );
 }
-
-// 保留給測試與除錯：確認陰筊隱藏款屬於吉側，不會誤入「重抽」流程
-export const _debug = { fortuneById, kindOf };
