@@ -29,10 +29,21 @@ export function Steps({ at }: { at: number }) {
 export function NameStep({ initial, initialHonorific, onSubmit }: { initial: string; initialHonorific: string; onSubmit: (name: string, honorific: string) => void }) {
   const [v, setV] = useState(initial);
   const [h, setH] = useState(initialHonorific);
+  const inputRef = useRef<HTMLInputElement>(null);
   const ok = normalizeName(v).length > 0;
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (ok) onSubmit(v.trim().replace(/\s+/g, ' ').slice(0, NAME_MAX), h);
+    if (!ok) return;
+    const name = v.trim().replace(/\s+/g, ' ').slice(0, NAME_MAX);
+    // 實驗（沒有 iPhone 實機驗證）：iOS 在搖籤頁搖手機會跳「還原輸入」，推測是這個輸入框留下的打字紀錄。
+    // 換頁前先讓輸入框失焦、並直接把 DOM 的值清空（程式寫入 value 會讓瀏覽器丟掉這筆編輯紀錄）。
+    // 要直接寫 DOM：這個元件會在同一次更新裡被卸載，setV('') 來不及生效。
+    const el = inputRef.current;
+    if (el) {
+      el.blur();
+      el.value = '';
+    }
+    onSubmit(name, h);
   };
   return (
     <form className="screen stack center" onSubmit={submit}>
@@ -40,6 +51,7 @@ export function NameStep({ initial, initialHonorific, onSubmit }: { initial: str
       <h2>信眾請留名</h2>
       <div className="grow" />
       <input
+        ref={inputRef}
         className="field"
         value={v}
         onChange={(e) => setV(e.target.value)}
@@ -190,19 +202,21 @@ export function StampStep({ name, pain, spec, onDone }: { name: string; pain: st
   );
 }
 
-/* ④ 搖籤筒：搖手機、或手指左右拖曳，兩種都可以，同時有效 */
-/** 手機搖一下加多少進度（0～1）。來回各算一下，約 15 下籤就跳出來（實機回報太難搖：0.05 → 0.07） */
+/* ④ 搖籤筒：像握著籤筒一樣，拿著手機上下搖；或用手指上下拖曳。兩種同時有效 */
+/** 手機搖一下加多少進度（0～1）。約 14 下籤就跳出來；門檻放寬後同樣的搖法會多算很多下，所以進度不再加大 */
 const SHAKE_STEP = 0.07;
+/** 籤筒上下晃動的幅度（px） */
+const BOB = 16;
 export function ShakeStep({ onDone }: { onDone: () => void }) {
   const [prog, setProg] = useState(0);
-  const [tilt, setTilt] = useState(0);
+  const [bob, setBob] = useState(0); // 籤筒上下偏移（px）
   const [popped, setPopped] = useState(false);
   // 搖手機的狀態：off = 不支援或沒授權（只剩拖曳）；ask = iOS 要點一下授權；on = 正在聽
   const [motion, setMotion] = useState<'off' | 'ask' | 'on'>(() => (motionSupport() === 'ask' ? 'ask' : motionSupport() === 'ready' ? 'on' : 'off'));
   const [motionLive, setMotionLive] = useState(false);
   const [denied, setDenied] = useState(false);
-  const last = useRef<number | null>(null);
-  const startX = useRef(0);
+  const last = useRef<{ x: number; y: number } | null>(null);
+  const startY = useRef(0);
   const moved = useRef(0);
   const progRef = useRef(0);
   const doneRef = useRef(false);
@@ -218,13 +232,13 @@ export function ShakeStep({ onDone }: { onDone: () => void }) {
     if (progRef.current >= 1) {
       doneRef.current = true;
       setPopped(true);
-      setTilt(0);
+      setBob(0);
       buzz([30, 30, 80]);
       later(onDone, 1000);
     }
   };
 
-  // 搖手機：每搖一下，進度加一點、籤筒往左右甩一下
+  // 搖手機：每搖一下，進度加一點、籤筒往上或往下頓一下
   const addRef = useRef(add);
   addRef.current = add;
   useEffect(() => {
@@ -232,8 +246,8 @@ export function ShakeStep({ onDone }: { onDone: () => void }) {
     return listenShake({
       onStroke: () => {
         flip.current = -flip.current;
-        setTilt(12 * flip.current);
-        later(() => setTilt(0), 160); // 沒再搖就回正；繼續搖的話下一下會再蓋過去
+        setBob(BOB * flip.current);
+        later(() => setBob(0), 160); // 沒再搖就回正；繼續搖的話下一下會再蓋過去
         addRef.current(SHAKE_STEP);
       },
       onLive: () => setMotionLive(true),
@@ -250,7 +264,7 @@ export function ShakeStep({ onDone }: { onDone: () => void }) {
     }
   };
 
-  const hint = popped ? '一支籤跳出來了！' : motionLive ? '搖手機，或左右拖曳籤筒' : HINTS.shake;
+  const hint = popped ? '一支籤跳出來了！' : motionLive ? '握住手機上下搖，或上下拖曳籤筒' : HINTS.shake;
 
   return (
     <div className="screen stack center">
@@ -262,45 +276,46 @@ export function ShakeStep({ onDone }: { onDone: () => void }) {
           用搖手機的方式搖
         </button>
       )}
-      {denied && !popped && <p className="note">沒開感應也沒關係，用手指拖曳就行。</p>}
+      {denied && !popped && <p className="note">沒開感應也沒關係，用手指上下拖曳就行。</p>}
       <div className="grow" />
       <div
         className="stage"
         role="button"
         tabIndex={0}
-        aria-label="搖籤筒。左右拖曳，或按 Enter 搖動"
+        aria-label="搖籤筒。上下拖曳，或按 Enter 搖動"
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
-          last.current = e.clientX;
-          startX.current = e.clientX;
+          last.current = { x: e.clientX, y: e.clientY };
+          startY.current = e.clientY;
           moved.current = 0;
         }}
         onPointerMove={(e) => {
           if (last.current == null) return;
-          const dx = Math.abs(e.clientX - last.current);
-          last.current = e.clientX;
-          moved.current += dx;
-          setTilt(Math.max(-14, Math.min(14, (e.clientX - startX.current) / 8)));
-          add(dx / 1100);
+          // 進度算「手指走過的總距離」，不分方向：有人還是橫著拖也不會卡住；籤筒的晃動只看上下
+          const d = Math.hypot(e.clientX - last.current.x, e.clientY - last.current.y);
+          last.current = { x: e.clientX, y: e.clientY };
+          moved.current += d;
+          setBob(Math.max(-BOB, Math.min(BOB, (e.clientY - startY.current) / 3)));
+          add(d / 1100);
         }}
         onPointerUp={() => {
           last.current = null;
-          setTilt(0);
+          setBob(0);
           if (moved.current < 8) add(0.12);
         }}
         onPointerCancel={() => {
           last.current = null;
-          setTilt(0);
+          setBob(0);
         }}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            setTilt((t) => (t > 0 ? -8 : 8));
+            setBob((b) => (b > 0 ? -10 : 10));
             add(0.12);
           }
         }}
       >
-        <Cylinder tilt={tilt} progress={prog} popped={popped} />
+        <Cylinder bob={bob} progress={prog} popped={popped} />
       </div>
       <div className="meter" aria-hidden="true">
         <i style={{ width: `${prog * 100}%` }} />

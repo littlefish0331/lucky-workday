@@ -28,9 +28,11 @@ export interface ShakeOptions {
   gravityTau?: number;
 }
 
-// 實機回報「有點難搖」（2026-11-22），門檻由 11 降到 8、release 5 → 4。這是依回報方向調的估計值，不是實測；
-// 降低門檻會讓走路更容易誤觸，所以只在搖籤那一頁才聽。
-export const SHAKE_DEFAULTS = { threshold: 8, release: 4, minGapMs: 130, rearmMs: 260, gravityTau: 0.12 } as const;
+// 實機回報「有點難搖」（2026-11-22）：門檻 11 → 8；第二次回報仍難搖（2026-11-23），再降到 6、release 3。
+// 注意高通濾波會吃掉一部分幅度：原始幅度 8 m/s²、3Hz 的搖法，去重力後只剩約 6 多，所以門檻 8 要幅度 10 以上才算。
+// 合成資料量測：門檻 6 時，幅度 8／3Hz 的普通搖會算（約 17 下／3 秒），走路（幅度 3、6）仍 0 下，
+// 幅度 9／2Hz（慢跑等級）會誤觸；因此只在搖籤那一頁才聽。以上都是估計，沒有實機驗證。
+export const SHAKE_DEFAULTS = { threshold: 6, release: 3, minGapMs: 130, rearmMs: 260, gravityTau: 0.12 } as const;
 
 export interface ShakeReading {
   /** 這一筆是否算一下搖動 */

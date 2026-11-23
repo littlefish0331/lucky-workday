@@ -57,7 +57,7 @@ async function toToss(page, name) {
   const s = await st.boundingBox();
   await page.mouse.move(s.x + s.width / 2, s.y + s.height / 2);
   await page.mouse.down();
-  for (let i = 0; i < 24; i++) await page.mouse.move(s.x + s.width / 2 + (i % 2 ? 90 : -90), s.y + s.height / 2, { steps: 3 });
+  for (let i = 0; i < 24; i++) await page.mouse.move(s.x + s.width / 2, s.y + s.height / 2 + (i % 2 ? 90 : -90), { steps: 3 });
   await page.mouse.up();
   await page.getByRole('button', { name: /擲筊|再擲一次/ }).waitFor({ timeout: 6000 });
 }

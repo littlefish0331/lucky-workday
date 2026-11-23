@@ -27,7 +27,7 @@ for (const [name, r] of [['sheng', 0.1], ['xiao', 0.8], ['yin', 0.99]]) {
   const st = page.locator('.stage'); await st.waitFor();
   const s = await st.boundingBox();
   await page.mouse.move(s.x + s.width / 2, s.y + s.height / 2); await page.mouse.down();
-  for (let i = 0; i < 24; i++) await page.mouse.move(s.x + s.width / 2 + (i % 2 ? 90 : -90), s.y + s.height / 2, { steps: 3 });
+  for (let i = 0; i < 24; i++) await page.mouse.move(s.x + s.width / 2, s.y + s.height / 2 + (i % 2 ? 90 : -90), { steps: 3 });
   await page.mouse.up();
   await page.getByRole('button', { name: /^擲筊$/ }).waitFor({ timeout: 6000 });
   await page.waitForFunction(() => document.querySelector('.toss-canvas')?.dataset.gl === 'ready', null, { timeout: 15000 });

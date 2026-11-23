@@ -60,13 +60,13 @@ await shot('05-stamp-done');
 await page.locator('.cyl').waitFor({ timeout: 4000 });
 ok('按手印 → 進入搖籤');
 
-// 搖籤：左右拖
+// 搖籤：上下拖
 const stage = page.locator('.stage');
 const sb = await stage.boundingBox();
 await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2);
 await page.mouse.down();
 for (let i = 0; i < 24; i++) {
-  await page.mouse.move(sb.x + sb.width / 2 + (i % 2 ? 90 : -90), sb.y + sb.height / 2, { steps: 3 });
+  await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2 + (i % 2 ? 90 : -90), { steps: 3 });
 }
 await shot('06-shake');
 await page.mouse.up();

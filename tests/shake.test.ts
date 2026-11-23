@@ -50,8 +50,18 @@ describe('搖手機偵測（合成資料）', () => {
     expect(n).toBeLessThanOrEqual(24);
   });
 
-  it('輕輕搖（約 3Hz、幅度 8 m/s²）：低於門檻，不算', () => {
-    expect(count(series(3, (t) => [8 * Math.sin(2 * Math.PI * 3 * t), 0, G]))).toBe(0);
+  it('輕輕晃（約 2Hz、幅度 5 m/s²）：低於門檻，不算', () => {
+    expect(count(series(3, (t) => [5 * Math.sin(2 * Math.PI * 2 * t), 0, G]))).toBe(0);
+  });
+
+  it('握著手機沿長邊上下搖，普通力道（約 3Hz、幅度 8 m/s²）：算數，3 秒約 12～24 下', () => {
+    const n = count(series(3, (t) => [0, 8 * Math.sin(2 * Math.PI * 3 * t), G]));
+    expect(n).toBeGreaterThanOrEqual(12);
+    expect(n).toBeLessThanOrEqual(24);
+  });
+
+  it('用力走路（約 2Hz、垂直幅度 6 m/s²）：0 下', () => {
+    expect(count(series(6, (t) => [0.8 * Math.sin(2 * Math.PI * 2 * t), 6 * Math.sin(2 * Math.PI * 2 * t + 1), G]))).toBe(0);
   });
 
   it('單次急促甩動：算 1 下，不會因為餘震連算', () => {

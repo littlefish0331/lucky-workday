@@ -41,6 +41,9 @@ async function session(mode, answer = 'granted') {
   await page.route('**/functions/v1/count', (r) => r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"ok":true}' }));
   await page.addInitScript(({ mode, answer }) => {
     window.__perm = 0;
+    // Edge 的手機模擬偶爾會自己發出真的 devicemotion（isTrusted，像一台傾斜的手機），混進合成資料會讓結果不穩。
+    // 只留測試自己派發的（isTrusted === false）。
+    window.addEventListener('devicemotion', (e) => { if (e.isTrusted) e.stopImmediatePropagation(); }, true);
     if (mode === 'none') { try { delete window.DeviceMotionEvent; } catch { window.DeviceMotionEvent = undefined; } return; }
     if (typeof window.DeviceMotionEvent === 'undefined') window.DeviceMotionEvent = function DeviceMotionEvent() {};
     if (mode === 'ios') window.DeviceMotionEvent.requestPermission = () => { window.__perm++; return Promise.resolve(answer); };
@@ -49,7 +52,7 @@ async function session(mode, answer = 'granted') {
   return { ctx, page, errors };
 }
 
-/** 派發一串合成的 devicemotion：用力左右搖 seconds 秒（約 4Hz、幅度 25 m/s²），每 16ms 一筆 */
+/** 派發一串合成的 devicemotion：握著手機沿長邊（y 軸）上下搖 seconds 秒（約 4Hz、幅度 25 m/s²），每 16ms 一筆 */
 async function shakeHard(page, seconds) {
   await page.evaluate(async (seconds) => {
     const G = 9.81;
@@ -63,7 +66,7 @@ async function shakeHard(page, seconds) {
     await new Promise((resolve) => {
       const tick = () => {
         const t = (performance.now() - start) / 1000;
-        fire(25 * Math.sin(2 * Math.PI * 4 * t), 0, G);
+        fire(0, 25 * Math.sin(2 * Math.PI * 4 * t), G);
         t >= seconds ? resolve() : setTimeout(tick, 16);
       };
       tick();
@@ -89,7 +92,7 @@ async function toShake(page, name) {
 }
 
 const meter = (page) => page.evaluate(() => parseFloat(document.querySelector('.meter i')?.style.width ?? '0'));
-const tiltOf = (page) => page.evaluate(() => document.querySelector('.cyl')?.style.transform ?? '');
+const bobOf = async (page) => parseFloat(((await page.evaluate(() => document.querySelector('.cyl')?.style.transform ?? '')).match(/translateY\((-?[\d.]+)px/)?.[1]) ?? '99');
 
 // ───── A. 桌機（有 DeviceMotionEvent 但沒有資料）：不出現授權鈕、拖曳照常、不報錯 ─────
 {
@@ -97,11 +100,11 @@ const tiltOf = (page) => page.evaluate(() => document.querySelector('.cyl')?.sty
   await toShake(page, '搖測桌機' + Date.now());
   await page.waitForTimeout(2000); // 超過「沒有資料」的等待時間
   check((await page.locator('.shake-allow').count()) === 0, '桌機：沒有出現授權鈕');
-  check(/左右拖曳/.test(await page.locator('.sub').first().innerText()), '桌機：提示文字仍是拖曳版本');
+  check(/上下拖曳/.test(await page.locator('.sub').first().innerText()), '桌機：提示文字是上下拖曳');
   const sb = await page.locator('.stage').boundingBox();
   await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2);
   await page.mouse.down();
-  for (let i = 0; i < 24; i++) await page.mouse.move(sb.x + sb.width / 2 + (i % 2 ? 90 : -90), sb.y + sb.height / 2, { steps: 3 });
+  for (let i = 0; i < 24; i++) await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2 + (i % 2 ? 90 : -90), { steps: 3 });
   await page.mouse.up();
   await page.getByRole('button', { name: '擲筊' }).waitFor({ timeout: 5000 }).then(() => ok('桌機：手指拖曳照常搖出籤'), () => bad('桌機：拖曳之後沒進到擲筊'));
   check(errors.length === 0, '桌機：沒有 JS 錯誤' + (errors.length ? '：' + errors.join(' | ') : ''));
@@ -117,17 +120,17 @@ const tiltOf = (page) => page.evaluate(() => document.querySelector('.cyl')?.sty
   await shakeHard(page, 0.8);
   const mid = await meter(page);
   check(mid > before && mid > 5, `Android：搖 0.8 秒進度條動了（${before}% → ${Math.round(mid)}%）`);
-  check(/左右拖曳/.test(await page.locator('.sub').first().innerText()) && /搖手機/.test(await page.locator('.sub').first().innerText()), 'Android：收到資料後提示改成「搖手機，或左右拖曳」');
-  // 搖的過程中連續取樣籤筒角度：要同時看到左傾與右傾（每一下會換邊）
+  check(/上下搖/.test(await page.locator('.sub').first().innerText()) && /上下拖曳/.test(await page.locator('.sub').first().innerText()), 'Android：收到資料後提示改成「握住手機上下搖，或上下拖曳」');
+  // 搖的過程中連續取樣籤筒的上下偏移：要同時看到往上與往下（每一下會換邊）
   const seen = new Set();
   const sampler = (async () => {
-    for (let i = 0; i < 60; i++) { seen.add(Math.round(parseFloat((await tiltOf(page)).match(/rotate\((-?[\d.]+)deg/)?.[1] ?? '0'))); await page.waitForTimeout(25); }
+    for (let i = 0; i < 60; i++) { seen.add(Math.round(await bobOf(page))); await page.waitForTimeout(25); }
   })();
   await shakeHard(page, 1.2);
   await sampler;
-  check(seen.has(12) && seen.has(-12), `Android：搖的過程中籤筒左右各傾斜過（看到的角度：${[...seen].sort((a, b) => a - b).join('、')}）`);
+  check(seen.has(16) && seen.has(-16), `Android：搖的過程中籤筒上下各頓過（看到的偏移 px：${[...seen].sort((a, b) => a - b).join('、')}）`);
   await page.waitForTimeout(400);
-  check(Math.round(parseFloat((await tiltOf(page)).match(/rotate\((-?[\d.]+)deg/)?.[1] ?? '99')) === 0, 'Android：停手之後籤筒回正');
+  check(Math.round(await bobOf(page)) === 0, 'Android：停手之後籤筒回正');
   await page.screenshot({ path: 'shots/s1-shaking.png' });
   await shakeHard(page, 4);
   await page.getByRole('button', { name: '擲筊' }).waitFor({ timeout: 6000 }).then(() => ok('Android：搖滿之後籤跳出來、進到擲筊'), () => bad('Android：搖了 4.8 秒還是沒進到擲筊'));
@@ -192,7 +195,7 @@ const tiltOf = (page) => page.evaluate(() => document.querySelector('.cyl')?.sty
   const sb = await page.locator('.stage').boundingBox();
   await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2);
   await page.mouse.down();
-  for (let i = 0; i < 24; i++) await page.mouse.move(sb.x + sb.width / 2 + (i % 2 ? 90 : -90), sb.y + sb.height / 2, { steps: 3 });
+  for (let i = 0; i < 24; i++) await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2 + (i % 2 ? 90 : -90), { steps: 3 });
   await page.mouse.up();
   await page.getByRole('button', { name: '擲筊' }).waitFor({ timeout: 5000 }).then(() => ok('iOS 拒絕：用手指拖曳仍能完成'), () => bad('iOS 拒絕：拖曳之後沒進到擲筊'));
   check(errors.length === 0, 'iOS 拒絕：沒有 JS 錯誤' + (errors.length ? '：' + errors.join(' | ') : ''));
@@ -206,6 +209,27 @@ const tiltOf = (page) => page.evaluate(() => document.querySelector('.cyl')?.sty
   await page.waitForTimeout(500);
   check((await page.locator('.shake-allow').count()) === 0, '沒有 DeviceMotion：不出現授權鈕');
   check(errors.length === 0, '沒有 DeviceMotion：沒有 JS 錯誤' + (errors.length ? '：' + errors.join(' | ') : ''));
+  await ctx.close();
+}
+
+// ───── G. 報名頁按「就是我」：輸入框已失焦且值清空（避免 iOS「還原輸入」），名字仍正確帶到下一頁 ─────
+{
+  const { ctx, page, errors } = await session('android');
+  const NAME = '還原' + String(Date.now()).slice(-6); // 名字上限 12 字
+  await page.goto(URL, { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: /進廟求籤|看今天的籤/ }).click();
+  const input = page.getByLabel('你的名字或暱稱');
+  await input.fill(NAME);
+  const handle = await input.elementHandle(); // 先抓住元素：換頁後它會被卸載，但仍可讀它最後的狀態
+  await page.getByRole('button', { name: '就是我' }).click();
+  await page.locator('.pain').first().waitFor();
+  const st = await handle.evaluate((el) => ({ value: el.value, focused: document.activeElement === el }));
+  check(st.value === '', '報名頁換頁後：輸入框的值已清空');
+  check(!st.focused, '報名頁換頁後：輸入框已失焦');
+  await page.locator('.pain').first().click();
+  await page.locator('.contract').waitFor();
+  check((await page.locator('.contract b').first().innerText()) === NAME, '名字仍正確帶到蓋手印頁（沒有因為清空輸入框而丟掉）');
+  check(errors.length === 0, '報名頁：沒有 JS 錯誤' + (errors.length ? '：' + errors.join(' | ') : ''));
   await ctx.close();
 }
 

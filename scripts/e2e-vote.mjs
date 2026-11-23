@@ -46,7 +46,7 @@ async function reachCard(page, name) {
   const sb = await page.locator('.stage').boundingBox();
   await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2);
   await page.mouse.down();
-  for (let i = 0; i < 24; i++) await page.mouse.move(sb.x + sb.width / 2 + (i % 2 ? 90 : -90), sb.y + sb.height / 2, { steps: 3 });
+  for (let i = 0; i < 24; i++) await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2 + (i % 2 ? 90 : -90), { steps: 3 });
   await page.mouse.up();
   await page.getByRole('button', { name: '擲筊' }).waitFor({ timeout: 5000 });
   for (let i = 0; i < 3; i++) {

@@ -56,7 +56,7 @@ export const RESOLVE_TIPS = [
 
 export const HINTS = {
   stamp: '按住紅印泥，等它蓋完',
-  shake: '左右拖曳籤筒，把籤搖出來',
+  shake: '上下拖曳籤筒，把籤搖出來',
   toss: '點一下，把筊杯擲出去',
   woodfish: '連續點木魚積功德，點越快越好',
 };

@@ -3,9 +3,10 @@ import { art } from '../data/art';
 import type { Deity as DeityInfo } from '../data/deities';
 import type { StampSpec } from '../lib/storage';
 
-export function Cylinder({ tilt = 0, progress = 0, popped = false }: { tilt?: number; progress?: number; popped?: boolean }) {
+/** bob：籤筒上下偏移（px，正值往下）。握著籤筒上下搖的感覺：順著偏移方向微微歪一點 */
+export function Cylinder({ bob = 0, progress = 0, popped = false }: { bob?: number; progress?: number; popped?: boolean }) {
   return (
-    <div className="cyl" style={{ transform: `rotate(${tilt}deg)` }}>
+    <div className="cyl" style={{ transform: `translateY(${bob}px) rotate(${bob * 0.2}deg)` }}>
       <img className="cyl-img" src={art.cylinder} alt="籤筒" draggable={false} />
       {popped && <img className="cyl-stick" src={art.stick} alt="" aria-hidden="true" draggable={false} />}
       {progress > 0 && !popped && <i className="cyl-bar" style={{ width: `${progress * 100}%` }} />}
