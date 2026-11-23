@@ -20,6 +20,7 @@ for (const [name, r] of [['sheng', 0.1], ['xiao', 0.8], ['yin', 0.99]]) {
   await page.getByRole('button', { name: /進廟求籤|看今天的籤/ }).click();
   await page.getByLabel('你的名字或暱稱').fill('驗面' + name + Date.now());
   await page.getByRole('button', { name: '就是我' }).click();
+  await page.locator('.topic').first().click();
   await page.locator('.pain').first().click();
   const pad = page.locator('.inkpad'); await pad.waitFor();
   const b = await pad.boundingBox();

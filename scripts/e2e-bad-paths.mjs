@@ -21,6 +21,7 @@ async function ritual(page, name) {
   await page.getByRole('button', { name: /進廟求籤|看今天的籤/ }).click();
   await page.getByLabel('你的名字或暱稱').fill(name);
   await page.getByRole('button', { name: '就是我' }).click();
+  await page.locator('.topic').first().click();
   await page.locator('.pain').first().click();
   const pad = page.locator('.inkpad');
   const b = await pad.boundingBox();

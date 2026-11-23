@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, type FormEvent, type PointerEvent as RPoin
 import { Block, Cylinder, StampImg } from '../components/ui';
 import { HONORIFICS, honorificById } from '../data/honorifics';
 import { HINTS } from '../data/texts';
-import { TOPIC_LABEL, pickPainBatch, type Pain } from '../data/pains';
+import { TOPICS, TOPIC_LABEL, pickPainBatch, topicHint, type Pain } from '../data/pains';
+import type { Topic } from '../engine/types';
 import { NAME_MAX } from '../engine/config';
 import { throwJiaobei } from '../engine/draw';
 import { normalizeName } from '../engine/rng';
@@ -85,26 +86,57 @@ export function NameStep({ initial, initialHonorific, onSubmit }: { initial: str
   );
 }
 
-/* ② 今天有什麼困擾 */
+/* ② 先選行業，再選今天的困擾（選了行業，抽籤就只抽那個行業的籤，所以第一層不能省） */
 export function PainStep({ honorific, onPick }: { honorific: string; onPick: (p: Pain) => void }) {
-  const seen = useRef(new Set<string>());
-  const [batch, setBatch] = useState<Pain[]>(() => pickPainBatch(seen.current));
+  const seen = useRef(new Set<string>()); // 各行業已看過的痛點 id（id 不重複，放同一個 Set 就夠）
+  const [topic, setTopic] = useState<Topic | null>(null);
+  const [batch, setBatch] = useState<Pain[]>([]);
+  const ask = honorificById(honorific).ask;
+
+  const choose = (t: Topic) => {
+    setBatch(pickPainBatch(t, seen.current));
+    setTopic(t);
+    window.scrollTo(0, 0);
+  };
+
+  if (!topic) {
+    return (
+      <div className="screen stack">
+        <Steps at={2} />
+        <h2>{ask}，是哪一行的？</h2>
+        <div className="pains" role="list">
+          {TOPICS.map((t) => (
+            <button key={t} className="topic" role="listitem" onClick={() => choose(t)}>
+              <b>{TOPIC_LABEL[t]}</b>
+              <span>{topicHint(t)}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="screen stack">
       <Steps at={2} />
-      <h2>{honorificById(honorific).ask}，今天有什麼困擾？</h2>
+      <h2>{ask}，今天有什麼困擾？</h2>
+      <p className="sub">{TOPIC_LABEL[topic]}的困擾，選一個最像的</p>
       <div className="pains" role="list">
         {batch.map((p) => (
           <button key={p.id} className="pain" role="listitem" onClick={() => onPick(p)}>
-            <small>{TOPIC_LABEL[p.topic]}</small>
             <b>{p.label}</b>
             <span>{p.hint}</span>
           </button>
         ))}
       </div>
-      <button className="btn ghost" onClick={() => setBatch(pickPainBatch(seen.current))}>
-        換一批
-      </button>
+      <div className="row">
+        <button className="btn ghost" onClick={() => setBatch(pickPainBatch(topic, seen.current))}>
+          換一批
+        </button>
+        <button className="btn ghost" onClick={() => setTopic(null)}>
+          換行業
+        </button>
+      </div>
     </div>
   );
 }

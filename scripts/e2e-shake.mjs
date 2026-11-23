@@ -80,6 +80,7 @@ async function toShake(page, name) {
   await page.getByRole('button', { name: /進廟求籤|看今天的籤/ }).click();
   await page.getByLabel('你的名字或暱稱').fill(name);
   await page.getByRole('button', { name: '就是我' }).click();
+  await page.locator('.topic').first().click();
   await page.locator('.pain').first().click();
   const pad = page.locator('.inkpad');
   await pad.waitFor();
@@ -222,6 +223,7 @@ const bobOf = async (page) => parseFloat(((await page.evaluate(() => document.qu
   await input.fill(NAME);
   const handle = await input.elementHandle(); // 先抓住元素：換頁後它會被卸載，但仍可讀它最後的狀態
   await page.getByRole('button', { name: '就是我' }).click();
+  await page.locator('.topic').first().click();
   await page.locator('.pain').first().waitFor();
   const st = await handle.evaluate((el) => ({ value: el.value, focused: document.activeElement === el }));
   check(st.value === '', '報名頁換頁後：輸入框的值已清空');

@@ -33,15 +33,28 @@ await page.getByLabel('你的名字或暱稱').fill(NAME);
 await shot('02-name');
 await page.getByRole('button', { name: '就是我' }).click();
 
-// 痛點：有 6 個，可換一批
+// 步驟②：先選行業（6 個），再選該行業的困擾（6 個、可換一批、可換行業）
+await page.locator('.topic').first().waitFor();
+const topics = await page.locator('.topic b').allInnerTexts();
+topics.length === 6 ? ok(`行業 6 個：${topics.join('、')}`) : bad(`行業數量 ${topics.length}`);
+await shot('03a-topic');
+const th = await page.evaluate(() => [...document.querySelectorAll('.topic')].map((b) => Math.round(b.getBoundingClientRect().height)));
+th.every((h) => h >= 48) ? ok(`行業鈕高度 ≥ 48px（${th.join('、')}）`) : bad(`行業鈕太矮：${th.join('、')}`);
+(await page.locator('.pain').count()) === 0 ? ok('選行業之前，不會看到痛點') : bad('還沒選行業就出現痛點');
+await page.locator('.topic').filter({ hasText: '工程師' }).click();
 await page.locator('.pain').first().waitFor();
 const n1 = await page.locator('.pain').count();
-n1 === 6 ? ok('痛點 6 個選項') : bad(`痛點數量 ${n1}`);
+n1 === 6 ? ok('該行業的困擾 6 個選項') : bad(`困擾數量 ${n1}`);
 const t1 = await page.locator('.pain b').allInnerTexts();
 await page.getByRole('button', { name: /換一批/ }).click();
 const t2 = await page.locator('.pain b').allInnerTexts();
 t1.join() !== t2.join() ? ok('換一批會換內容') : bad('換一批沒有變');
+t1.some((x) => t2.includes(x)) ? bad('換一批出現重複的困擾：' + t1.filter((x) => t2.includes(x)).join('、')) : ok('換一批與上一批完全不重複');
 await shot('03-pain');
+await page.getByRole('button', { name: /換行業/ }).click();
+(await page.locator('.topic').count()) === 6 && (await page.locator('.pain').count()) === 0 ? ok('換行業：回到行業選單') : bad('換行業沒有回到選單');
+await page.locator('.topic').filter({ hasText: '工程師' }).click();
+await page.locator('.pain').first().waitFor();
 await page.locator('.pain').nth(0).click();
 
 // 按手印：按住 1.3 秒
