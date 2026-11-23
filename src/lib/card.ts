@@ -2,6 +2,7 @@
 // 美術到位前，底圖由程式繪製（紙紋、雙框、角飾）。
 import { art, loadImage } from '../data/art';
 import { stampDataUrl } from './stamp';
+import { SEAL_FONT_FAMILY, SEAL_FONT_WEIGHT } from './scan';
 import type { Result } from './storage';
 import { STAMP_CAPTION } from './stamp';
 import { honorificById } from '../data/honorifics';
@@ -192,6 +193,7 @@ export async function drawCard(r: Result, opt: CardOptions = {}): Promise<HTMLCa
       document.fonts.load(`700 80px ${SERIF}`, all),
       document.fonts.load(`400 80px ${SERIF}`, all),
       document.fonts.load(`400 80px ${KAI}`, all),
+      document.fonts.load(`${SEAL_FONT_WEIGHT} 80px ${SEAL_FONT_FAMILY}`, r.stamp.text ?? ''),
     ]);
   } catch {
     /* 字型載入失敗就用系統字型，仍然畫得出來 */
@@ -206,7 +208,8 @@ export async function drawCard(r: Result, opt: CardOptions = {}): Promise<HTMLCa
   const bg = await loadImage(bad ? art.cardBad : art.cardGood);
   if (bg) ctx.drawImage(bg, 0, 0, CARD_W, CARD_H);
   else paper(ctx, p, bad);
-  const stampArt = opt.stampImage === undefined ? await loadImage(art.stamp(r.stamp)) : opt.stampImage;
+  // 印章（kind=seal）是程式畫的、沒有圖檔，直接走下面的程式繪製，不要去要一張不存在的圖
+  const stampArt = opt.stampImage === undefined ? (r.stamp.kind === 'seal' ? null : await loadImage(art.stamp(r.stamp))) : opt.stampImage;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
 

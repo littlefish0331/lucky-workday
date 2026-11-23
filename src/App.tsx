@@ -62,7 +62,6 @@ export function App() {
     // 回訪：同名同日已經抽過 → 直接給看，不重跑儀式
     const hit = name ? findResult(store, name, date) : null;
     if (hit) { play.current.result = hit; return go({ s: 'card', r: hit, today: true }); }
-    play.current.stamp = randomStamp();
     play.current.honorific = store.honorific ?? '';
     go({ s: 'name' });
   };
@@ -71,6 +70,7 @@ export function App() {
     setStore(persistName(name, honorific || undefined));
     play.current.name = name;
     play.current.honorific = honorific;
+    play.current.stamp = randomStamp(Math.random, name); // 印章要刻名字，所以名字確定後才抽
     const hit = findResult(loadStore(), name, date);
     if (hit) { play.current.result = hit; return go({ s: 'card', r: hit, today: true }); }
     go({ s: 'pain' });

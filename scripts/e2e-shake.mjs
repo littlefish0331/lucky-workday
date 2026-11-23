@@ -82,7 +82,7 @@ async function toShake(page, name) {
   await page.getByRole('button', { name: '就是我' }).click();
   await page.locator('.topic').first().click();
   await page.locator('.pain').first().click();
-  const pad = page.locator('.inkpad');
+  const pad = page.locator('.stampzone');
   await pad.waitFor();
   const b = await pad.boundingBox();
   await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);

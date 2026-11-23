@@ -58,7 +58,7 @@ await page.locator('.pain').first().waitFor();
 await page.locator('.pain').nth(0).click();
 
 // 按手印：按住 1.3 秒
-const pad = page.locator('.inkpad');
+const pad = page.locator('.stampzone');
 await pad.waitFor();
 await shot('04-stamp-before');
 const box = await pad.boundingBox();

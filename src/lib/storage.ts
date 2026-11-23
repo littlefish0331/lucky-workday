@@ -1,14 +1,18 @@
 import type { Level, Topic } from '../engine/types';
 import { LEVELS, TOPICS } from '../engine/types';
 import { normalizeName } from '../engine/rng';
+import { sealText } from './scan';
 
-export type StampKind = 'finger' | 'palm' | 'cat' | 'dog';
+/** palm 已不再抽出，但舊紀錄裡還有，籤卡要能繼續顯示 */
+export type StampKind = 'finger' | 'seal' | 'palm' | 'cat' | 'dog';
 export interface StampSpec {
   kind: StampKind;
   idx: number;
   /** 旋轉角度（度） */
   rot: number;
   scale: number;
+  /** 印章（seal）刻的字，取自玩家名字的前幾個漢字 */
+  text?: string;
 }
 export type Outcome = 'direct' | 'rerolled' | 'kept' | 'resolved';
 
@@ -124,14 +128,24 @@ export function clearBook(): Store {
   return next;
 }
 
-export function randomStamp(rand: () => number = Math.random): StampSpec {
+/** 手印種類的機率：指印 35%、印章 35%、貓掌 15%、狗掌 15%（貓狗是「你按指印，牠們代簽」的趣味變化） */
+export const STAMP_ODDS = { finger: 0.35, seal: 0.7, cat: 0.85 } as const;
+
+/**
+ * 隨機抽一種手印。印章要刻玩家的名字，所以要給名字；名字裡沒有漢字（例如純英文）就不抽印章，
+ * 抽到印章的機率改給指印。掌印（palm）不再抽出。
+ */
+export function randomStamp(rand: () => number = Math.random, name = ''): StampSpec {
+  const text = sealText(name);
   const r = rand();
-  const kind: StampKind = r < 0.35 ? 'finger' : r < 0.6 ? 'palm' : r < 0.8 ? 'cat' : 'dog';
-  const count = kind === 'finger' ? 4 : kind === 'palm' ? 2 : 3;
+  let kind: StampKind = r < STAMP_ODDS.finger ? 'finger' : r < STAMP_ODDS.seal ? 'seal' : r < STAMP_ODDS.cat ? 'cat' : 'dog';
+  if (kind === 'seal' && !text) kind = 'finger';
+  const count = kind === 'finger' ? 4 : kind === 'seal' ? 1 : 3;
   return {
     kind,
     idx: Math.floor(rand() * count),
     rot: Math.round(-28 + rand() * 56),
     scale: Math.round((0.9 + rand() * 0.25) * 100) / 100,
+    ...(kind === 'seal' ? { text } : {}),
   };
 }

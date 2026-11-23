@@ -55,7 +55,9 @@ export const RESOLVE_TIPS = [
 ];
 
 export const HINTS = {
-  stamp: '按住紅印泥，等它蓋完',
+  stamp: '按住框框 1 秒，蓋個指印',
+  stampSeal: '按住框框 1 秒，蓋上你的印章',
+  stampShort: '按久一點',
   shake: '上下拖曳籤筒，把籤搖出來',
   toss: '點一下，把筊杯擲出去',
   woodfish: '連續點木魚積功德，點越快越好',

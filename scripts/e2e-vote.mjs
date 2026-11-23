@@ -36,7 +36,7 @@ async function reachCard(page, name) {
   await page.getByRole('button', { name: '就是我' }).click();
   await page.locator('.topic').first().click();
   await page.locator('.pain').first().click();
-  const pad = page.locator('.inkpad');
+  const pad = page.locator('.stampzone');
   await pad.waitFor();
   const box = await pad.boundingBox();
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);

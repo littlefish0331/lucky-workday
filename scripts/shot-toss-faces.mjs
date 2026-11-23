@@ -22,7 +22,7 @@ for (const [name, r] of [['sheng', 0.1], ['xiao', 0.8], ['yin', 0.99]]) {
   await page.getByRole('button', { name: '就是我' }).click();
   await page.locator('.topic').first().click();
   await page.locator('.pain').first().click();
-  const pad = page.locator('.inkpad'); await pad.waitFor();
+  const pad = page.locator('.stampzone'); await pad.waitFor();
   const b = await pad.boundingBox();
   await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2); await page.mouse.down(); await page.waitForTimeout(1400); await page.mouse.up();
   const st = page.locator('.stage'); await st.waitFor();

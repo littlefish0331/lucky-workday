@@ -8,13 +8,16 @@ import { NAME_MAX } from '../engine/config';
 import { throwJiaobei } from '../engine/draw';
 import { normalizeName } from '../engine/rng';
 import type { Jiaobei } from '../engine/types';
-import { buzz } from '../lib/haptics';
+import { buzz, vibrate } from '../lib/haptics';
 import { reduceMotion, useLater } from '../lib/hooks';
 import { planThrow, type BlockPlan } from '../lib/jiaobei-physics';
 import type { JiaobeiScene } from '../lib/jiaobei-scene';
 import { listenShake, motionSupport, requestMotionPermission } from '../lib/motion';
+import { FP_H, FP_W, SEAL_FONT_FAMILY, SEAL_FONT_WEIGHT, SEAL_FRAME, fingerRings, ringFraction, sealBorderFraction, sealCells, sealCharFraction } from '../lib/scan';
+import { STAMP_CAPTION } from '../lib/stamp';
 import type { StampSpec } from '../lib/storage';
 
+const FINGER_RINGS = fingerRings();
 const TOTAL_STEPS = 5;
 export function Steps({ at }: { at: number }) {
   return (
@@ -141,21 +144,31 @@ export function PainStep({ honorific, onPick }: { honorific: string; onPick: (p:
   );
 }
 
-/* ③ 蓋手印 */
+/* ③ 蓋指印（或印章）：不用再按紅印泥，直接按住框起來的蓋章區 1 秒。
+ * 指紋（或方印）在按下的位置，一圈一圈、一個字一個字亮起，像手機設定指紋的掃描動畫。
+ * 貓掌、狗掌是趣味變化：你按指印，牠們代簽。 */
+const HOLD_MS = 1000;
+const SCAN_SIZE = 124; // 掃描圖示的邊長（px），和蓋好的手印同大
 export function StampStep({ name, pain, spec, onDone }: { name: string; pain: string; spec: StampSpec; onDone: () => void }) {
   const [p, setP] = useState(0);
   const [hold, setHold] = useState(false);
   const [signed, setSigned] = useState(false);
+  const [short, setShort] = useState(false); // 剛剛沒按滿，要提示「按久一點」
+  const [at, setAt] = useState<{ x: number; y: number } | null>(null); // 掃描圖示中心，相對於蓋章區
   const raf = useRef(0);
   const t0 = useRef(0);
   const marks = useRef(0);
+  const pRef = useRef(0);
   const doneRef = useRef(false);
+  const zone = useRef<HTMLDivElement>(null);
   const later = useLater();
-  const HOLD_MS = 1000;
+  const isSeal = spec.kind === 'seal';
 
   const stop = () => {
     cancelAnimationFrame(raf.current);
     if (!doneRef.current) {
+      if (pRef.current > 0.02) setShort(true); // 有按下去、但沒按滿才提示
+      pRef.current = 0;
       setHold(false);
       setP(0);
     }
@@ -164,51 +177,63 @@ export function StampStep({ name, pain, spec, onDone }: { name: string; pain: st
 
   const tick = () => {
     const t = Math.min(1, (performance.now() - t0.current) / HOLD_MS);
+    pRef.current = t;
     setP(t);
     const m = Math.floor(t * 4);
     if (m > marks.current && t < 1) {
       marks.current = m;
-      buzz(12);
+      vibrate(12); // 只在有震動功能的裝置震（Android）；不做畫面微震
     }
     if (t >= 1) {
       doneRef.current = true;
       setSigned(true);
       setHold(false);
-      buzz([40, 30, 70]);
+      vibrate([40, 30, 70]);
       later(onDone, 1100);
       return;
     }
     raf.current = requestAnimationFrame(tick);
   };
-  const start = () => {
+  const start = (clientX?: number, clientY?: number) => {
     if (doneRef.current) return;
+    const z = zone.current?.getBoundingClientRect();
+    if (z) {
+      // 掃描圖示放在手指按下的位置，但不能超出蓋章區
+      const half = SCAN_SIZE / 2;
+      const cx = clientX == null ? z.width / 2 : clientX - z.left;
+      const cy = clientY == null ? z.height / 2 : clientY - z.top;
+      setAt({ x: Math.min(z.width - half, Math.max(half, cx)), y: Math.min(z.height - half, Math.max(half, cy)) });
+    }
     marks.current = 0;
+    pRef.current = 0;
     t0.current = performance.now();
+    setShort(false);
     setHold(true);
     raf.current = requestAnimationFrame(tick);
   };
 
-  const R = 91;
-  const C = 2 * Math.PI * R;
+  const sub = signed ? '登記完成。' : short ? HINTS.stampShort : isSeal ? HINTS.stampSeal : HINTS.stamp;
   return (
     <div className="screen stack center">
       <Steps at={3} />
-      <h2>蓋個手印</h2>
+      <h2>{isSeal ? '蓋個印章' : '蓋個指印'}</h2>
       <div className="contract">
         <h3>求籤登記單</h3>
         <div>
           信眾 <b>{name}</b>，因「<b>{pain}</b>」之事，來本廟求籤一支。
         </div>
         <div>抽到什麼都不退貨，明天的班照樣要上。</div>
-        {signed && <StampImg className="signed on" spec={spec} />}
       </div>
-      <div className="grow" />
-      <p className="sub">{signed ? '登記完成。' : HINTS.stamp}</p>
-      <button
-        className={`inkpad${hold ? ' hold' : ''}`}
-        onPointerDown={(e: RPointerEvent<HTMLButtonElement>) => {
+      <p className="sub" role="status">{sub}</p>
+      <div
+        ref={zone}
+        className={`stampzone${hold ? ' hold' : ''}${signed ? ' done' : ''}`}
+        role="button"
+        tabIndex={0}
+        aria-label={isSeal ? '按住 1 秒，蓋印章' : '按住 1 秒，蓋指印'}
+        onPointerDown={(e: RPointerEvent<HTMLDivElement>) => {
           e.currentTarget.setPointerCapture(e.pointerId);
-          start();
+          start(e.clientX, e.clientY);
         }}
         onPointerUp={stop}
         onPointerCancel={stop}
@@ -220,17 +245,73 @@ export function StampStep({ name, pain, spec, onDone }: { name: string; pain: st
           }
         }}
         onKeyUp={(e) => (e.key === ' ' || e.key === 'Enter') && stop()}
-        aria-label="按住 1 秒，蓋手印"
-        disabled={signed}
       >
-        <svg className="ring" viewBox="0 0 200 200" aria-hidden="true">
-          <circle className="bg" cx="100" cy="100" r={R} />
-          <circle className="fg" cx="100" cy="100" r={R} strokeDasharray={C} strokeDashoffset={C * (1 - p)} />
-        </svg>
-        {signed ? '成了' : '按住\n蓋手印'}
-      </button>
+        <i className="corner tl" />
+        <i className="corner tr" />
+        <i className="corner bl" />
+        <i className="corner br" />
+        {!hold && !signed && <span className="zone-tip">{short ? HINTS.stampShort : '按在這裡'}</span>}
+        {hold && at && <ScanMark spec={spec} p={p} x={at.x} y={at.y} />}
+        {signed && <SignedMark spec={spec} at={at} />}
+      </div>
       <div style={{ height: 8 }} />
     </div>
+  );
+}
+
+/** 按住時的掃描動畫：指紋一圈一圈亮起，或方印先描框、再一個字一個字亮 */
+function ScanMark({ spec, p, x, y }: { spec: StampSpec; p: number; x: number; y: number }) {
+  const style = { left: x - SCAN_SIZE / 2, top: y - SCAN_SIZE / 2, width: SCAN_SIZE, height: SCAN_SIZE };
+  if (spec.kind === 'seal') {
+    const cells = sealCells(spec.text ?? '');
+    const border = sealBorderFraction(p);
+    const { outer, inner } = SEAL_FRAME;
+    return (
+      <svg className="scan" style={style} viewBox="0 0 100 100" aria-hidden="true">
+        <rect x={outer.x} y={outer.y} width={outer.w} height={outer.w} className="scan-dim" />
+        <rect x={inner.x} y={inner.y} width={inner.w} height={inner.w} className="scan-dim thin" />
+        <rect x={outer.x} y={outer.y} width={outer.w} height={outer.w} className="scan-lit" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - border} />
+        <rect x={inner.x} y={inner.y} width={inner.w} height={inner.w} className="scan-lit thin" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - border} />
+        {cells.map((c, i) => (
+          <text
+            key={i}
+            x={c.x}
+            y={c.y}
+            fontSize={c.size}
+            fontFamily={SEAL_FONT_FAMILY}
+            fontWeight={SEAL_FONT_WEIGHT}
+            textAnchor="middle"
+            dominantBaseline="central"
+            className="scan-char"
+            style={{ opacity: 0.16 + 0.84 * sealCharFraction(p, i, cells.length) }}
+          >
+            {c.ch}
+          </text>
+        ))}
+      </svg>
+    );
+  }
+  return (
+    <svg className="scan" style={style} viewBox={`0 0 ${FP_W} ${FP_H}`} aria-hidden="true">
+      {FINGER_RINGS.map((r, k) => (
+        <g key={k}>
+          <path d={r.d} className="scan-dim" />
+          <path d={r.d} className="scan-lit" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - ringFraction(p, k, FINGER_RINGS.length)} />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/** 蓋好之後：指印／印章蓋在按下的位置；貓掌、狗掌是「代為簽收」，蓋在框的中央，旁邊多一行字 */
+function SignedMark({ spec, at }: { spec: StampSpec; at: { x: number; y: number } | null }) {
+  const proxy = spec.kind === 'cat' || spec.kind === 'dog';
+  const pos = proxy || !at ? { left: '50%', top: '50%' } : { left: at.x, top: at.y };
+  return (
+    <>
+      <StampImg className="signed on" spec={spec} style={pos} />
+      {proxy && <span className="proxy-cap">{STAMP_CAPTION[spec.kind]}</span>}
+    </>
   );
 }
 

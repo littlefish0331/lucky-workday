@@ -79,28 +79,51 @@ describe('一局的狀態轉換', () => {
 });
 
 describe('手印', () => {
-  it('四種都會出現，貓與狗合計約 40%', () => {
-    const c = { finger: 0, palm: 0, cat: 0, dog: 0 };
-    let seed = 12345;
-    const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const lcg = (seed: number) => () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+
+  it('新規格的機率：指印 35%、印章 35%、貓 15%、狗 15%；不再抽出掌印', () => {
+    const c = { finger: 0, seal: 0, palm: 0, cat: 0, dog: 0 };
+    const rand = lcg(12345);
     const N = 20000;
-    for (let i = 0; i < N; i++) c[randomStamp(rand).kind]++;
+    for (let i = 0; i < N; i++) c[randomStamp(rand, '王小明').kind]++;
+    expect(c.palm).toBe(0);
     expect(c.finger / N).toBeGreaterThan(0.32);
     expect(c.finger / N).toBeLessThan(0.38);
-    expect(c.palm / N).toBeGreaterThan(0.22);
-    expect(c.palm / N).toBeLessThan(0.28);
-    expect((c.cat + c.dog) / N).toBeGreaterThan(0.37);
-    expect((c.cat + c.dog) / N).toBeLessThan(0.43);
+    expect(c.seal / N).toBeGreaterThan(0.32);
+    expect(c.seal / N).toBeLessThan(0.38);
+    expect(c.cat / N).toBeGreaterThan(0.13);
+    expect(c.cat / N).toBeLessThan(0.17);
+    expect(c.dog / N).toBeGreaterThan(0.13);
+    expect(c.dog / N).toBeLessThan(0.17);
   });
-  it('張數不會超出素材範圍（指印 4、掌印 2、貓狗各 3）', () => {
-    let seed = 99;
-    const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-    const max = { finger: 4, palm: 2, cat: 3, dog: 3 };
+
+  it('名字沒有漢字（純英文、數字、emoji）：不抽印章，機率改給指印（約 70%）', () => {
+    const c = { finger: 0, seal: 0, cat: 0, dog: 0 } as Record<string, number>;
+    const rand = lcg(777);
+    const N = 20000;
+    for (const name of ['Amy', '007', '😀😀', '']) for (let i = 0; i < N / 4; i++) c[randomStamp(rand, name).kind]++;
+    expect(c.seal).toBe(0);
+    expect(c.finger / N).toBeGreaterThan(0.67);
+    expect(c.finger / N).toBeLessThan(0.73);
+  });
+
+  it('印章：刻名字裡的前 4 個漢字，其他字元略過', () => {
+    const rand = () => 0.5; // 落在印章區間
+    expect(randomStamp(rand, '王小明')).toMatchObject({ kind: 'seal', text: '王小明' });
+    expect(randomStamp(rand, '陳大文Amy').text).toBe('陳大文');
+    expect(randomStamp(rand, 'A王B小C明😀').text).toBe('王小明');
+    expect(randomStamp(rand, '歐陽小明明明').text).toBe('歐陽小明');
+  });
+
+  it('張數不會超出素材範圍（指印 4、印章 1、貓狗各 3）；只有印章有 text', () => {
+    const rand = lcg(99);
+    const max = { finger: 4, seal: 1, cat: 3, dog: 3 } as Record<string, number>;
     for (let i = 0; i < 5000; i++) {
-      const s = randomStamp(rand);
+      const s = randomStamp(rand, '王小明');
       expect(s.idx).toBeGreaterThanOrEqual(0);
       expect(s.idx).toBeLessThan(max[s.kind]);
       expect(Math.abs(s.rot)).toBeLessThanOrEqual(28);
+      expect(s.text !== undefined).toBe(s.kind === 'seal');
     }
   });
 });

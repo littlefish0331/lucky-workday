@@ -1,5 +1,6 @@
 // 手印：程式繪製的暫代版（墨跡質感）。美術到位後由 HAS_ART.stamps 切換成圖片。
 import { createRng } from '../engine/rng';
+import { SEAL_FONT_FAMILY, SEAL_FONT_WEIGHT, SEAL_FRAME, sealCells } from './scan';
 import type { StampSpec } from './storage';
 
 export const INK = '#B3261E';
@@ -54,6 +55,30 @@ function drawPalm(ctx: CanvasRenderingContext2D, s: number, idx: number) {
   ctx.globalCompositeOperation = 'source-over';
 }
 
+/** 名字印章：方框＋最多四個漢字。座標與畫面上的掃描動畫（scan.ts）共用同一份，所以兩邊長得一樣 */
+function drawSeal(ctx: CanvasRenderingContext2D, s: number, text: string) {
+  const k = (s / 100) * 0.78; // 方印佔畫布約 78%，視覺大小和指印、掌印相近
+  ctx.save();
+  ctx.translate(s / 2, s / 2);
+  ctx.scale(k, k);
+  ctx.translate(-50, -50);
+  ctx.fillStyle = INK;
+  ctx.strokeStyle = INK;
+  ctx.globalAlpha = 0.9;
+  const { outer, inner } = SEAL_FRAME;
+  ctx.lineWidth = 5;
+  ctx.strokeRect(outer.x, outer.y, outer.w, outer.w);
+  ctx.lineWidth = 1.6;
+  ctx.strokeRect(inner.x, inner.y, inner.w, inner.w);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  for (const c of sealCells(text)) {
+    ctx.font = `${SEAL_FONT_WEIGHT} ${c.size}px ${SEAL_FONT_FAMILY}`;
+    ctx.fillText(c.ch, c.x, c.y);
+  }
+  ctx.restore();
+}
+
 function drawPaw(ctx: CanvasRenderingContext2D, s: number, dog: boolean, idx: number) {
   const c = s / 2;
   ctx.fillStyle = INK;
@@ -103,6 +128,7 @@ export function renderStamp(spec: StampSpec, size = 360): HTMLCanvasElement {
   ctx.scale(spec.scale, spec.scale);
   ctx.translate(-size / 2, -size / 2);
   if (spec.kind === 'finger') drawFinger(ctx, size, spec.idx, rand);
+  else if (spec.kind === 'seal') drawSeal(ctx, size, spec.text ?? '');
   else if (spec.kind === 'palm') drawPalm(ctx, size, spec.idx);
   else drawPaw(ctx, size, spec.kind === 'dog', spec.idx);
   // 墨跡質感：隨機擦掉小點與邊緣缺口
@@ -125,6 +151,7 @@ export function stampDataUrl(spec: StampSpec, size = 240): string {
 
 export const STAMP_CAPTION: Record<StampSpec['kind'], string> = {
   finger: '',
+  seal: '',
   palm: '',
   cat: '胖橘代為簽收',
   dog: '旺財代為簽收',

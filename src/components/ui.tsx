@@ -1,7 +1,20 @@
 // 互動素材：圖片版。圖片載入失敗時整個元件仍然可用（alt 文字加 CSS 底色）。
 import { art } from '../data/art';
 import type { Deity as DeityInfo } from '../data/deities';
+import { stampDataUrl } from '../lib/stamp';
 import type { StampSpec } from '../lib/storage';
+
+/** 印章（seal）是程式畫的、沒有圖檔：同一個 spec 只畫一次，之後重用 */
+const sealCache = new Map<string, string>();
+function sealDataUrl(spec: StampSpec): string {
+  const k = `${spec.text}|${spec.rot}|${spec.scale}`;
+  let u = sealCache.get(k);
+  if (!u) {
+    u = stampDataUrl(spec, 360);
+    sealCache.set(k, u);
+  }
+  return u;
+}
 
 /** bob：籤筒上下偏移（px，正值往下）。握著籤筒上下搖的感覺：順著偏移方向微微歪一點 */
 export function Cylinder({ bob = 0, progress = 0, popped = false }: { bob?: number; progress?: number; popped?: boolean }) {
@@ -43,8 +56,13 @@ export function Deity({ deity, stage, done }: { deity: DeityInfo; stage: 0 | 1 |
   );
 }
 
-export function StampImg({ spec, className }: { spec: StampSpec; className?: string }) {
-  return (
-    <img className={className} src={art.stamp(spec)} alt="手印" draggable={false} style={{ transform: `rotate(${spec.rot}deg) scale(${spec.scale})` }} />
-  );
+/**
+ * 蓋好的手印。旋轉與縮放用 CSS 變數（--rot、--scale）交給樣式表組合，這樣動畫（slam）和定位
+ * （left/top 置中）可以和它們同時存在，不會互相蓋掉 transform。
+ */
+export function StampImg({ spec, className, style }: { spec: StampSpec; className?: string; style?: React.CSSProperties }) {
+  const seal = spec.kind === 'seal';
+  const src = seal ? sealDataUrl(spec) : art.stamp(spec);
+  const vars = { '--rot': `${spec.rot}deg`, '--scale': spec.scale } as React.CSSProperties;
+  return <img className={className} src={src} alt={seal ? '印章' : '手印'} draggable={false} style={{ ...style, ...vars }} />;
 }
